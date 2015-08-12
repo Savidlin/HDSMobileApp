@@ -4,6 +4,13 @@ HDS Leadership Team Building Application
 
 ## Tools Setup
 
+Initial VS2015 project files have been uploaded.  These should work as-is in Visual Studio 2015. 
+Build the project in Visual Studio and run it. 
+
+
+====
+## Notes:
+
 #### SQLite
 
 Install SQLite ADO.NET NuGet package:

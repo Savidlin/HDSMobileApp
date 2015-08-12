@@ -1,0 +1,77 @@
+========
+TODO:
+-use shared/global data models, don't construct objects containing both primitive
+properties (string, number, boolean) and nested object properties unless you're
+mirroring or copying an existing data model, for example adding a TypeScript version of one of the C# DTOs.
+
+-try not to copy paste more than 2 or 3 lines of code, create or add to existing
+TypeScript modules. 
+
+-code should roughly fall into 4 categories: data models, generic data logic,
+business specific logic, UI
+
+
+========
+Coding Conventions:
+-use double quotes " for all strings except single character strings like 'Y' or
+DOM strings like '<div class="widget">'
+
+-documentation generally follows JSDoc/Java code style (http://usejsdoc.org/, http://www.oracle.com/technetwork/java/codeconventions-150003.pdf)
+
+-when Java Java syntax is not appropriate, see TypeScript (TS) sample programs (http://www.typescriptlang.org/Samples)
+
+-use TypeScript for all new code, convert critical JS to TS if available time
+
+-avoid global variables like the plague
+
+-use namespaces as much as possible (naturally occurs when following previous rule),
+makes refactoring and ctrl+f easier
+
+-use "==="/"!==" over "=="/"!="
+
+-avoid bitwise operators "&", "|", "^" (not to be confused with boolean operators "&&", "||", "!")
+
+-if effort is put into documentation, document function inputs/outputs/side-effects first!
+
+-surround ternary statements with parentheses,
+e.g. "window.foo ? window.foo.bar() : window.defaultBar"
+should be: "(window.foo ? window.foo.bar() : window.defaultBar)"
+
+-do not include code on the same line as a function declaration unless it's a
+very simple Array.filter(...) or Array.map(...) style lambda.
+e.g. "clickCb = function () { $(this).attr("blarg", warg); };"
+should be: "
+clickCb = function () {
+   $(this).attr("blarg", warg);
+};"
+
+-please name annonymous functions if they do anything more than return a property
+or filter/map a value.
+e.g. "checkUserStatusCb = function () { ... };"
+should be: "checkUserStatusCb = function checkUserStatusCb() { ... };"
+or just: "function checkUserStatusCb() { ... };"
+
+-'widget-ize' DOM code where possible, create a module for the code, use context
+with DOM selectors (i.e. "$(..., context)") to ensure only DOM elements for that
+widget are selected
+
+-if func A calls func B and B returns a promise which A consumes without returning to it's calling function,
+then make sure to consume B's promise using .done(), not .then(). 
+Promise .done() propagates any exceptions that occurred in the promise's scope into
+the .done()'s call scope, allowing us to see the errors in the console. 
+
+-prefer promises over callbacks, if you use callbacks you need to manually add try-catch
+blocks in callback functions to catch errors, with promises you can just use .done()
+and let the promise catch and throw the error for you
+
+-prefer stateless classes and functions and pass object state into these functions
+rather than creating stateful classes, data vs. logic separation
+
+-prefer standalone definitions over deeply nested functions to allow for
+function reuse
+
+-prefer code that fails at TS compile time over runtime failures (no one
+likes debugging)
+
+-descriptive error messages! And strongly typed error callbacks/promises so
+errors can be passed back and handled by calling functions

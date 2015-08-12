@@ -1,0 +1,71 @@
+Setting Up HDSMobileApp Visual Studio Project To Run Locally:
+
+
+enable: (start > search 'turn windows features on or off'):
+turn on: .Net framework 3.5/4.0 > HTTP Activation
+Internet Information Services > Web Management Tools > IIS Management Console
+Internet Information Services > World Wide Web Services > * (including sub trees)
+
+
+Install:
+-asp.net mvc 4
+-Microsoft System CLR Types for SQL Server 2012 (via Microsoft SQL Feature pack..?)
+
+
+If using VS2015:
+  Disable browser link in Visual Studio
+
+If VS2015 Javascript syntax/autocomplete missing:
+  (https://social.msdn.microsoft.com/Forums/en-US/f3693b97-7fb1-4b9a-9953-1970b767a407/visual-studio-2015-ctp-javascript-support-missing?forum=visualstudiogeneral)
+  "If you are not installed in the default folder,then go to C:\Program Files (x86)\Microsoft Visual Studio 14.0 copy ["merge"] to your install folder(ex.F:\Microsoft Visual Studio 14.0)
+  open the Developer Command Prompt as administrator,run command:
+  devenv /setup
+  devenv.exe /InstallVSTemplates
+  Reference articles:http://blog.lishewen.com/post/2015/03/03/vs2015-ctp6-after-installation-without-javascript-intellisense-solution-templates-and-editor"
+
+
+If issues with IIS: 
+  to setup/register ISS try running this command in command prompt: 
+  "C:\Windows\Microsoft.NET\Framework\v4.0.30319\aspnet_regiis.exe -i" (may need to change .net framework path name)
+
+IIS web server console: (start > inetmgr)
+-right click on 'sites' > add web site
+-site name: anything (e.g. 'hds-mobile-app.dev')
+-application pool: ASP.NET v4 (if ASP.NET v4 is not available, something hasn't installed correctly)
+-physical path: the "/HDSMobileApp" folder from git on your local machine
+-Type: http
+-IP address: all unassigned
+-Port: 80
+-Host name: same as hosts file (e.g. 'hds-mobile-app.dev')
+
+Check that these exist in the project's 'web.config' file:
+  <connectionStrings>
+    <add name="HDSMobileAppDbContext"
+        connectionString="Server=server-name;Database=database-name;uid=user-name;password=pass-word;multipleactiveresultsets=True;"
+        providerName="System.Data.SqlClient"/>
+  </connectionStrings>
+
+
+Install Node.js and packages setup:
+  install Node.js from http://nodejs.org/
+  run 'Node.js command prompt' (as administrator! from start > all programs once you install it)
+  navigate ('cd ...') to the HDSMobileApp "/HDSMobileApp" folder and run the following commands:
+
+Node.js command prompt:
+  'npm install'  // to install all the dependencies required for our project
+  'npm install gulp -g'  // to install gulp globally
+  'npm install typescript -g' // typescript compiler
+
+go to your global node_modules dir (normally %ProgramFiles(x86)%/nodejs/node_modules) and go to "typescript/bin" and rename "lib.d.ts" to "lib.d.ts.bak" or something similar
+and rename "lib.es6.d.ts" to "lib.d.ts" to get TypeScript support for es6 which the project uses (may not apply in future once TypeScript switches to es6).
+
+download latest version of github.com/techfort/LokiJS as 'download zip' and unzip and copy the directory into the project's 'node_modules/lokijs'
+
+add the chunk of parseFloat/parseInt and NumberConstructor definitions from "tsDefinitions/ps.d.ts" to the global typescript "lib.d.ts" file. 
+
+in "lib.d.ts" change 'declare var Window' to some other name, like 'declare var WindowStatic' for the window constructor so that the 'Window' interface is visible and extendable. 
+
+
+Node.js command prompt (in project directory):
+  'gulp'  // start gulp running, this will rebuild files whenever you modify any of the source files and save them
+  you should see some output about 'starting' and 'finished building', once you see that you should be all set
