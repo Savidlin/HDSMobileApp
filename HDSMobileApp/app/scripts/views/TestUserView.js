@@ -6,9 +6,9 @@ var TestUserController = require("../controllers/TestUserController");
 var TestUserView = (function () {
     function TestUserView() {
     }
-    TestUserView.newView = function (model, domContext) {
+    TestUserView.initView = function (appTools) {
         var inst = new TestUserView();
-        inst.model = model;
+        var domContext = appTools.getPageDocument().querySelector("#test-user-view");
         inst.domContext = domContext;
         var nameField = domContext.querySelector(".user-name-input.text-field");
         var resultElem = domContext.querySelector(".user-name-result");
@@ -25,10 +25,9 @@ var TestUserView = (function () {
         inst.validateBtnListener = validateBtnListener;
         return inst;
     };
-    TestUserView.deregister = function (view) {
+    TestUserView.deregister = function (appTools, view) {
         view.domContext.querySelector(".validate-user-name.btn").removeEventListener("click", view.validateBtnListener);
         view.domContext = null;
-        view.model = null;
         view.validateBtnListener = null;
     };
     return TestUserView;

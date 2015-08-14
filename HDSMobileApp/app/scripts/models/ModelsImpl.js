@@ -1,10 +1,11 @@
+/// <reference path="../../tsDefinitions/mobileapp.d.ts" />
 /* @license (c) Copyright 2014 HDS IP Holdings, LLC. All Rights Reserved.
  * @generated
  */
 "use strict";
 var ModelUtil = require("./ModelUtil");
-var Models;
-(function (Models) {
+var ModelsImpl;
+(function (ModelsImpl) {
     var UserMaster = (function () {
         function UserMaster(obj) {
             this.User_Number = ((obj.User_Number || obj.UserNumber) || 0);
@@ -36,7 +37,7 @@ var Models;
         };
         return UserMaster;
     })();
-    Models.UserMaster = UserMaster;
+    ModelsImpl.UserMaster = UserMaster;
     var UserProfile = (function () {
         function UserProfile(obj) {
             var lastUpdateDate = ((obj.Last_Update_Date || obj.LastUpdateDate) ? ModelUtil.getRealDate((obj.Last_Update_Date || obj.LastUpdateDate)) : ModelUtil.getTime());
@@ -121,6 +122,6 @@ var Models;
         };
         return UserProfile;
     })();
-    Models.UserProfile = UserProfile;
-})(Models || (Models = {}));
-module.exports = Models;
+    ModelsImpl.UserProfile = UserProfile;
+})(ModelsImpl || (ModelsImpl = {}));
+module.exports = ModelsImpl;

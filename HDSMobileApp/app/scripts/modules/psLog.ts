@@ -3,7 +3,7 @@
 import LocalStoreByDate = require("./LocalStoreByDate");
 
 /** PsLogs class
- * error/info logging instances for PowerScope, uses 'log4javascript' library
+ * error/info logging instances for HDSMobileApp, uses 'log4javascript' library
  * @since 2015-2-10
  */
 class PsLog {
@@ -19,7 +19,7 @@ class PsLog {
     }
 
     private static initDefaultLog() {
-        var log = log4javascript.getLogger("powerscope");
+        var log = log4javascript.getLogger("hdsmobileapp");
         log.addAppender(PsLog.getBrowserConsoleAppender());
         PsLog._defaultLog = log;
         return PsLog._defaultLog;

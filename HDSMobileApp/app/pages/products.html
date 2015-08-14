@@ -1,0 +1,13 @@
+<div class="row well" ng-repeat="product in productsCtrl.products">
+
+  <div class="col-md-2 col-md-offset-2">
+    <img ng-src="{{product.image}}" class="img-responsive">
+  </div><!--./col-md-2-->
+
+  <div class="col-md-6 text-center product">
+    <h3>{{product.name}}</h3>
+    <h4>{{product.price | currency}}</h4>
+    <h4>Toppings: {{product.toppings}}</h4>
+  </div><!--col-md-2-->
+
+</div><!--./row-->

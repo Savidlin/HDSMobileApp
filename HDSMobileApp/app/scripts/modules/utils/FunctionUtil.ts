@@ -1,4 +1,4 @@
-﻿/* @license (c) Copyright 2014 HDS IP Holdings, LLC. All Rights Reserved. */
+﻿"use strict";
 
 /** FunctionUtil class
  * utility functions for calling functions
@@ -6,7 +6,6 @@
  * @since 2015-4-21
  */
 class FunctionUtil {
-    "use strict";
 
     /** A function which takes no arguments (or any arguments) and returns nothing */
     public static NO_OP: () => void = function () { };

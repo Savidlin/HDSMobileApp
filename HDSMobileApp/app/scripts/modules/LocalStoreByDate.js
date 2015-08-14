@@ -65,12 +65,11 @@ var LocalStoreByDate = (function () {
             }
         }
         // sort ascending
-        timestamps.sort(function (a, b) {
-            return a - b;
-        });
+        timestamps.sort(function (a, b) { return a - b; });
         var timestampCount = timestamps.length;
         maxItemsRemoved = maxItemsRemoved === void 0 ? timestampCount : Math.min(timestampCount, maxItemsRemoved);
         var removeCount = Math.max(Math.min(Math.round(timestampCount * removePercentage), maxItemsRemoved), minItemsRemoved);
+        // remove the oldest timestamped entries (always remove between [1, timestamps.length] entries)
         for (var i = 0; i < removeCount; i++) {
             localStore.removeItem(timestamps[i].toString());
         }
@@ -90,13 +89,16 @@ var LocalStoreByDate = (function () {
         var tmp = 0;
         var tmpLoops = 0;
         var loops = 3;
+        // add as many items as possible until a cleanup occurs multiple times to see that cleanup ratio is working correctly
         for (var i = 0; i < loops; i++) {
             var initialAttemptCount = storeDated.removalAttemptCount;
             var addCount = 0;
+            // keep inserting items until the store encounters an error adding more items and attempts to remove old items
             while (storeDated.removalAttemptCount === initialAttemptCount) {
                 // loop, waiting until addItem() returns a new key to ensure each new key is a unique entry
                 var newKey = storeDated.addItem(str, true);
                 while (newKey === newKeys[newKeys.length - 1]) {
+                    // waste time waiting for the next millisecond so that addItem() returns a new key
                     for (var ii = 0; ii < 10000000; ii++) {
                         tmp += (ii % 2) == 0 ? 1 : -1;
                     }

@@ -1,0 +1,32 @@
+﻿[
+  {
+    "image": "app/images/rockyRoad.jpg",
+    "name": "Rocky Road",
+    "price": "3.00",
+    "toppings": "Marshmellow, Chocolate Pices, various nuts"
+  },
+  {
+    "image": "app/images/bananaNut.jpg",
+    "name": "Banana Nut",
+    "price": "2.50",
+    "toppings": "walnuts, banana slices"
+  },
+  {
+    "image": "app/images/cookiesCream.jpg",
+    "name": "Cookies and Cream",
+    "price": "2.00",
+    "toppings": "Oreo cookie chunks"
+  },
+  {
+    "image": "app/images/butterPecan.jpg",
+    "name": "Butter Pecan",
+    "price": "2.80",
+    "toppings": "pecans"
+  },
+  {
+    "image": "app/images/neapolitan.jpg",
+    "name": "Neapolitan",
+    "price": "1.50",
+    "toppings": "no toppings"
+  }
+]

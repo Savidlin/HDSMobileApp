@@ -1,4 +1,4 @@
-/* @license (c) Copyright 2014 HDS IP Holdings, LLC. All Rights Reserved. */
+"use strict";
 /** NumberUtil class
  * utility functions for converting numeric values to and from other formats
  * @author Benjamin
@@ -48,7 +48,9 @@ var NumberUtil = (function () {
     NumberUtil.orZero = function (num, infinityToZero) {
         "use strict";
         var val = (num == null || typeof (num) == "number") ? num : parseFloat(num);
-        return (num == null || isNaN(val) || (infinityToZero === true && (val === Infinity || val === Number.NEGATIVE_INFINITY || val === Number.POSITIVE_INFINITY))) ? 0 : val;
+        return (num == null || isNaN(val) ||
+            (infinityToZero === true && (val === Infinity ||
+                val === Number.NEGATIVE_INFINITY || val === Number.POSITIVE_INFINITY))) ? 0 : val;
     };
     /** Convert a value like {@code 1340283.5264} to {@code 1,340,283.53}
      * @param {String} value a value to convert to a currency value

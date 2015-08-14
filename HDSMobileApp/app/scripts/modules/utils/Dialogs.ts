@@ -1,10 +1,6 @@
-﻿/// <reference path="../../../tsDefinitions/lib/jquery.d.ts" />
-/// <reference path="../../../tsDefinitions/lib/jqueryui.d.ts" />
-/* @license (c) Copyright 2014 HDS IP Holdings, LLC. All Rights Reserved.
- * @author Benjamin
- * @since 2015-2-9
- */
-
+﻿/// <reference path="../../../tsDefinitions/lib/jquery/jquery.d.ts" />
+/// <reference path="../../../tsDefinitions/lib/jquery/jqueryui.d.ts" />
+"use strict";
 import Ps = require("../main");
 
 interface DialogOptions {

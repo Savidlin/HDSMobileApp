@@ -1,9 +1,6 @@
-/// <reference path="../../../tsDefinitions/lib/jquery.d.ts" />
-/// <reference path="../../../tsDefinitions/lib/jqueryui.d.ts" />
-/* @license (c) Copyright 2014 HDS IP Holdings, LLC. All Rights Reserved.
- * @author Benjamin
- * @since 2015-2-9
- */
+/// <reference path="../../../tsDefinitions/lib/jquery/jquery.d.ts" />
+/// <reference path="../../../tsDefinitions/lib/jquery/jqueryui.d.ts" />
+"use strict";
 var Ps = require("../main");
 /** Dialogs namespace
  * for managing, showing, and closing UI dialog boxes
@@ -36,7 +33,8 @@ var Dialogs = (function () {
         //dlg.dialog("close");
         dlg.find("p").html(message);
         if (dlg.find("button").length === 0 && dlg.find(".light-button").length === 0) {
-            dlg.append("<div style='text-align: center;'>" + "<button style='padding: 5px; text-align:center; margin-top: 25px; display:inline-block; width: 50px;'>Ok</button></div>");
+            dlg.append("<div style='text-align: center;'>" +
+                "<button style='padding: 5px; text-align:center; margin-top: 25px; display:inline-block; width: 50px;'>Ok</button></div>");
             var btn = dlg.find("button");
             var btnCb = function openDialogCallback() {
                 btn.off("click", btnCb);
@@ -87,7 +85,9 @@ var Dialogs = (function () {
             var buttons = callback;
             var buttonsHtml = ["<div style='text-align: center;'>"];
             for (var i = 0, size = buttons.length; i < size; i++) {
-                buttonsHtml.push("<button id='" + (buttons[i].id ? buttons[i].id : "dialogWithTitleButton" + i) + "' style='padding: 5px; margin: 5px; text-align:center; margin-top: 25px; display:inline-block; " + "min-width: " + (buttons[i].width ? buttons[i].width : "40px; ") + "max-width: " + (buttons[i].maxWidth ? buttons[i].maxWidth : "120px") + "'>" + buttons[i].name + "</button>");
+                buttonsHtml.push("<button id='" + (buttons[i].id ? buttons[i].id : "dialogWithTitleButton" + i) + "' style='padding: 5px; margin: 5px; text-align:center; margin-top: 25px; display:inline-block; " +
+                    "min-width: " + (buttons[i].width ? buttons[i].width : "40px; ") + "max-width: " + (buttons[i].maxWidth ? buttons[i].maxWidth : "120px") + "'>" +
+                    buttons[i].name + "</button>");
             }
             buttonsHtml.push("</div>");
             dlg.append(buttonsHtml.join("\n"));
@@ -109,7 +109,10 @@ var Dialogs = (function () {
             }
         }
         else {
-            dlg.append("<div style='text-align: center;'>" + "<button style='padding: 5px; text-align:center; margin-top: 25px; display:inline-block; width: 50px;'>" + "Ok" + "</button>" + "</div>");
+            dlg.append("<div style='text-align: center;'>" +
+                "<button style='padding: 5px; text-align:center; margin-top: 25px; display:inline-block; width: 50px;'>" +
+                "Ok" + "</button>" +
+                "</div>");
             var btn = dlg.find("button");
             var btnCb = function openDialogWithTitleCallback2() {
                 if (callback) {

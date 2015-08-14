@@ -17,7 +17,6 @@ var TestUserController = (function () {
             var foundMatch = false;
             var matchingUser = null;
             for (var i = 0, size = users.length; i < size; i++) {
-                console.log("names match: ", users[i].Name, " = ", userName, " : ", (users[i].Name === userName));
                 if (users[i].Name === userName) {
                     matchingUser = users[i];
                     foundMatch = true;

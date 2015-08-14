@@ -1,3 +1,4 @@
+/// <reference path="./definitions/node_modules/node-modules.d.ts" />
 var gulp = require('gulp');
 var fs = require('fs');
 var gutil = require('gulp-util');
@@ -16,12 +17,6 @@ var dist = 'app/dist';
 var modelsDir = {
     base: "app/scripts/models/"
 };
-var minifiedLibraryFileInfos = [
-    { std: "app/lib/jquery-2.0.3.js", min: "app/lib/jquery-2.0.3.min.js" },
-    { std: "app/lib/require.js", min: "app/lib/require.min.js" },
-    { std: "app/i18next-1.7.3/i18next-1.7.3.js", min: "app/i18next-1.7.3/i18next-1.7.3.min.js" },
-    { std: "app/lib/jquery-ui-1.10.3.custom.js", min: "app/lib/jquery-ui-1.10.3.custom.min.js" },
-];
 var bannerLines = [
     "/* @license (c) Copyright 2014 HDS IP Holdings, LLC. All Rights Reserved.",
     " * @generated",
@@ -37,8 +32,7 @@ var watchifyOptions = {
     extensions: [".js"],
     paths: ["node_modules", "./app/scripts/controllers", "./app/scripts/models", "./app/scripts/modules", "./app/scripts/views"]
 };
-function noop() {
-}
+function noop() { }
 function compileScripts(debug) {
     var dstFileName = "app.js";
     var srcMapFile = dist + "/app.js.map";
@@ -50,13 +44,7 @@ function compileScripts(debug) {
     var pathChecks = [
         "controllers/",
         "models/",
-        "dataModel/",
-        "modules/",
-        "generators/",
-        "modelHelpers/",
-        "psData/",
-        "psServices/",
-        "psUtils/",
+        "dataModel/", "modules/", "generators/", "modelHelpers/", "psData/", "psServices/", "psUtils/",
         "views/"
     ];
     function rebundle() {
@@ -66,12 +54,8 @@ function compileScripts(debug) {
             debug: debug,
             filter: function (path) {
                 // tries to valid import statements for incorrect casing ('psUtils' vs. 'psutils') or absolute directories (not starting with './' or '../')
-                var notPath = pathChecks.reduce(function (prev, cur) {
-                    return prev && path.indexOf(cur) === -1;
-                }, true);
-                var notPathLowerCase = pathChecks.reduce(function (prev, cur) {
-                    return prev && path.toLowerCase().indexOf(cur.toLowerCase()) === -1;
-                }, true);
+                var notPath = pathChecks.reduce(function (prev, cur) { return prev && path.indexOf(cur) === -1; }, true);
+                var notPathLowerCase = pathChecks.reduce(function (prev, cur) { return prev && path.toLowerCase().indexOf(cur.toLowerCase()) === -1; }, true);
                 if ((!notPath && !(path.indexOf("./") === 0 || path.indexOf("../") === 0)) || (notPath && !notPathLowerCase)) {
                     gutil.log("incorrect import: '" + path + "', ensure name case is correct and path begins with relative './' or '../'");
                 }
@@ -126,7 +110,10 @@ gulp.task("checkFileEncoding", function () {
 });
 gulp.task("vendor", function () {
     var dstFileName = "vendor.js";
-    return gulp.src(vendorFiles).pipe(uglify()).pipe(concat(dstFileName, { newLine: "\n\n" })).pipe(gulp.dest(dist));
+    return gulp.src(vendorFiles)
+        .pipe(uglify())
+        .pipe(concat(dstFileName, { newLine: "\n\n" }))
+        .pipe(gulp.dest(dist));
 });
 // "--debug true/false" (default true) whether to include extra debug info in compiled files like source maps
 gulp.task("default", ["vendor"], function () {

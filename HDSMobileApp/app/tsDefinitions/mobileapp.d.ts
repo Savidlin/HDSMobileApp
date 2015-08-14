@@ -1,10 +1,11 @@
-﻿/// <reference path="./lib/log4javascript.d.ts" />
+﻿/// <reference path="./lib/angularjs/angular.d.ts" />
+/// <reference path="./lib/jquery/jquery.d.ts" />
+/// <reference path="./lib/lodash.d.ts" />
+/// <reference path="./lib/log4javascript.d.ts" />
 /// <reference path="./lib/numeral.d.ts" />
 /// <reference path="./lib/Q.d.ts" />
 /// <reference path="../scripts/models/Models.d.ts" />
 /// <reference path="../scripts/models/SvcModels.d.ts" />
-/// <reference path="../scripts/models/OptionalPropModels.d.ts" />
-/// <reference path="../scripts/models/OptionalPropSvcModels.d.ts" />
 /* @license (c) Copyright 2014 HDS IP Holdings, LLC. All Rights Reserved.
  * @author Benjamin
  * @since 2015-2-9
@@ -51,9 +52,13 @@ interface JQuery {
     stickyTableHeaders(options?: string | { fixedOffset?: number | JQuery; scrollableArea?: Element | JQuery; }): JQuery;
 }
 
-interface ArrayLike<T> {
+/*interface ArrayLike<T> {
     length: number;
     [index: number]: T;
+}*/
+
+interface StringMap<T> {
+    [id: string]: T
 }
 
 interface GetSize {
@@ -168,10 +173,6 @@ interface UrlInfo {
 interface UrlInst {
     pageInfo: UrlInfo;
     parameterValues: string[];
-}
-
-interface StringMap<T> {
-    [id: string]: T
 }
 
 interface ServiceErrorFunction {
@@ -319,21 +320,18 @@ interface UniqueStoreI {
 }
 
 
-interface Exporter {
-    Excel: {
-        exportExcel: (headers: string[], data: any[][]| any[], fileName: string, saveAs, requireJS) => void;
-    };
-    Ecb: {
-        exportEcb: (fileContent, fileName: string, saveAs) => void;
-    };
-    Pdf: {
-        exportPdf: (headers: { name: string; prompt: string; width: number; }[], data: any[][]| any[], fileName: string, jsPDF) => void;
-    };
-    Util: {
-        isIPad(): boolean;
-        toBase64(str: string): string;
-        base64toBlob(a, b): Blob;
-    };
+interface Main {
+
+    getPageDocument(): Document;
+
+    getJQuery(): JQueryStatic;
+
+    getJQueryContext(): JQuery;
+
+    getUiUtil(): UiUtilI;
+
+    getPageWindow(): Window;
+
 }
 
 

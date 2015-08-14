@@ -1,6 +1,40 @@
 require=(function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);throw new Error("Cannot find module '"+o+"'")}var f=n[o]={exports:{}};t[o][0].call(f.exports,function(e){var n=t[o][1][e];return s(n?n:e)},f,f.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
 "use strict";
 "use strict";
+var TestCompanyNgCtrl = (function() {
+  function TestCompanyNgCtrl() {}
+  TestCompanyNgCtrl.initView = function(appTools) {
+    var app = angular.module('myCompany', []);
+    app.controller('CompanyController', ["$http", function($http) {
+      var company = this;
+      $http.get('app/rsc/company-information.json').success(function(data) {
+        company.information = data;
+      });
+    }]);
+    app.directive("products", function() {
+      return {
+        restrict: "E",
+        templateUrl: "app/pages/products.html",
+        controller: ["$http", function($http) {
+          var company = this;
+          $http.get('app/rsc/company-products.json').success(function(data) {
+            company.products = data;
+          });
+        }],
+        controllerAs: "productsCtrl"
+      };
+    });
+  };
+  TestCompanyNgCtrl.deregister = function(appTools, view) {};
+  return TestCompanyNgCtrl;
+})();
+module.exports = TestCompanyNgCtrl;
+
+
+//# sourceURL=c:/Users/TeamworkGuy2/Documents/Visual Studio 2015/Projects/HDSTeamBuilding/HDSMobileApp/app/scripts/controllers/TestCompanyNgCtrl.js
+},{}],2:[function(require,module,exports){
+"use strict";
+"use strict";
 var Defer = require("../modules/Defer");
 var Services = require("../modules/services/Services");
 var TestUserController = (function() {
@@ -14,7 +48,6 @@ var TestUserController = (function() {
       var matchingUser = null;
       for (var i = 0,
           size = users.length; i < size; i++) {
-        console.log("names match: ", users[i].Name, " = ", userName, " : ", (users[i].Name === userName));
         if (users[i].Name === userName) {
           matchingUser = users[i];
           foundMatch = true;
@@ -32,7 +65,7 @@ module.exports = TestUserController;
 
 
 //# sourceURL=c:/Users/TeamworkGuy2/Documents/Visual Studio 2015/Projects/HDSTeamBuilding/HDSMobileApp/app/scripts/controllers/TestUserController.js
-},{"../modules/Defer":2,"../modules/services/Services":11}],2:[function(require,module,exports){
+},{"../modules/Defer":3,"../modules/services/Services":12}],3:[function(require,module,exports){
 "use strict";
 var Q = require("q");
 var Defer = (function() {
@@ -135,7 +168,7 @@ module.exports = Defer;
 
 
 //# sourceURL=c:/Users/TeamworkGuy2/Documents/Visual Studio 2015/Projects/HDSTeamBuilding/HDSMobileApp/app/scripts/modules/Defer.js
-},{"q":17}],3:[function(require,module,exports){
+},{"q":18}],4:[function(require,module,exports){
 "use strict";
 var LocalStore = (function() {
   function LocalStore(store) {
@@ -209,7 +242,7 @@ module.exports = LocalStore;
 
 
 //# sourceURL=c:/Users/TeamworkGuy2/Documents/Visual Studio 2015/Projects/HDSTeamBuilding/HDSMobileApp/app/scripts/modules/LocalStore.js
-},{}],4:[function(require,module,exports){
+},{}],5:[function(require,module,exports){
 "use strict";
 var LocalStore = require("./LocalStore");
 var LocalStoreByDate = (function() {
@@ -314,22 +347,25 @@ module.exports = LocalStoreByDate;
 
 
 //# sourceURL=c:/Users/TeamworkGuy2/Documents/Visual Studio 2015/Projects/HDSTeamBuilding/HDSMobileApp/app/scripts/modules/LocalStoreByDate.js
-},{"./LocalStore":3}],"qRPk4k":[function(require,module,exports){
+},{"./LocalStore":4}],"qRPk4k":[function(require,module,exports){
 "use strict";
 "use strict";
 var FunctionUtil = require("../modules/utils/FunctionUtil");
 var TestUserView = require("../views/TestUserView");
+var TestCompanyNgCtrl = require("../controllers/TestCompanyNgCtrl");
 var Ps = require("./main");
 var PageLoader = (function() {
   function PageLoader() {
     this.getPages = FunctionUtil.createLazyInitializedField(function() {
-      return {TestUserView: TestUserView};
+      return ({
+        TestUserView: TestUserView,
+        TestCompanyNgCtrl: TestCompanyNgCtrl
+      });
     });
   }
   PageLoader.prototype.loadPage = function(name) {
     Ps.resetAppNewPage(null, null, window);
-    var elem = Ps.getPageDocument().querySelector("#test-user-view");
-    var view = this.getPages()[name].newView(null, elem);
+    var view = this.getPages()[name].initView(Ps);
     return view;
   };
   Object.defineProperty(PageLoader, "defaultPageLoader", {
@@ -342,6 +378,7 @@ var PageLoader = (function() {
   PageLoader._defaultPageLoader = new PageLoader();
   PageLoader.cctor = (function() {
     window["PageLoader"] = PageLoader;
+    console.log("PageLoader static initializer: " + (window["PageLoader"]));
   }());
   return PageLoader;
 })();
@@ -349,9 +386,9 @@ module.exports = PageLoader;
 
 
 //# sourceURL=c:/Users/TeamworkGuy2/Documents/Visual Studio 2015/Projects/HDSTeamBuilding/HDSMobileApp/app/scripts/modules/PageLoader.js
-},{"../modules/utils/FunctionUtil":12,"../views/TestUserView":15,"./main":8}],"./app/scripts/modules/PageLoader.js":[function(require,module,exports){
+},{"../controllers/TestCompanyNgCtrl":1,"../modules/utils/FunctionUtil":13,"../views/TestUserView":16,"./main":9}],"./app/scripts/modules/PageLoader.js":[function(require,module,exports){
 module.exports=require('qRPk4k');
-},{}],7:[function(require,module,exports){
+},{}],8:[function(require,module,exports){
 "use strict";
 var PageTools;
 (function(PageTools) {
@@ -439,7 +476,7 @@ module.exports = PageTools;
 
 
 //# sourceURL=c:/Users/TeamworkGuy2/Documents/Visual Studio 2015/Projects/HDSTeamBuilding/HDSMobileApp/app/scripts/modules/PageTools.js
-},{}],8:[function(require,module,exports){
+},{}],9:[function(require,module,exports){
 "use strict";
 "use strict";
 var PageTools = require("./PageTools");
@@ -532,7 +569,7 @@ module.exports = Ps;
 
 
 //# sourceURL=c:/Users/TeamworkGuy2/Documents/Visual Studio 2015/Projects/HDSTeamBuilding/HDSMobileApp/app/scripts/modules/main.js
-},{"./PageTools":7}],9:[function(require,module,exports){
+},{"./PageTools":8}],10:[function(require,module,exports){
 "use strict";
 var LocalStoreByDate = require("./LocalStoreByDate");
 var PsLog = (function() {
@@ -545,7 +582,7 @@ var PsLog = (function() {
     configurable: true
   });
   PsLog.initDefaultLog = function() {
-    var log = log4javascript.getLogger("powerscope");
+    var log = log4javascript.getLogger("hdsmobileapp");
     log.addAppender(PsLog.getBrowserConsoleAppender());
     PsLog._defaultLog = log;
     return PsLog._defaultLog;
@@ -642,7 +679,7 @@ module.exports = PsLog;
 
 
 //# sourceURL=c:/Users/TeamworkGuy2/Documents/Visual Studio 2015/Projects/HDSTeamBuilding/HDSMobileApp/app/scripts/modules/psLog.js
-},{"./LocalStoreByDate":4}],10:[function(require,module,exports){
+},{"./LocalStoreByDate":5}],11:[function(require,module,exports){
 "use strict";
 var ServiceData;
 (function(ServiceData) {
@@ -662,14 +699,13 @@ module.exports = ServiceData;
 
 
 //# sourceURL=c:/Users/TeamworkGuy2/Documents/Visual Studio 2015/Projects/HDSTeamBuilding/HDSMobileApp/app/scripts/modules/services/ServiceData.js
-},{}],11:[function(require,module,exports){
+},{}],12:[function(require,module,exports){
 "use strict";
 "use strict";
 var _ = require("lodash");
 var Defer = require("../Defer");
 var psLog = require("../psLog");
 var ObjectUtil = require("../utils/ObjectUtil");
-var FunctionUtil = require("../utils/FunctionUtil");
 var ServiceData = require("./ServiceData");
 var Ps = require("../main");
 var Services = (function() {
@@ -831,156 +867,6 @@ var Services = (function() {
     xhr = Ps.getJQuery().ajax(ajaxSettings);
     return def.promise;
   };
-  Services.callHandshakeGetService = function(relativeUrl, parameterNames, parameterValues, expectArrayResponse, responseDataPropertyName, requestProperties) {
-    if (expectArrayResponse === void 0) {
-      expectArrayResponse = false;
-    }
-    if (responseDataPropertyName === void 0) {
-      responseDataPropertyName = null;
-    }
-    var def = Defer.newDefer();
-    Services.doHandshake(function() {
-      Services.callGetService(relativeUrl, parameterNames, parameterValues, expectArrayResponse, responseDataPropertyName, requestProperties).done(function(res) {
-        def.resolve(res);
-      }, function(svcErr) {
-        def.reject({
-          error: svcErr,
-          isHandshakeError: false
-        });
-      });
-    }, function(xhr, ts, et) {
-      def.reject({
-        error: {
-          xhr: xhr,
-          textStatus: ts,
-          errorThrown: et
-        },
-        isHandshakeError: true
-      });
-    });
-    return def.promise;
-  };
-  Services.callHandshakePostService = function(relativeUrl, data, parameterNames, parameterValues, expectArrayResponse, responseDataPropertyName, requestProperties) {
-    if (parameterNames === void 0) {
-      parameterNames = null;
-    }
-    if (parameterValues === void 0) {
-      parameterValues = null;
-    }
-    if (expectArrayResponse === void 0) {
-      expectArrayResponse = false;
-    }
-    if (responseDataPropertyName === void 0) {
-      responseDataPropertyName = null;
-    }
-    var def = Defer.newDefer();
-    Services.doHandshake(function() {
-      Services.callPostService(relativeUrl, data, parameterNames, parameterValues, expectArrayResponse, responseDataPropertyName, requestProperties).done(function(res) {
-        def.resolve(res);
-      }, function(svcErr) {
-        def.reject({
-          error: svcErr,
-          isHandshakeError: false
-        });
-      });
-    }, function(xhr, ts, et) {
-      def.reject({
-        error: {
-          xhr: xhr,
-          textStatus: ts,
-          errorThrown: et
-        },
-        isHandshakeError: true
-      });
-    });
-    return def.promise;
-  };
-  Services.callHandshake = function(successFunc, failureFunc) {
-    return Services.doHandshake(successFunc, function(xhr, textStatus, errorThrown) {
-      failureFunc({
-        error: {
-          xhr: xhr,
-          textStatus: textStatus,
-          errorThrown: errorThrown
-        },
-        isHandshakeError: true
-      });
-    });
-  };
-  Services.doHandshake = function(successfunction, failurefunction) {
-    console.log("doHandshake: ", Ps.getJQuery());
-    Ps.getJQuery().ajax({
-      url: Services.baseUrl() + "LoginHandshakeService.svc/iSynch",
-      method: "GET",
-      timeout: Services.handshakeTimeout(),
-      cache: false,
-      success: function(result) {
-        FunctionUtil.tryCatch(successfunction, function(errMsg) {
-          console.error(errMsg);
-          failurefunction(null, '', errMsg);
-        });
-      },
-      error: function(xhr, textStatus, errorThrown) {
-        psLog.logs.services.error("initial handshake error", xhr);
-        if (xhr.status == 0 || textStatus.indexOf("Abort") != -1) {
-          if (typeof failurefunction != "undefined") {
-            failurefunction(xhr, textStatus, errorThrown);
-            return;
-          }
-        }
-        if (xhr.status == 404 && !Services.offlineChecked) {
-          psLog.logs.services.error("check if index.html exists");
-          Ps.getJQuery().ajax({
-            url: Services.baseUrl() + "../index.html",
-            method: "GET",
-            cache: false,
-            success: function(result) {
-              psLog.logs.login.debug("we are online but need to reauthenticate with websso");
-              var vars = {};
-              var parts = Ps.getPageWindow().location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m, key, value) {
-                vars[key] = value;
-              });
-              psLog.logs.login.trace("reauthenticate vars: ", vars);
-              if ("reload" in vars) {
-                failurefunction(null, '', "Preventing redirect loop");
-                return;
-              }
-              var key = "reload";
-              var value = Math.floor(Math.random() * 90000) + 10000;
-              var kvp = Ps.getPageDocument().location.search.substr(1).split('&');
-              var i = kvp.length;
-              while (i--) {
-                var x = kvp[i].split('=');
-                if (x[0] == key) {
-                  x[1] = value.toString();
-                  kvp[i] = x.join('=');
-                  break;
-                }
-              }
-              if (kvp.length === 0) {
-                kvp[kvp.length] = [key, value].join('=');
-              }
-              Services.offlineChecked = true;
-              Ps.getPageDocument().location.search = kvp.join('&');
-            },
-            error: function(xhr, textStatus, errorThrown) {
-              Services.offlineChecked = true;
-              psLog.logs.services.info("we are in offline mode");
-              if (typeof failurefunction != "undefined") {
-                failurefunction(xhr, textStatus, errorThrown);
-                return;
-              }
-            }
-          });
-        } else {
-          if (typeof failurefunction != "undefined") {
-            failurefunction(xhr, textStatus, errorThrown);
-            return;
-          }
-        }
-      }
-    });
-  };
   Services._baseUrl = "./";
   Services._pageBaseUrl = "/app/pages/";
   Services._defaultTimeOut = 600000;
@@ -993,48 +879,29 @@ var Services;
   var UserMaster = (function() {
     function UserMaster() {}
     UserMaster.search = function(postData) {
-      return Util.svcCall(false, "UserMasterService.svc/UserMaster/Search", 0, null, 0, postData);
+      return Util.svcCall("UserMasterService.svc/UserMaster/Search", ServiceData.SvcType.POST, null, ServiceData.SvcDataType.JSON, postData);
     };
     return UserMaster;
   })();
   Services.UserMaster = UserMaster;
   var Util = (function() {
     function Util() {}
-    Util.svcCall = function(requireHandshake, url, callType, urlParameters, postDataType, postData, requestProperties) {
-      if (requireHandshake) {
-        var urlParamKeys = null;
-        var urlParamVals = null;
-        if (urlParameters != null) {
-          urlParamKeys = Object.keys(urlParameters);
-          urlParamVals = ObjectUtil.values(urlParameters, urlParamKeys);
-        }
-        switch (callType) {
-          case 1:
-            return Services.callHandshakeGetService(url, urlParamKeys, urlParamVals, false, null, requestProperties);
-          case 2:
-            throw new Error("unimplemented service call type 'DELETE'");
-          case 0:
-            return Services.callHandshakePostService(url, postData, urlParamKeys, urlParamVals, false, null, requestProperties);
-          default:
-            throw new Error("unknown SvcType '" + callType + "'");
-        }
-      } else {
-        switch (callType) {
-          case 1:
-            var urlParamKeys = null;
-            var urlParamVals = null;
-            if (urlParameters != null) {
-              urlParamKeys = Object.keys(urlParameters);
-              urlParamVals = ObjectUtil.values(urlParameters, urlParamKeys);
-            }
-            return Services.callGetService(url, urlParamKeys, urlParamVals, false, null, requestProperties);
-          case 2:
-            throw new Error("unimplemented service call type 'DELETE'");
-          case 0:
-            return Services.callPostService(url, postData, urlParamKeys, urlParamVals, false, null, requestProperties);
-          default:
-            throw new Error("unknown SvcType '" + callType + "'");
-        }
+    Util.svcCall = function(url, callType, urlParameters, postDataType, postData, requestProperties) {
+      switch (callType) {
+        case ServiceData.SvcType.GET:
+          var urlParamKeys = null;
+          var urlParamVals = null;
+          if (urlParameters != null) {
+            urlParamKeys = Object.keys(urlParameters);
+            urlParamVals = ObjectUtil.values(urlParameters, urlParamKeys);
+          }
+          return Services.callGetService(url, urlParamKeys, urlParamVals, false, null, requestProperties);
+        case ServiceData.SvcType.DELETE:
+          throw new Error("unimplemented service call type 'DELETE'");
+        case ServiceData.SvcType.POST:
+          return Services.callPostService(url, postData, urlParamKeys, urlParamVals, false, null, requestProperties);
+        default:
+          throw new Error("unknown SvcType '" + callType + "'");
       }
     };
     return Util;
@@ -1044,7 +911,8 @@ module.exports = Services;
 
 
 //# sourceURL=c:/Users/TeamworkGuy2/Documents/Visual Studio 2015/Projects/HDSTeamBuilding/HDSMobileApp/app/scripts/modules/services/Services.js
-},{"../Defer":2,"../main":8,"../psLog":9,"../utils/FunctionUtil":12,"../utils/ObjectUtil":14,"./ServiceData":10,"lodash":16}],12:[function(require,module,exports){
+},{"../Defer":3,"../main":9,"../psLog":10,"../utils/ObjectUtil":15,"./ServiceData":11,"lodash":17}],13:[function(require,module,exports){
+"use strict";
 "use strict";
 var FunctionUtil = (function() {
   function FunctionUtil() {}
@@ -1095,7 +963,8 @@ module.exports = FunctionUtil;
 
 
 //# sourceURL=c:/Users/TeamworkGuy2/Documents/Visual Studio 2015/Projects/HDSTeamBuilding/HDSMobileApp/app/scripts/modules/utils/FunctionUtil.js
-},{}],13:[function(require,module,exports){
+},{}],14:[function(require,module,exports){
+"use strict";
 "use strict";
 var NumberUtil = (function() {
   function NumberUtil() {}
@@ -1198,7 +1067,8 @@ module.exports = NumberUtil;
 
 
 //# sourceURL=c:/Users/TeamworkGuy2/Documents/Visual Studio 2015/Projects/HDSTeamBuilding/HDSMobileApp/app/scripts/modules/utils/NumberUtil.js
-},{}],14:[function(require,module,exports){
+},{}],15:[function(require,module,exports){
+"use strict";
 "use strict";
 var NumberUtil = require("./NumberUtil");
 var ObjectUtil = (function() {
@@ -1412,15 +1282,15 @@ module.exports = ObjectUtil;
 
 
 //# sourceURL=c:/Users/TeamworkGuy2/Documents/Visual Studio 2015/Projects/HDSTeamBuilding/HDSMobileApp/app/scripts/modules/utils/ObjectUtil.js
-},{"./NumberUtil":13}],15:[function(require,module,exports){
+},{"./NumberUtil":14}],16:[function(require,module,exports){
 "use strict";
 "use strict";
 var TestUserController = require("../controllers/TestUserController");
 var TestUserView = (function() {
   function TestUserView() {}
-  TestUserView.newView = function(model, domContext) {
+  TestUserView.initView = function(appTools) {
     var inst = new TestUserView();
-    inst.model = model;
+    var domContext = appTools.getPageDocument().querySelector("#test-user-view");
     inst.domContext = domContext;
     var nameField = domContext.querySelector(".user-name-input.text-field");
     var resultElem = domContext.querySelector(".user-name-result");
@@ -1437,10 +1307,9 @@ var TestUserView = (function() {
     inst.validateBtnListener = validateBtnListener;
     return inst;
   };
-  TestUserView.deregister = function(view) {
+  TestUserView.deregister = function(appTools, view) {
     view.domContext.querySelector(".validate-user-name.btn").removeEventListener("click", view.validateBtnListener);
     view.domContext = null;
-    view.model = null;
     view.validateBtnListener = null;
   };
   return TestUserView;
@@ -1449,7 +1318,7 @@ module.exports = TestUserView;
 
 
 //# sourceURL=c:/Users/TeamworkGuy2/Documents/Visual Studio 2015/Projects/HDSTeamBuilding/HDSMobileApp/app/scripts/views/TestUserView.js
-},{"../controllers/TestUserController":1}],16:[function(require,module,exports){
+},{"../controllers/TestUserController":2}],17:[function(require,module,exports){
 (function (global){
 /**
  * @license
@@ -8239,7 +8108,7 @@ module.exports = TestUserView;
 }.call(this));
 
 }).call(this,typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{}],17:[function(require,module,exports){
+},{}],18:[function(require,module,exports){
 (function (process){
 // vim:ts=4:sts=4:sw=4:
 /*!
@@ -10291,7 +10160,7 @@ return Q;
 });
 
 }).call(this,require("uiHBzj"))
-},{"uiHBzj":18}],18:[function(require,module,exports){
+},{"uiHBzj":19}],19:[function(require,module,exports){
 // shim for using process in browser
 
 var process = module.exports = {};

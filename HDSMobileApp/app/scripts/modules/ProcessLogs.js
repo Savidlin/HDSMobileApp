@@ -177,7 +177,9 @@ var ProcessLogs;
         ProcessLog.prototype.toString = function () {
             "use strict";
             var stepsStr = " " + this.stepCount + " steps" + (this.initialStepCount > -1 ? " of " + this.initialStepCount : "");
-            return this.endTime != null ? "process '" + this.name + "' took " + this.getTotalLogTime() + " ms," + stepsStr : "process '" + this.name + "' not complete," + stepsStr;
+            return this.endTime != null ?
+                "process '" + this.name + "' took " + this.getTotalLogTime() + " ms," + stepsStr :
+                "process '" + this.name + "' not complete," + stepsStr;
         };
         /* static functions and properties */
         ProcessLog.startSimpleLog = function (message) {
@@ -209,7 +211,9 @@ var ProcessLogs;
         LogStep.prototype.toString = function () {
             "use strict";
             var stepsStr = (this.stepNumber || "") + (this.totalSteps != null ? " of " + this.totalSteps : "");
-            return this.deltaTime != null ? "step " + stepsStr + " '" + this.stepMessage + "' took " + this.deltaTime + " ms" : "step " + stepsStr + " '" + this.stepMessage + "' not complete";
+            return this.deltaTime != null ?
+                "step " + stepsStr + " '" + this.stepMessage + "' took " + this.deltaTime + " ms" :
+                "step " + stepsStr + " '" + this.stepMessage + "' not complete";
         };
         return LogStep;
     })();

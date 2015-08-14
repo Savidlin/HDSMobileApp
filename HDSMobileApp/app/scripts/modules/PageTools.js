@@ -82,7 +82,8 @@ var PageTools;
             return jquery(doc || PageConfig.illegalState("create jQuery context", "page document"));
         };
         PageConfig.illegalState = function (context, msg) {
-            throw new Error("context: " + context + "; " + "problem: missing " + msg);
+            throw new Error("context: " + context + "; " +
+                "problem: missing " + msg);
         };
         return PageConfig;
     })();

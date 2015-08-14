@@ -1,7 +1,7 @@
 /* @license (c) Copyright 2014 HDS IP Holdings, LLC. All Rights Reserved. */
 var LocalStoreByDate = require("./LocalStoreByDate");
 /** PsLogs class
- * error/info logging instances for PowerScope, uses 'log4javascript' library
+ * error/info logging instances for HDSMobileApp, uses 'log4javascript' library
  * @since 2015-2-10
  */
 var PsLog = (function () {
@@ -15,7 +15,7 @@ var PsLog = (function () {
         configurable: true
     });
     PsLog.initDefaultLog = function () {
-        var log = log4javascript.getLogger("powerscope");
+        var log = log4javascript.getLogger("hdsmobileapp");
         log.addAppender(PsLog.getBrowserConsoleAppender());
         PsLog._defaultLog = log;
         return PsLog._defaultLog;
@@ -65,14 +65,14 @@ var PsLog = (function () {
  * @author Benjamin
  * @since 2015-2-16
  */
-var LocalStoreAppender = (function () {
-    function LocalStoreAppender(localStore, mergeGroupEvents) {
+var LocalStoreAppender /*extends log4javascript.Appender */ = (function () {
+    function LocalStoreAppender /*extends log4javascript.Appender */(localStore, mergeGroupEvents) {
         if (mergeGroupEvents === void 0) { mergeGroupEvents = false; }
         this.currentGroupEvents = [];
         this.store = localStore;
         this.mergeGroups = mergeGroupEvents;
     }
-    LocalStoreAppender.prototype.append = function (loggingEvent) {
+    LocalStoreAppender /*extends log4javascript.Appender */.prototype.append = function (loggingEvent) {
         if (this.inGroup === true && this.mergeGroups === true) {
             this.currentGroupEvents.push(loggingEvent);
         }
@@ -83,12 +83,12 @@ var LocalStoreAppender = (function () {
             }
         }
     };
-    LocalStoreAppender.prototype.group = function (name) {
+    LocalStoreAppender /*extends log4javascript.Appender */.prototype.group = function (name) {
         this.inGroup = true;
         this.currentGroupName = name;
         this.currentGroupEvents = [];
     };
-    LocalStoreAppender.prototype.groupEnd = function () {
+    LocalStoreAppender /*extends log4javascript.Appender */.prototype.groupEnd = function () {
         var groupName = this.currentGroupName;
         var groupEvents = this.currentGroupEvents;
         if (this.mergeGroups === true) {
@@ -102,16 +102,16 @@ var LocalStoreAppender = (function () {
         this.currentGroupName = null;
         this.currentGroupEvents = null;
     };
-    LocalStoreAppender.prototype.toString = function () {
+    LocalStoreAppender /*extends log4javascript.Appender */.prototype.toString = function () {
         return "LocalStoreAppender";
     };
     // TODO poor workaround for 'extends' not working correctly
-    LocalStoreAppender.tmp = (function () {
+    LocalStoreAppender /*extends log4javascript.Appender */.tmp = (function () {
         LocalStoreAppender.prototype = new log4javascript.Appender();
         LocalStoreAppender.prototype["appender"] = new log4javascript.Appender();
         LocalStoreAppender.prototype["layout"] = new log4javascript.NullLayout();
         LocalStoreAppender.prototype["threshold"] = log4javascript.Level.DEBUG;
     }());
-    return LocalStoreAppender;
+    return LocalStoreAppender /*extends log4javascript.Appender */;
 })();
 module.exports = PsLog;

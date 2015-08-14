@@ -1,6 +1,4 @@
-/* @license (c) Copyright 2014 HDS IP Holdings, LLC. All Rights Reserved.
- * @since 2015-1-15
- */
+"use strict";
 /** StringUtil namespace - string manipulation utility functions
  * @author Benjamin
  * @since 2014-12-8
@@ -9,7 +7,6 @@ var StringUtil = (function () {
     function StringUtil() {
     }
     StringUtil.isAllStrings = function (ary) {
-        "use strict";
         if (ary == null) {
             return false;
         }
@@ -91,7 +88,6 @@ var StringUtil = (function () {
      * @return {String} the quoted string
      */
     StringUtil.addQuotesSingleOrDouble = function (str, doTrim) {
-        "use strict";
         // ensure that value is quoted
         str = ("" + str);
         if (doTrim === true) {
@@ -105,8 +101,12 @@ var StringUtil = (function () {
         var containsSingle = withoutExistingQuotes.indexOf("'") > -1;
         var containsDouble = withoutExistingQuotes.indexOf("\"") > -1;
         // if a string starts with a ' or " and ends with the other, throw an error, this case is probably an input error of some kind
-        if ((startsWithSingle && endsWithDouble) || (startsWithDouble && endsWithSingle) || (containsSingle && (startsWithSingle || endsWithSingle)) || (containsDouble && (startsWithDouble || endsWithDouble)) || containsSingle && containsDouble) {
-            throw new Error("argument: " + str + ", this function is not designed to add quotes to a string that already contains or starts and ends with different quote characters");
+        if ((startsWithSingle && endsWithDouble) || (startsWithDouble && endsWithSingle) ||
+            (containsSingle && (startsWithSingle || endsWithSingle)) ||
+            (containsDouble && (startsWithDouble || endsWithDouble)) ||
+            containsSingle && containsDouble) {
+            throw new Error("argument: " + str +
+                ", this function is not designed to add quotes to a string that already contains or starts and ends with different quote characters");
         }
         // starts with ' or "
         if (startsWithSingle || startsWithDouble) {
@@ -151,7 +151,6 @@ var StringUtil = (function () {
         return str;
     };
     StringUtil.padZeroLeft = function (value, maxDigits, padChar) {
-        "use strict";
         if (padChar === void 0) { padChar = '0'; }
         return StringUtil.padLeft(value, maxDigits, padChar);
     };
@@ -162,7 +161,6 @@ var StringUtil = (function () {
      * @return {String} the {@code value} converted to a string padded with {@code padChar} or '0'
      */
     StringUtil.padLeft = function (value, maxDigits, padChar) {
-        "use strict";
         var valStr = String(value);
         if (valStr.length > maxDigits) {
             return value;
@@ -170,7 +168,6 @@ var StringUtil = (function () {
         return value != null ? new Array(maxDigits - valStr.length + 1).join(padChar) + value : value;
     };
     StringUtil.padRight = function (value, maxDigits, padChar) {
-        "use strict";
         var valStr = String(value);
         if (valStr.length > maxDigits) {
             return value;
@@ -183,7 +180,6 @@ var StringUtil = (function () {
      * @return {Boolean} true if the character at the specified index is a digit {@code 0-9}, false if not
      */
     StringUtil.isCharAtDigit = function (str, i) {
-        "use strict";
         if (str == null || i < 0 || i >= str.length) {
             return false;
         }
@@ -195,7 +191,6 @@ var StringUtil = (function () {
      * @return {Boolean} true if every character in the string is a digit {@code 0-9}, false if not
      */
     StringUtil.isDigit = function (str) {
-        "use strict";
         if (str == null) {
             return false;
         }
@@ -217,7 +212,6 @@ var StringUtil = (function () {
      * @return {Boolean} true if the character at index {@code i} is upper case
      */
     StringUtil.isCharAtUpperCase = function (str, i) {
-        "use strict";
         if (str == null || i < 0 || i >= str.length) {
             return false;
         }
@@ -234,7 +228,6 @@ var StringUtil = (function () {
      * @return {Boolean} true if the character at index {@code i} is lower case
      */
     StringUtil.isCharAtLowerCase = function (str, i) {
-        "use strict";
         if (str == null || i < 0 || i >= str.length) {
             return false;
         }
@@ -250,7 +243,6 @@ var StringUtil = (function () {
      * @param {Boolean} true if {@code str} is underscore case, false if not
      */
     StringUtil.isUnderscoreCase = function (str) {
-        "use strict";
         var underscoreIndex = str.indexOf('_');
         if (underscoreIndex === 0) {
             throw new Error("invalid underscoreCase string starting with underscore '" + str + "'");
@@ -263,6 +255,7 @@ var StringUtil = (function () {
                 if (str.charAt(i - 1) !== '_' && !StringUtil.isDigit(ch) && !StringUtil.isCharAtUpperCase(str, i - 1)) {
                     return false;
                 }
+                // read consecutive capital characters after an underscore, for example "Bid_ID" is valid because the capital "D" gets skipped
                 for (; i < size; i++) {
                     ch = str.charAt(i);
                     if (ch !== ch.toUpperCase() || ch === '_') {
@@ -279,7 +272,6 @@ var StringUtil = (function () {
      * throws an error if the string's format is not recognized
      */
     StringUtil.toUnderscoreCase = function (str) {
-        "use strict";
         var resStr = null;
         if (StringUtil.isCamelCase(str)) {
             var res = [str.charAt(0).toUpperCase()];
@@ -324,7 +316,6 @@ var StringUtil = (function () {
      * @param {Boolean} true if {@code str} is title case, false if not
      */
     StringUtil.isTitleCase = function (str) {
-        "use strict";
         var underscoreIndex = str.indexOf('_');
         if (underscoreIndex === 0) {
             throw new Error("invalid TitleCase string starting with underscore '" + str + "'");
@@ -337,7 +328,6 @@ var StringUtil = (function () {
      * throws an error if the string's format is not recognized
      */
     StringUtil.toTitleCase = function (str) {
-        "use strict";
         var resStr = null;
         if (StringUtil.isCamelCase(str)) {
             resStr = str.charAt(0).toUpperCase() + str.substr(1);
@@ -375,7 +365,6 @@ var StringUtil = (function () {
      * @param {Boolean} true if {@code str} is camel case, false if not
      */
     StringUtil.isCamelCase = function (str) {
-        "use strict";
         var underscoreIndex = str.indexOf('_');
         if (underscoreIndex === 0) {
             throw new Error("invalid camelCase string starting with underscore '" + str + "'");
@@ -388,7 +377,6 @@ var StringUtil = (function () {
      * throws an error if the string's format is not recognized
      */
     StringUtil.toCamelCase = function (str) {
-        "use strict";
         var resStr = null;
         if (StringUtil.isCamelCase(str)) {
             resStr = str;
@@ -419,7 +407,9 @@ var StringUtil = (function () {
     };
     StringUtil.testStringCase = function () {
         ["At_Bat_Cat", "ABC", "atBatCat", "CharAt"].forEach(function (str) {
-            console.log(str + ": CamelCase: " + StringUtil.toCamelCase(str) + ", titleCase: " + StringUtil.toTitleCase(str) + ", toUnderscoreCase: " + StringUtil.toUnderscoreCase(str));
+            console.log(str + ": CamelCase: " + StringUtil.toCamelCase(str) +
+                ", titleCase: " + StringUtil.toTitleCase(str) +
+                ", toUnderscoreCase: " + StringUtil.toUnderscoreCase(str));
         });
     };
     return StringUtil;

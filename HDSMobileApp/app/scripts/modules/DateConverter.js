@@ -90,7 +90,9 @@ var DateConverter;
             if (hrs === 0) {
                 hrs = 12;
             }
-            return DateConverter.Dates.toDisplayDate(date) + ' ' + (hrs <= 9 ? '0' + hrs : '' + hrs) + ':' + (mins <= 9 ? '0' + mins : '' + mins) + ' ' + ampm;
+            return DateConverter.Dates.toDisplayDate(date) +
+                ' ' + (hrs <= 9 ? '0' + hrs : '' + hrs) +
+                ':' + (mins <= 9 ? '0' + mins : '' + mins) + ' ' + ampm;
         };
         /** number of days between {@code dtLeft - dtRight}
          * @param {Boolean} [incrementAtMidnight=false]: assumes dtRight's time is midnight and counts from dtRight's date

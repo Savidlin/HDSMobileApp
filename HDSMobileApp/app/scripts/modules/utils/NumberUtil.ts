@@ -1,4 +1,4 @@
-﻿/* @license (c) Copyright 2014 HDS IP Holdings, LLC. All Rights Reserved. */
+﻿"use strict";
 
 /** NumberUtil class
  * utility functions for converting numeric values to and from other formats
@@ -6,7 +6,6 @@
  * @since 2015-1-30
  */
 class NumberUtil {
-
 
     /** Returns true if the input argument is a number or a valid string representation of a number, false if not
      */

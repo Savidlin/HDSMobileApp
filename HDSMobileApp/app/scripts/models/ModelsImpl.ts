@@ -1,13 +1,14 @@
+/// <reference path="../../tsDefinitions/mobileapp.d.ts" />
 /* @license (c) Copyright 2014 HDS IP Holdings, LLC. All Rights Reserved.
  * @generated
  */
 "use strict";
 import ModelUtil = require("./ModelUtil");
 
-module Models {
+module ModelsImpl {
 
 
-    interface UserMasterConstructorProps extends OptionalPropSvcModels.UserMaster, OptionalPropModels.UserMaster { }
+    interface UserMasterConstructorProps extends SvcModels.UserMasterOptional, Models.UserMasterOptional { }
 
     export class UserMaster {
         public User_Number: number;
@@ -58,7 +59,7 @@ module Models {
     }
 
 
-    interface UserProfileConstructorProps extends OptionalPropSvcModels.UserProfile, OptionalPropModels.UserProfile { }
+    interface UserProfileConstructorProps extends SvcModels.UserProfileOptional, Models.UserProfileOptional { }
 
     export class UserProfile implements PsSyncable {
         public Deleted: boolean;
@@ -189,4 +190,4 @@ module Models {
 
 }
 
-export = Models;
+export = ModelsImpl;

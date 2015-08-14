@@ -1,4 +1,4 @@
-/* @license (c) Copyright 2014 HDS IP Holdings, LLC. All Rights Reserved. */
+"use strict";
 var NumberUtil = require("./NumberUtil");
 /** ObjectUtil class
  * object manipulation utility functions
@@ -27,9 +27,7 @@ var ObjectUtil = (function () {
         if (keys == null) {
             keys = Object.keys(obj);
         }
-        return keys.map(function (prop) {
-            return obj[prop];
-        });
+        return keys.map(function (prop) { return obj[prop]; });
     };
     /** Get a set of non-null property values from an object.
      * The list of property names can be provided, or if not provided,
@@ -51,35 +49,25 @@ var ObjectUtil = (function () {
         if (keys == null) {
             keys = Object.keys(obj);
         }
-        return keys.filter(function (prop) {
-            return obj[prop] != null;
-        }).map(function (prop) {
-            return obj[prop];
-        });
+        return keys.filter(function (prop) { return obj[prop] != null; }).map(function (prop) { return obj[prop]; });
     };
     /** Check if an object has at least 1 non-null property from a list of property names
      * @see #hasMatchingProperties()
      */
     ObjectUtil.hasAnyNonFalseyProperties = function (obj, propNames) {
-        return ObjectUtil.hasMatchingProperties(obj, propNames, function template_notNull(val) {
-            return !!val;
-        }, propNames != null ? 1 : 0);
+        return ObjectUtil.hasMatchingProperties(obj, propNames, function template_notNull(val) { return !!val; }, propNames != null ? 1 : 0);
     };
     /** Check if an object has at least 1 non-null property from a list of property names
      * @see #hasMatchingProperties()
      */
     ObjectUtil.hasAnyNonNullProperties = function (obj, propNames) {
-        return ObjectUtil.hasMatchingProperties(obj, propNames, function template_notNull(val) {
-            return val != null;
-        }, propNames != null ? 1 : 0);
+        return ObjectUtil.hasMatchingProperties(obj, propNames, function template_notNull(val) { return val != null; }, propNames != null ? 1 : 0);
     };
     /** Check if an object has non-null values for all of the propery names specified
      * @see #hasMatchingProperties()
      */
     ObjectUtil.hasNonNullProperties = function (obj, propNames) {
-        return ObjectUtil.hasMatchingProperties(obj, propNames, function template_notNull(val) {
-            return val != null;
-        }, propNames != null ? propNames.length : 0);
+        return ObjectUtil.hasMatchingProperties(obj, propNames, function template_notNull(val) { return val != null; }, propNames != null ? propNames.length : 0);
     };
     /** Check if an object has matching values for all of the properties specified
      * Example: {@code hasMatchingProperties({ alpha: 100 }, ["alpha"], function (v) { return v != null; })}
@@ -113,6 +101,7 @@ var ObjectUtil = (function () {
                 }
             }
             else if (i - nonNullCount >= size - requiredCount) {
+                // enough properties checks have already returned false, that we can return false early
                 break;
             }
         }

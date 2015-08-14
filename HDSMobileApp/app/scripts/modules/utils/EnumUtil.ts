@@ -1,5 +1,4 @@
-﻿/* @license (c) Copyright 2014 HDS IP Holdings, LLC. All Rights Reserved. */
-
+﻿"use strict";
 import ArrayUtil = require("./ArrayUtil");
 import ObjectUtil = require("./ObjectUtil");
 

@@ -1,5 +1,4 @@
-﻿/* @license (c) Copyright 2014 HDS IP Holdings, LLC. All Rights Reserved. */
-
+﻿"use strict";
 import ObjectUtil = require("./ObjectUtil");
 
 /** ArrayUtil class
@@ -8,7 +7,6 @@ import ObjectUtil = require("./ObjectUtil");
  * @since 2014-8-0
  */
 class ArrayUtil {
-    "use strict";
 
     static EMPTY_ARRAY: any[] = Object.freeze([]);
 

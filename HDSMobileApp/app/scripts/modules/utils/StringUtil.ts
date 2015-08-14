@@ -1,6 +1,4 @@
-﻿/* @license (c) Copyright 2014 HDS IP Holdings, LLC. All Rights Reserved.
- * @since 2015-1-15
- */
+﻿"use strict";
 
 /** StringUtil namespace - string manipulation utility functions
  * @author Benjamin
@@ -9,7 +7,6 @@
 class StringUtil {
 
     static isAllStrings(ary: any[]): boolean {
-        "use strict";
         if (ary == null) { return false; }
         for (var i = ary.length - 1; i > -1; i--) {
             if (typeof ary[i] !== "string") { return false; }
@@ -101,7 +98,6 @@ class StringUtil {
      * @return {String} the quoted string
      */
     static addQuotesSingleOrDouble(str: string, doTrim?: boolean): string {
-        "use strict";
         // ensure that value is quoted
         str = ("" + str);
         if (doTrim === true) {
@@ -168,7 +164,6 @@ class StringUtil {
 
 
     static padZeroLeft(value, maxDigits: number, padChar: string = '0'): string {
-        "use strict";
         return StringUtil.padLeft(value, maxDigits, padChar);
     }
 
@@ -180,7 +175,6 @@ class StringUtil {
      * @return {String} the {@code value} converted to a string padded with {@code padChar} or '0'
      */
     static padLeft(value, maxDigits: number, padChar: string): string {
-        "use strict";
         var valStr = String(value);
         if (valStr.length > maxDigits) {
             return value;
@@ -190,7 +184,6 @@ class StringUtil {
 
 
     static padRight(value, maxDigits: number, padChar: string): string {
-        "use strict";
         var valStr = String(value);
         if (valStr.length > maxDigits) {
             return value;
@@ -205,7 +198,6 @@ class StringUtil {
      * @return {Boolean} true if the character at the specified index is a digit {@code 0-9}, false if not
      */
     static isCharAtDigit(str: string, i: number): boolean {
-        "use strict";
         if (str == null || i < 0 || i >= str.length) {
             return false;
         }
@@ -219,7 +211,6 @@ class StringUtil {
      * @return {Boolean} true if every character in the string is a digit {@code 0-9}, false if not
      */
     static isDigit(str: string): boolean {
-        "use strict";
         if (str == null) {
             return false;
         }
@@ -243,7 +234,6 @@ class StringUtil {
      * @return {Boolean} true if the character at index {@code i} is upper case
      */
     static isCharAtUpperCase(str: string, i: number): boolean {
-        "use strict";
         if (str == null || i < 0 || i >= str.length) {
             return false;
         }
@@ -262,7 +252,6 @@ class StringUtil {
      * @return {Boolean} true if the character at index {@code i} is lower case
      */
     static isCharAtLowerCase(str: string, i: number): boolean {
-        "use strict";
         if (str == null || i < 0 || i >= str.length) {
             return false;
         }
@@ -280,7 +269,6 @@ class StringUtil {
      * @param {Boolean} true if {@code str} is underscore case, false if not
      */
     static isUnderscoreCase(str: string): boolean {
-        "use strict";
         var underscoreIndex = str.indexOf('_');
         if (underscoreIndex === 0) {
             throw new Error("invalid underscoreCase string starting with underscore '" + str + "'");
@@ -313,7 +301,6 @@ class StringUtil {
      * throws an error if the string's format is not recognized
      */
     static toUnderscoreCase(str: string): string {
-        "use strict";
         var resStr = null;
         if (StringUtil.isCamelCase(str)) {
             var res = [str.charAt(0).toUpperCase()];
@@ -361,7 +348,6 @@ class StringUtil {
      * @param {Boolean} true if {@code str} is title case, false if not
      */
     static isTitleCase(str: string): boolean {
-        "use strict";
         var underscoreIndex = str.indexOf('_');
         if (underscoreIndex === 0) {
             throw new Error("invalid TitleCase string starting with underscore '" + str + "'");
@@ -376,7 +362,6 @@ class StringUtil {
      * throws an error if the string's format is not recognized
      */
     static toTitleCase(str: string): string {
-        "use strict";
         var resStr = null;
         if (StringUtil.isCamelCase(str)) {
             resStr = str.charAt(0).toUpperCase() + str.substr(1);
@@ -417,7 +402,6 @@ class StringUtil {
      * @param {Boolean} true if {@code str} is camel case, false if not
      */
     static isCamelCase(str: string): boolean {
-        "use strict";
         var underscoreIndex = str.indexOf('_');
         if (underscoreIndex === 0) {
             throw new Error("invalid camelCase string starting with underscore '" + str + "'");
@@ -432,7 +416,6 @@ class StringUtil {
      * throws an error if the string's format is not recognized
      */
     static toCamelCase(str: string): string {
-        "use strict";
         var resStr = null;
         if (StringUtil.isCamelCase(str)) {
             resStr = str;

@@ -1,9 +1,6 @@
-/* @license (c) Copyright 2014 HDS IP Holdings, LLC. All Rights Reserved.
- * @author Benjamin
- * @since 2015-2-9
- */
+"use strict";
 var Dialogs = require("./Dialogs");
-/** ErrorUtil namespace - utility functions for constructing/throwing standardized errors across the PowerScope app
+/** ErrorUtil namespace - utility functions for constructing/throwing common errors in HDSMobileApp
  * @author Benjamin
  * @since 2015-2-9
  */
@@ -27,9 +24,8 @@ var ErrorUtil = (function () {
                 errs.push(msg);
             }
         }
-        Dialogs.openDialog(msgStrs.join(" ") + "<br/>\n" + errs.map(function (err) {
-            return err.stack;
-        }).join("<br/>\n"));
+        Dialogs.openDialog(msgStrs.join(" ") + "<br/>\n" +
+            errs.map(function (err) { return err.stack; }).join("<br/>\n"));
     };
     ErrorUtil.showServiceError = function (svcError) {
         var msgs = [];
@@ -108,7 +104,8 @@ var ErrorUtil = (function () {
                 errorCallback(toStringFunc(err));
             }
             else {
-                throw new Error("incorrect usage (" + errorCallback + ", " + err + ", " + errorToString + "), expected (Function errorCallback, Object err[, Boolean errorToString])" + ", error occurred: " + toStringFunc(err));
+                throw new Error("incorrect usage (" + errorCallback + ", " + err + ", " + errorToString + "), expected (Function errorCallback, Object err[, Boolean errorToString])" +
+                    ", error occurred: " + toStringFunc(err));
             }
         }
     };

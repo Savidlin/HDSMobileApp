@@ -1,4 +1,4 @@
-/* @license (c) Copyright 2014 HDS IP Holdings, LLC. All Rights Reserved. */
+"use strict";
 /** FunctionUtil class
  * utility functions for calling functions
  * @author Benjamin
@@ -52,8 +52,7 @@ var FunctionUtil = (function () {
         };
     };
     /** A function which takes no arguments (or any arguments) and returns nothing */
-    FunctionUtil.NO_OP = function () {
-    };
+    FunctionUtil.NO_OP = function () { };
     // Alias for {@link #createLazyInitializedField}
     FunctionUtil.lazyField = FunctionUtil.createLazyInitializedField;
     return FunctionUtil;

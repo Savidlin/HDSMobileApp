@@ -1,4 +1,5 @@
-﻿import gulp = require('gulp');
+﻿/// <reference path="./definitions/node_modules/node-modules.d.ts" />
+import gulp = require('gulp');
 import fs = require('fs');
 import vm = require('vm');
 import gutil = require('gulp-util');
@@ -24,12 +25,6 @@ var dist = 'app/dist';
 var modelsDir = {
     base: "app/scripts/models/"
 };
-var minifiedLibraryFileInfos = [
-    { std: "app/lib/jquery-2.0.3.js", min: "app/lib/jquery-2.0.3.min.js" },
-    { std: "app/lib/require.js", min: "app/lib/require.min.js" },
-    { std: "app/i18next-1.7.3/i18next-1.7.3.js", min: "app/i18next-1.7.3/i18next-1.7.3.min.js" },
-    { std: "app/lib/jquery-ui-1.10.3.custom.js", min: "app/lib/jquery-ui-1.10.3.custom.min.js" },
-];
 
 var bannerLines = [
     "/* @license (c) Copyright 2014 HDS IP Holdings, LLC. All Rights Reserved.",

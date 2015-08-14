@@ -1,4 +1,4 @@
-/* @license (c) Copyright 2014 HDS IP Holdings, LLC. All Rights Reserved. */
+"use strict";
 var ObjectUtil = require("./ObjectUtil");
 /** ArrayUtil class
  * Array utility functions (most are superseeded by lodash), useful for chrome command line testing
@@ -209,14 +209,17 @@ var ArrayUtil = (function () {
      * @see with1Prop()
      */
     ArrayUtil.withAll3Prop = function (ary, propName, propValue, propName2, propValue2, propName3, propValue3) {
-        if (ary == null || propName == null || propName2 == null || propName3 == null || propValue === undefined || propValue2 === undefined || propValue3 === undefined) {
+        if (ary == null || propName == null || propName2 == null || propName3 == null ||
+            propValue === undefined || propValue2 === undefined || propValue3 === undefined) {
             return [];
         }
         var results = [];
         var obj = null;
         for (var i = 0, size = ary.length; i < size; i++) {
             obj = ary[i];
-            if (obj[propName] === propValue && obj[propName2] === propValue2 && obj[propName3] === propValue3) {
+            if (obj[propName] === propValue &&
+                obj[propName2] === propValue2 &&
+                obj[propName3] === propValue3) {
                 results.push(obj);
             }
         }
@@ -226,14 +229,17 @@ var ArrayUtil = (function () {
      * @see with1Prop()
      */
     ArrayUtil.withAny3Prop = function (ary, propName, propValue, propName2, propValue2, propName3, propValue3) {
-        if (ary == null || propName == null || propName2 == null || propName3 == null || propValue === undefined || propValue2 === undefined || propValue3 === undefined) {
+        if (ary == null || propName == null || propName2 == null || propName3 == null ||
+            propValue === undefined || propValue2 === undefined || propValue3 === undefined) {
             return [];
         }
         var results = [];
         var obj = null;
         for (var i = 0, size = ary.length; i < size; i++) {
             obj = ary[i];
-            if (obj[propName] === propValue || obj[propName2] === propValue2 || obj[propName3] === propValue3) {
+            if (obj[propName] === propValue ||
+                obj[propName2] === propValue2 ||
+                obj[propName3] === propValue3) {
                 results.push(obj);
             }
         }
@@ -554,7 +560,8 @@ var ArrayUtil = (function () {
     };
     ArrayUtil.isAllInstance = function (ary, expectedConstructorName) {
         if (expectedConstructorName == null) {
-            throw new Error("incorrect usage (" + ary + ", " + expectedConstructorName + "), " + "expected (Array ary, String|Function(Object):Boolean expectedConstructorName)");
+            throw new Error("incorrect usage (" + ary + ", " + expectedConstructorName + "), " +
+                "expected (Array ary, String|Function(Object):Boolean expectedConstructorName)");
         }
         return ArrayUtil.isAllSameInstance(ary, expectedConstructorName);
     };
@@ -597,7 +604,8 @@ var ArrayUtil = (function () {
             }
         }
         else {
-            throw new Error("incorrect usage (" + ary + ", " + expectedConstructorName + "), " + "expected (Array ary, String|Function(Object):Boolean expectedConstructorName)");
+            throw new Error("incorrect usage (" + ary + ", " + expectedConstructorName + "), " +
+                "expected (Array ary, String|Function(Object):Boolean expectedConstructorName)");
         }
         return true;
     };
@@ -607,7 +615,8 @@ var ArrayUtil = (function () {
      */
     ArrayUtil.isAllInstanceOf = function (ary, parentClass) {
         if (!Array.isArray(ary) || ary == null || parentClass == null) {
-            throw new Error("incorrect usage (" + ary + ", " + parentClass + "), " + "expected (Array ary, Function() parentClass)");
+            throw new Error("incorrect usage (" + ary + ", " + parentClass + "), " +
+                "expected (Array ary, Function() parentClass)");
         }
         for (var i = ary.length - 1; i > -1; i--) {
             if (ary[i] == null || !(ary[i] instanceof parentClass)) {
@@ -671,7 +680,8 @@ var ArrayUtil = (function () {
             if (ary1 == null && ary2 == null) {
                 return true;
             }
-            if ((ary1 != null && !Array.isArray(ary1)) || (ary2 != null && !Array.isArray(ary2)) || ary1 === undefined || ary2 === undefined) {
+            if ((ary1 != null && !Array.isArray(ary1)) || (ary2 != null && !Array.isArray(ary2)) ||
+                ary1 === undefined || ary2 === undefined) {
                 throw new Error("incorrect usage ([" + ary1 + "], [" + ary2 + "]), " + "expected (Array ary1, Array ary2)");
             }
             if ((ary1 == null && ary2 != null) || (ary1 != null && ary2 == null)) {
@@ -723,7 +733,8 @@ var ArrayUtil = (function () {
                 };
             }
             // if either value is not an array, incorrect function usage
-            if ((ary1 != null && !Array.isArray(ary1)) || (ary2 != null && !Array.isArray(ary2)) || ary1 === undefined || ary2 === undefined) {
+            if ((ary1 != null && !Array.isArray(ary1)) || (ary2 != null && !Array.isArray(ary2)) ||
+                ary1 === undefined || ary2 === undefined) {
                 throw new Error("incorrect usage ([" + ary1 + "], [" + ary2 + "]), expected (Array ary1, Array ary2)");
             }
             // if one array is null and the other is not, the difference is just the non-null array's values
@@ -747,6 +758,7 @@ var ArrayUtil = (function () {
         var usedFromAry2 = [];
         var ary1Size = ary1.length;
         var ary2Size = ary2.length;
+        // find each element in {@code ary2} that does not exist in {@code ary1} and mark it
         for (var i = 0; i < ary1Size; i++) {
             var elem1 = ary1[i];
             var matchIndex2 = -1;
@@ -764,6 +776,7 @@ var ArrayUtil = (function () {
                 usedFromAry2[matchIndex2] = true;
             }
         }
+        // each unused item represents an item that only exists in {@code ary2}
         for (var ii = 0; ii < ary2Size; ii++) {
             if (usedFromAry2[ii] !== true) {
                 dif.added.push(ary2[ii]);
@@ -791,7 +804,8 @@ var ArrayUtil = (function () {
      */
     ArrayUtil.arrayKeyValueDifference = function (aryKeys1, aryKeys2, aryValues1, aryValues2) {
         // check that keys and values are the correct types and handle null values
-        if (aryKeys1 == null || aryKeys2 == null || !Array.isArray(aryKeys1) || !Array.isArray(aryKeys2) || aryValues1 == null || aryValues2 == null || !Array.isArray(aryValues1) || !Array.isArray(aryValues2)) {
+        if (aryKeys1 == null || aryKeys2 == null || !Array.isArray(aryKeys1) || !Array.isArray(aryKeys2) ||
+            aryValues1 == null || aryValues2 == null || !Array.isArray(aryValues1) || !Array.isArray(aryValues2)) {
             // both array's null, no difference between them
             if (aryKeys1 == null && aryKeys2 == null) {
                 return {
@@ -800,8 +814,10 @@ var ArrayUtil = (function () {
                 };
             }
             // if either value is not an array, incorrect function usage
-            if ((aryKeys1 != null && !Array.isArray(aryKeys1)) || (aryKeys2 != null && !Array.isArray(aryKeys2)) || aryValues1 == null || aryValues2 == null || !Array.isArray(aryValues1) || !Array.isArray(aryValues2)) {
-                throw new Error("incorrect usage ([" + aryKeys1 + "], [" + aryKeys2 + "], [" + aryValues1 + "], [" + aryValues2 + "]), " + "expected (Array aryKeys1, Array aryKeys2, Array aryValues1, Array aryValues2)");
+            if ((aryKeys1 != null && !Array.isArray(aryKeys1)) || (aryKeys2 != null && !Array.isArray(aryKeys2)) ||
+                aryValues1 == null || aryValues2 == null || !Array.isArray(aryValues1) || !Array.isArray(aryValues2)) {
+                throw new Error("incorrect usage ([" + aryKeys1 + "], [" + aryKeys2 + "], [" + aryValues1 + "], [" + aryValues2 + "]), " +
+                    "expected (Array aryKeys1, Array aryKeys2, Array aryValues1, Array aryValues2)");
             }
             // if one array is null and the other is not, the difference is just the non-null array's values
             if (aryKeys1 == null && aryKeys2 != null) {
@@ -824,6 +840,7 @@ var ArrayUtil = (function () {
         var usedFromAry2 = [];
         var ary1Size = aryKeys1.length;
         var ary2Size = aryKeys2.length;
+        // find each element in {@code aryKeys2} that does not exist in {@code aryKeys1} and mark it
         for (var i = 0; i < ary1Size; i++) {
             var elem1 = aryKeys1[i];
             var matchIndex2 = -1;
@@ -841,6 +858,7 @@ var ArrayUtil = (function () {
                 usedFromAry2[matchIndex2] = true;
             }
         }
+        // each unused item represents an item that only exists in {@code aryKey2}
         for (var ii = 0; ii < ary2Size; ii++) {
             if (usedFromAry2[ii] !== true) {
                 dif.added.push(aryValues2[ii]);
@@ -873,6 +891,7 @@ var ArrayUtil = (function () {
         var aryLen = ary.length;
         var results = new Array(aryLen);
         var sum = 0;
+        // fill the {@code results} array with the converted values so that we do not call orZero again for the same element in the percentage loop further below
         for (var i = aryLen - 1; i > -1; i--) {
             var val = results[i] = ObjectUtil.orZero(ary[i]);
             if (val < 0) {
@@ -891,6 +910,7 @@ var ArrayUtil = (function () {
             }
         }
         else {
+            // else, calculate percentages using non-zero sum
             for (var i = aryLen - 1; i > -1; i--) {
                 results[i] = results[i] / sum;
             }
@@ -909,11 +929,13 @@ var ArrayUtil = (function () {
      */
     ArrayUtil.spliceArray = function (origAry, insertAry, index, deleteCount) {
         if (deleteCount === void 0) { deleteCount = 0; }
-        if (origAry == null || insertAry == null || !Array.isArray(origAry) || !Array.isArray(insertAry) || !(typeof index === "number" && isFinite(index) && Math.floor(index) === index) || (deleteCount !== undefined && !(typeof deleteCount === "number" && isFinite(deleteCount) && Math.floor(deleteCount) === deleteCount))) {
+        if (origAry == null || insertAry == null || !Array.isArray(origAry) || !Array.isArray(insertAry) ||
+            !(typeof index === "number" && isFinite(index) && Math.floor(index) === index) || (deleteCount !== undefined && !(typeof deleteCount === "number" && isFinite(deleteCount) && Math.floor(deleteCount) === deleteCount))) {
             if (origAry == null && insertAry == null) {
                 return null;
             }
-            if ((origAry != null && !Array.isArray(origAry)) || (insertAry != null && !Array.isArray(insertAry)) || origAry === undefined || insertAry === undefined) {
+            if ((origAry != null && !Array.isArray(origAry)) || (insertAry != null && !Array.isArray(insertAry)) ||
+                origAry === undefined || insertAry === undefined) {
                 throw new Error("incorrect usage ([" + origAry + "], [" + insertAry + "], " + index + ", " + (deleteCount || 0) + "), " + "expected (Array origAry, Array insertAry, Integer index, Integer deleteCount)");
             }
             if ((origAry == null && insertAry != null) || (origAry != null && insertAry == null)) {
@@ -932,6 +954,7 @@ var ArrayUtil = (function () {
         }
         else {
             tmp = [];
+            // copy up to the index to insert, then insert the array, and copying the remaining portion
             for (var i = 0; i < index; i++) {
                 tmp.push(origAry[i]);
             }

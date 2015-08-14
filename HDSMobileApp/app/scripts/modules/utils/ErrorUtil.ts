@@ -1,16 +1,11 @@
-﻿/* @license (c) Copyright 2014 HDS IP Holdings, LLC. All Rights Reserved.
- * @author Benjamin
- * @since 2015-2-9
- */
-
+﻿"use strict";
 import Dialogs = require("./Dialogs");
 
-/** ErrorUtil namespace - utility functions for constructing/throwing standardized errors across the PowerScope app
+/** ErrorUtil namespace - utility functions for constructing/throwing common errors in HDSMobileApp
  * @author Benjamin
  * @since 2015-2-9
  */
 class ErrorUtil {
-    "use strict";
 
     static showUserError(...msgs) {
         var msgStrs: string[] = [];

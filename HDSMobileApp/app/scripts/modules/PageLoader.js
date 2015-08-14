@@ -1,20 +1,22 @@
+/// <reference path="../../tsDefinitions/mobileapp.d.ts" />
 "use strict";
 var FunctionUtil = require("../modules/utils/FunctionUtil");
 var TestUserView = require("../views/TestUserView");
+var TestCompanyNgCtrl = require("../controllers/TestCompanyNgCtrl");
 var Ps = require("./main");
 /** Page initializers for HDS Mobile App
  * @since 2015-8-12
  */
 var PageLoader = (function () {
     function PageLoader() {
-        this.getPages = FunctionUtil.createLazyInitializedField(function () { return {
+        this.getPages = FunctionUtil.createLazyInitializedField(function () { return ({
             TestUserView: TestUserView,
-        }; });
+            TestCompanyNgCtrl: TestCompanyNgCtrl,
+        }); });
     }
     PageLoader.prototype.loadPage = function (name) {
         Ps.resetAppNewPage(null, null, window);
-        var elem = Ps.getPageDocument().querySelector("#test-user-view");
-        var view = this.getPages()[name].newView(null, elem);
+        var view = this.getPages()[name].initView(Ps);
         return view;
     };
     Object.defineProperty(PageLoader, "defaultPageLoader", {
@@ -28,6 +30,8 @@ var PageLoader = (function () {
     // static initializer to give pages access
     PageLoader.cctor = (function () {
         window["PageLoader"] = PageLoader;
+        // TODO debugging
+        console.log("PageLoader static initializer: " + (window["PageLoader"]));
     }());
     return PageLoader;
 })();

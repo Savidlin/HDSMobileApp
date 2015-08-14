@@ -1,4 +1,4 @@
-/* @license (c) Copyright 2014 HDS IP Holdings, LLC. All Rights Reserved. */
+"use strict";
 /** EnumUtil namespace
  * for creating Javscript enums similar to Java enums
  * @author Benjamin
@@ -18,7 +18,8 @@ var EnumUtils;
             this.enumConstantClass = enumConstantClass;
         }
         EnumClass.prototype.isInstance = function (obj) {
-            return obj != null && (obj.constructor != null && ((obj.constructor.name === this.enumConstantClass.name) || obj instanceof this.enumConstantClass));
+            return obj != null && (obj.constructor != null &&
+                ((obj.constructor.name === this.enumConstantClass.name) || obj instanceof this.enumConstantClass));
         };
         EnumClass.prototype.values = function () {
             return this.enumConstants;

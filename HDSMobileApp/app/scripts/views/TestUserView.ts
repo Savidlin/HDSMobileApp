@@ -5,14 +5,15 @@ import TestUserController = require("../controllers/TestUserController");
  * @since 2015-8-11
  */
 class TestUserView {
-    private model: Models.UserMaster;
     private domContext: Element;
     private validateBtnListener;
 
 
-    public static newView(model: Models.UserMaster, domContext: Element) {
+    public static initView(appTools: Main) {
         var inst = new TestUserView();
-        inst.model = model;
+
+        var domContext = appTools.getPageDocument().querySelector("#test-user-view");
+
         inst.domContext = domContext;
 
         var nameField = <HTMLInputElement>domContext.querySelector(".user-name-input.text-field");
@@ -38,10 +39,9 @@ class TestUserView {
     }
 
 
-    public static deregister(view: TestUserView) {
+    public static deregister(appTools: Main, view: TestUserView) {
         view.domContext.querySelector(".validate-user-name.btn").removeEventListener("click", view.validateBtnListener);
         view.domContext = null;
-        view.model = null;
         view.validateBtnListener = null;
     }
 
