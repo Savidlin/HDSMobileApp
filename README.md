@@ -2,24 +2,24 @@
 HDS Leadership Team Building Mobile Application
 
 
-## Tools Setup
-
 Initial VS2015 project files have been uploaded.  See below instructions for installing SQLite ADO.NET package in Visual Studio. 
+
 Build the project in Visual Studio and run it. 
 
 
 ====
 ## Setup HDSMobileApp Project To Run Locally:
 
-### Server Setup (Internet Information Services "IIS"):
+#### Server Setup (Internet Information Services "IIS"):
+The following instructions only apply if you wish to run the site outside visual studio and make changes without having to start and restart the site in visual studio.
 
-enable: (start > search 'turn windows features on or off'):
+Enable windows features: (start > search 'turn windows features on or off'):
 * .Net framework 3.5/4.0 > HTTP Activation
 * Internet Information Services > Web Management Tools > IIS Management Console
 * Internet Information Services > World Wide Web Services > * (including sub trees)
 
-add to hosts file (C:\Windows\System32\drivers\etc\hosts):
-  "127.0.0.1 site-url" (e.g. '127.0.0.1 my-test-site.dev')
+Add to hosts file (C:\Windows\System32\drivers\etc\hosts):
+* "127.0.0.1 site-url" (e.g. '127.0.0.1 my-test-site.dev')
 
 IIS web server console: (start > inetmgr)
 * right click on 'sites' > add web site
@@ -32,11 +32,11 @@ IIS web server console: (start > inetmgr)
 * Host name: same as hosts file (e.g. 'my-test-site.dev')
 
 If pages don't load, or .NET v4 is missing, or issues with IIS errors: 
-  setup/register IIS with this command in command prompt: 
-  -$ "C:\Windows\Microsoft.NET\Framework\v4.0.30319\aspnet_regiis.exe -i" (may need to change .net framework path name)
+* setup/register IIS with this command in command prompt: 
+* $ "C:\Windows\Microsoft.NET\Framework\v4.0.30319\aspnet_regiis.exe -i" (may need to change .net framework path name)
 
 ====
-### Build Tool Setup (gulp.js using Node.js):
+#### Build Tool Setup (gulp.js using Node.js):
 
 Install Node.js and packages setup:
 * install Node.js from http://nodejs.org/
@@ -50,19 +50,18 @@ Node.js command prompt:
 * you should see output message about 'starting'
 * wait for 'finished building ...' message, once you see that you should be all set
 
-From now one, whenever you want to edit files in the app:
+From now on, when you want to edit app/ files:
 * open 'Node.js command prompt'
-* naviaget to HDSMobileApp/ dir inside main project
+* navigate to HDSMobileApp/ dir inside main project
 * $ 'gulp'
 
 ====
-### IDE Setup (Visual Studio 2015 Community):
+#### IDE Setup (Visual Studio 2015 Community):
 
 Install Visual Studio SQLite ADO.NET NuGet package:
 * Tools > 'NuGet Package Manager' > 'Manage NuGet Packages For Solution' 
 * Search: 'sqlite' 
 * Install: 'System.Data.SQLite' (v1.0.97, dependencies: .NET v2.0, .NET v4.0, .NET v4.5, .NET v4.5.1)
-
 
 Visual Studio:
 * Tools > options > Text Editor > TypeScript > Project:
@@ -76,7 +75,7 @@ If using VS2015:
 ### additional error fixes:
 
 Install:
-  -asp.net mvc 4
+* asp.net mvc 4
 
 go to your global node_modules dir (normally %ProgramFiles(x86)%/nodejs/node_modules) and go to "typescript/bin" and rename "lib.d.ts" to "lib.d.ts.bak" or something similar
 and rename "lib.es6.d.ts" to "lib.d.ts" to get TypeScript support for es6 which the project uses (may not apply in future once TypeScript switches to es6).
@@ -98,8 +97,8 @@ If VS2015 Javascript syntax/autocomplete missing:
 ====
 links/notes:
 
-http://stackoverflow.com/questions/2218838/entity-framework-connection-to-sqlite-database-not-working-after-deployment
+* http://stackoverflow.com/questions/2218838/entity-framework-connection-to-sqlite-database-not-working-after-deployment
 
-http://nullskull.com/a/10476742/sqlite-in-wpf-with-entity-framework-6.aspx
+* http://nullskull.com/a/10476742/sqlite-in-wpf-with-entity-framework-6.aspx
 
-http://system.data.sqlite.org/index.html/doc/trunk/www/index.wiki
+* http://system.data.sqlite.org/index.html/doc/trunk/www/index.wiki
