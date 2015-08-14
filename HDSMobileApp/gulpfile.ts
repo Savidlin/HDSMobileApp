@@ -1,4 +1,4 @@
-﻿/// <reference path="./definitions/node_modules/node-modules.d.ts" />
+﻿/// <reference path="./definitions/common_node_modules/node-modules.d.ts" />
 import gulp = require('gulp');
 import fs = require('fs');
 import vm = require('vm');

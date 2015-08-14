@@ -1,4 +1,4 @@
-/// <reference path="./definitions/node_modules/node-modules.d.ts" />
+/// <reference path="./definitions/common_node_modules/node-modules.d.ts" />
 var gulp = require('gulp');
 var fs = require('fs');
 var gutil = require('gulp-util');
