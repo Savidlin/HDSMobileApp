@@ -30,8 +30,6 @@ var PageLoader = (function () {
     // static initializer to give pages access
     PageLoader.cctor = (function () {
         window["PageLoader"] = PageLoader;
-        // TODO debugging
-        console.log("PageLoader static initializer: " + (window["PageLoader"]));
     }());
     return PageLoader;
 })();

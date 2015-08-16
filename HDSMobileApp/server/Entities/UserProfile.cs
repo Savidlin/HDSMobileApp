@@ -1,6 +1,4 @@
-﻿/* Copyright (c) 2014, HDS IP Holdings, LLC. All Rights Reserved. */
-
-using System.Runtime.Serialization;
+﻿using System.Runtime.Serialization;
 using System;
 using System.ComponentModel.DataAnnotations.Schema;
 using HDSMobileApp.Entities.Base;

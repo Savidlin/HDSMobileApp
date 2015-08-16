@@ -5,7 +5,6 @@
 /// <reference path="./lib/numeral.d.ts" />
 /// <reference path="./lib/Q.d.ts" />
 /// <reference path="../scripts/models/Models.d.ts" />
-/// <reference path="../scripts/models/SvcModels.d.ts" />
 /* @license (c) Copyright 2014 HDS IP Holdings, LLC. All Rights Reserved.
  * @author Benjamin
  * @since 2015-2-9
@@ -193,6 +192,13 @@ interface ServiceTransactionError {
 interface ServiceResult<T> {
     xhr: JQueryXHR;
     result: T;
+}
+
+interface SearchResult<T> {
+    TotalPages: number;
+    PageNumber: number;
+    TotalRecords: number;
+    Items: T[];
 }
 
 

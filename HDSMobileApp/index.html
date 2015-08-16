@@ -6,7 +6,7 @@
     <meta name="format-detection" content="telephone=no">
     <title>HDS - Mobile App</title>
     <link rel="stylesheet" type="text/css" href="node_modules/bootstrap/dist/css/bootstrap.css" />
-    <link rel="stylesheet" type="text/css" href="/ps/css/screen.css" />
+    <link rel="stylesheet" type="text/css" href="/app/css/screen.css" />
 
     <script type="text/javascript" src="node_modules/angular/angular.min.js"></script>
     <script type="text/javascript" src="/app/dist/vendor.js"></script>
@@ -50,6 +50,15 @@
         </div><!--./row-->
         <!-- we can use a custom html tag because of our angular E directive -->
         <products></products>
+
+        <!-- todo: make this an element directive -->
+        <h1 class="text-center">The Creamery Wall of Slackers</h1>
+        <div class="row" ng-repeat="slacker in company.slackers | limitTo: 5">
+            <div class="col-md-12 text-center">
+                <h3>{{slacker.name}} our {{slacker.jobTitle}} has used {{slacker.usedHours}} vacation hours</h3>
+            </div><!--col-md-4-->
+        </div><!--./row-->
+        <!-- end todo -->
 
     </div><!--./container-->
 

@@ -1,6 +1,4 @@
-﻿/* @license (c) Copyright 2015 HDS IP Holdings, LLC. All Rights Reserved. */
-
-using System;
+﻿using System;
 
 namespace HDSMobileApp.Helpers
 {

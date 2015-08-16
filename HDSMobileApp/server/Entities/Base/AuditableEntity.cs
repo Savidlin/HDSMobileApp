@@ -1,22 +1,13 @@
-/* Copyright (c) 2014, HDS IP Holdings, LLC. All Rights Reserved. */
-
 using System;
-using System.ComponentModel.DataAnnotations;
 using System.Runtime.Serialization;
 
 namespace HDSMobileApp.Entities.Base
 {
-    /// <summary>
-    /// <para>
-    /// An entity class that represents auditable entity.
-    /// </para>
-    /// </summary>
-    /// <threadsafety>
-    /// This class is mutable, so it is not thread-safe.
-    /// </threadsafety>
-    /// <author>Yeung</author>
-    /// <version>1.0</version>
-    /// <copyright>Copyright (c) 2014, HDS IP Holdings, LLC. All Rights Reserved.</copyright>
+    /** An entity class that represents auditable entity.
+     * @threadsafety This class is mutable, so it is not thread-safe.
+     * @version 1.0
+     * @copyright Copyright (c) 2014, HDS IP Holdings, LLC. All Rights Reserved
+     */
     [DataContract]
     public abstract class AuditableEntity : IdentifiableEntity
     {
@@ -26,9 +17,7 @@ namespace HDSMobileApp.Entities.Base
         private DateTime lastUpdateDate = DateTime.UtcNow;
 
         /// <summary>
-        /// <para>
         /// Initializes a new instance of the <see cref="AuditableEntity"/> class.
-        /// </para>
         /// </summary>
         protected AuditableEntity()
         {

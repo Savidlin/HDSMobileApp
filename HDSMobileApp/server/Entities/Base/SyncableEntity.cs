@@ -1,21 +1,13 @@
-﻿/* Copyright (c) 2014, HDS IP Holdings, LLC. All Rights Reserved. */
-
-using System;
+﻿using System;
 using System.Runtime.Serialization;
 
 namespace HDSMobileApp.Entities.Base
 {
-    /// <summary>
-    /// <para>
-    /// A 'syncable' entity that can be synchronized between the server and client.
-    /// </para>
-    /// </summary>
-    /// <threadsafety>
-    /// This class is mutable, so it is not thread-safe.
-    /// </threadsafety>
-    /// <author>Benjamin</author>
-    /// <version>1.0</version>
-    /// <copyright>Copyright (c) 2014, HDS IP Holdings, LLC. All Rights Reserved.</copyright>
+    /** A 'syncable' entity that can be synchronized between the server and client.
+     * @threadsafety This class is mutable, so it is not thread-safe.
+     * @version 1.0
+     * @copyright Copyright (c) 2014, HDS IP Holdings, LLC. All Rights Reserved
+     */
     [DataContract]
     public abstract class SyncableEntity
     {

@@ -1,26 +1,16 @@
-﻿/* Copyright (c) 2014, HDS IP Holdings, LLC. All Rights Reserved. */
-
-using System.ServiceModel;
+﻿using System.ServiceModel;
 using System.ServiceModel.Web;
 using HDSMobileApp.Entities;
+using HDSMobileApp.Entities.Base.Searching;
 using HDSMobileApp.Entities.Searching;
-using System.ServiceModel.Channels;
 
 namespace HDSMobileApp.Services
 {
-    /// <summary>
-    /// <para>
-    /// This interface provides the contract for manage user master action.
-    /// </para>
-    /// </summary>
-    /// <remarks>
-    /// <para>
-    /// Implementations are expected to be effectively thread-safe.
-    /// </para>
-    /// </remarks>
-    /// <author>TCSASSEMBLER</author>
-    /// <version>1.0</version>
-    /// <copyright>Copyright (c) 2014, HDS IP Holdings, LLC. All Rights Reserved.</copyright>
+    /** This interface provides the contract for manage user master action.
+     * @threadsafety Implementations are expected to be effectively thread-safe.
+     * @version 1.0
+     * @copyright Copyright (c) 2014, HDS IP Holdings, LLC. All Rights Reserved.
+     */
     [ServiceContract]
     public interface IUserMasterService
     {
@@ -37,6 +27,6 @@ namespace HDSMobileApp.Services
         [WebInvoke(Method = "POST", UriTemplate = "/UserMaster/Search",
             RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
         [TransactionFlow(TransactionFlowOption.Allowed)]
-        SearchResult<UserMaster> Search(UserMasterSearchCriteria criteria);
+        SearchResult<UserMaster> Search(Searchable<UserMasterSearcher> userMasterCriteria);
     }
 }

@@ -11,6 +11,18 @@ class ArrayUtil {
     static EMPTY_ARRAY: any[] = Object.freeze([]);
 
 
+    /** Add all of the values in {@code toAdd} to the {@code src} array
+     * @return the source array
+     */
+    static addAll<E>(src: E[], toAdd: E[]): E[] {
+        if (toAdd && toAdd.length > 0) {
+            Array.prototype.push.apply(src, toAdd);
+        }
+        return src;
+    }
+
+
+
     /** Returns only the unique values in the array as defined by the '===' operator
      * @param {Array} ary: an array of values
      * @return {Array} a new array of values containing the original array's unique values

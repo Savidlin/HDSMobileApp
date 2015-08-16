@@ -1,67 +1,57 @@
-﻿/* Copyright (c) 2014, HDS IP Holdings, LLC. All Rights Reserved. */
-
-using System.Data.Entity;
-using HDSMobileApp.Entities;
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.Data.Entity;
 using System;
-using System.Collections.Generic;
+using HDSMobileApp.Entities;
+using System.Data.SQLite;
+using System.Configuration;
+using System.Data.Entity.Core.Common;
+using System.Data.SQLite.EF6;
 
 namespace HDSMobileApp.Services.Impl
 {
 
     public class DbSetInfo<T> where T : class
     {
-        public Type DtoType
-        {
-            get;
-            set;
-        }
+        public Type DtoType { get; set; }
 
-        public Func<HDSMobileAppDbContext, DbSet<T>> DbSetGetter
-        {
-            get;
-            set;
-        }
+        public Func<HDSMobileAppDbContext, DbSet<T>> DbSetGetter { get; set; }
 
     }
 
 
     public class HDSMobileAppDataStores
     {
-        public static DbSetInfo<UserMaster> UserMaster = new DbSetInfo<UserMaster>
+        public static DbSetInfo<Employee> Employee = new DbSetInfo<Employee>
         {
-            DtoType = typeof(UserMaster),
-            DbSetGetter = (HDSMobileAppDbContext ctx) => ctx.UserMasterSet,
-        };
-
-        public static DbSetInfo<UserProfile> UserProfile = new DbSetInfo<UserProfile>
-        {
-            DtoType = typeof(UserProfile),
-            DbSetGetter = (HDSMobileAppDbContext ctx) => ctx.UserProfileSet,
+            DtoType = typeof(Employee),
+            DbSetGetter = (HDSMobileAppDbContext ctx) => ctx.EmployeeSet,
         };
 
     }
 
 
-    ///<summary>
-    /// <para>
-    /// This class provides the database context used in this assembly.
-    /// </para>
-    /// </summary>
-    /// <threadsafety>
-    /// This class is mutable, so it is not  thread-safe.
-    /// </threadsafety>
-    /// <author>TCSASSEMBLER</author>
-    /// <version>1.0</version>
-    /// <copyright>Copyright (c) 2014, HDS IP Holdings, LLC. All Rights Reserved.</copyright>
+    public class SQLiteConfiguration : DbConfiguration {
+        public SQLiteConfiguration() {
+            SetProviderFactory("System.Data.SQLite", SQLiteFactory.Instance);
+            SetProviderFactory("System.Data.SQLite.EF6", SQLiteProviderFactory.Instance);
+            SetProviderServices("System.Data.SQLite", (DbProviderServices)SQLiteProviderFactory.Instance.GetService(typeof(DbProviderServices)));
+        }
+    }
+
+
+    /** This class provides the database context used in this assembly.
+     * @threadsafety This class is mutable, so it is not thread-safe
+     * @version 1.0
+     * @copyright Copyright (c) 2014, HDS IP Holdings, LLC. All Rights Reserved
+     */
     public class HDSMobileAppDbContext : DbContext
     {
+
+        private static readonly string SqliteConnectionString = ConfigurationManager.AppSettings["SqliteConnectionString"];
+
         /// <summary>
-        /// <para>
         /// Initializes a new instance of the <see cref="HDSMobileAppDbContext"/> class.
-        /// </para>
         /// </summary>
-        public HDSMobileAppDbContext()
+        public HDSMobileAppDbContext(): base(new SQLiteConnection(SqliteConnectionString), true)
         {
             this.Configuration.LazyLoadingEnabled = false;
             this.Configuration.ProxyCreationEnabled = false;
@@ -73,20 +63,8 @@ namespace HDSMobileApp.Services.Impl
             return dbSetInfo.DbSetGetter(this);
         }
 
-
-        /// <value>The user  master set. It can hold any value.</value>
-        public DbSet<UserMaster> UserMasterSet
-        {
-            get;
-            set;
-        }
-
-        /// <value>The user profile set. It can hold any value.</value>
-        public DbSet<UserProfile> UserProfileSet
-        {
-            get;
-            set;
-        }
+        /// <value>The employee set. It can hold any value.</value>
+        public DbSet<Employee> EmployeeSet { get; set; }
 
         /// <summary>
         /// Custom Model Creating to not create table when application start.
@@ -96,41 +74,19 @@ namespace HDSMobileApp.Services.Impl
         {
             Database.SetInitializer<HDSMobileAppDbContext>(null);
 
-            modelBuilder.Entity<UserMaster>().ToTable("User_Master");
-            modelBuilder.Entity<UserMaster>().HasKey(i => i.UserIdentifier);
-            modelBuilder.Entity<UserMaster>().Property(i => i.UserNumber).HasColumnName("User_Number");
-            modelBuilder.Entity<UserMaster>().Property(i => i.Name).HasColumnName("Name");
-            modelBuilder.Entity<UserMaster>().Property(i => i.UserIdentifier).HasColumnName("User_Identifier");
-            modelBuilder.Entity<UserMaster>().Property(i => i.PrimaryBranchNumber).HasColumnName("Primary_Branch_Number");
-            modelBuilder.Entity<UserMaster>().Property(i => i.EmailAddress).HasColumnName("Email_Address");
-            modelBuilder.Entity<UserMaster>().Property(i => i.Phone).HasColumnName("Phone");
-            modelBuilder.Entity<UserMaster>().Property(i => i.Fax).HasColumnName("Fax");
-            modelBuilder.Entity<UserMaster>().Property(i => i.Mobile).HasColumnName("Mobile");
-
-            modelBuilder.Entity<UserProfile>().ToTable("User_Profile");
-            modelBuilder.Entity<UserProfile>().HasKey(i => i.UserIdentifier);
-            modelBuilder.Entity<UserProfile>().Property(i => i.UserNumber).HasColumnName("User_Number");
-            modelBuilder.Entity<UserProfile>().Property(i => i.Name).HasColumnName("Name");
-            modelBuilder.Entity<UserProfile>().Property(i => i.UserIdentifier).HasColumnName("User_Identifier");
-            modelBuilder.Entity<UserProfile>().Property(i => i.PrimaryBranchNumber).HasColumnName("Primary_Branch_Number");
-            modelBuilder.Entity<UserProfile>().Property(i => i.PricingProfileNumber1).HasColumnName("Pricing_Profile_Number_1");
-            modelBuilder.Entity<UserProfile>().Property(i => i.PricingProfileNumber2).HasColumnName("Pricing_Profile_Number_2");
-            modelBuilder.Entity<UserProfile>().Property(i => i.PricingProfileNumber3).HasColumnName("Pricing_Profile_Number_3");
-            modelBuilder.Entity<UserProfile>().Property(i => i.PricingProfileNumber4).HasColumnName("Pricing_Profile_Number_4");
-            modelBuilder.Entity<UserProfile>().Property(i => i.PricingProfileNumber5).HasColumnName("Pricing_Profile_Number_5");
-            modelBuilder.Entity<UserProfile>().Property(i => i.PricingProfileNumber6).HasColumnName("Pricing_Profile_Number_6");
-            modelBuilder.Entity<UserProfile>().Property(i => i.EmailAddress).HasColumnName("Email_Address");
-            modelBuilder.Entity<UserProfile>().Property(i => i.Phone).HasColumnName("Phone");
-            modelBuilder.Entity<UserProfile>().Property(i => i.Fax).HasColumnName("Fax");
-            modelBuilder.Entity<UserProfile>().Property(i => i.Mobile).HasColumnName("Mobile");
-            modelBuilder.Entity<UserProfile>().Property(i => i.CurrencyCode).HasColumnName("Currency_Code");
-            modelBuilder.Entity<UserProfile>().Property(i => i.LanguageId).HasColumnName("Language_ID");
-            modelBuilder.Entity<UserProfile>().Property(i => i.PrintPartNum).HasColumnName("Print_Part_Num");
-            modelBuilder.Entity<UserProfile>().Property(i => i.HeaderPrintOption).HasColumnName("Header_Print_Option");
-            modelBuilder.Entity<UserProfile>().Property(i => i.SubmittalGroupId).HasColumnName("Submittal_Group_ID");
-            modelBuilder.Entity<UserProfile>().Property(i => i.Deleted).HasColumnName("Deleted");
-            modelBuilder.Entity<UserProfile>().Property(i => i.LastUpdateDate).HasColumnName("Last_Update_Date");
-            modelBuilder.Entity<UserProfile>().Property(i => i.ItemDescriptionPrintOption).HasColumnName("Item_Description_Print_Option");
+            modelBuilder.Entity<Employee>().ToTable("employee");
+            modelBuilder.Entity<Employee>().HasKey(i => i.businessEntityId);
+            modelBuilder.Entity<Employee>().Property(i => i.birthDate).HasColumnName("birthdate");
+            modelBuilder.Entity<Employee>().Property(i => i.currentFlag).HasColumnName("currentflag");
+            modelBuilder.Entity<Employee>().Property(i => i.gender).HasColumnName("gender");
+            modelBuilder.Entity<Employee>().Property(i => i.hireDate).HasColumnName("hiredate");
+            modelBuilder.Entity<Employee>().Property(i => i.jobTitle).HasColumnName("jobtitle");
+            modelBuilder.Entity<Employee>().Property(i => i.loginId).HasColumnName("loginid");
+            modelBuilder.Entity<Employee>().Property(i => i.maritalStatus).HasColumnName("maritalstatus");
+            modelBuilder.Entity<Employee>().Property(i => i.nationalIdNumber).HasColumnName("nationalidnumber");
+            modelBuilder.Entity<Employee>().Property(i => i.salariedFlag).HasColumnName("salariedflag");
+            modelBuilder.Entity<Employee>().Property(i => i.sickLeaveHours).HasColumnName("sickleavehours");
+            modelBuilder.Entity<Employee>().Property(i => i.vacationHours).HasColumnName("vacationhours");
 
             base.OnModelCreating(modelBuilder);
         }

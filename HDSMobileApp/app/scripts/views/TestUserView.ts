@@ -24,7 +24,7 @@ class TestUserView {
 
             resultElem.textContent = "Loading...";
 
-            TestUserController.isValidUserByName(userName).done(function (success) {
+            TestUserController.isValidUserByName(userName, null).then(function (success) {
                 resultElem.textContent = success ? "found user '" + encodeURIComponent(userName) + "'" : "could not find user '" + encodeURIComponent(userName) + "'";
             }, function (err) {
                 resultElem.textContent = "failed to validate user name: " + err;

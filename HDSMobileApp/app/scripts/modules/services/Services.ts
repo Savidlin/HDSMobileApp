@@ -67,8 +67,8 @@ class Services {
      * the error title/descriptor and the server's error response text
      */
     static callGetService(relativeUrl: string, parameterNames: string[] = null, parameterValues: string[] = null,
-            expectArrayResponse: boolean = false, responseDataPropertyName: string = null, requestProperties: JQueryAjaxSettings = {}): PsPromise<ServiceResult<any>, ServiceError> {
-        var def = Defer.newDefer<PsDeferred<ServiceResult<any>, ServiceError>>();
+        expectArrayResponse: boolean = false, responseDataPropertyName: string = null, requestProperties: angular.IRequestShortcutConfig = {},
+        $http?: angular.IHttpService): angular.IHttpPromise<any> {
         var paramAry = [];
         if (parameterNames != null && parameterValues != null) {
             if (parameterNames.length !== parameterValues.length) {
@@ -79,13 +79,16 @@ class Services {
             }
         }
 
-        var xhr = null;
-        var ajaxSettings: JQueryAjaxSettings = _.extend(requestProperties, {
+        // TODO workaround
+        if ($http.defaults) {
+            $http.defaults.headers.get["Content-Type"] = "application/json";
+        }
+
+        var requestDefaults: angular.IRequestConfig = {
             url: Services.baseUrl() + relativeUrl + (paramAry.length > 0 ? "?" + paramAry.join("&") : ""),
             method: "GET",
-            contentType: "application/json",
             timeout: Services.defaultTimeOut(),
-            success: function (response) {
+            transformResponse: function (response) {
                 var results = null;
                 if (expectArrayResponse === true) {
                     results = [];
@@ -106,18 +109,14 @@ class Services {
                         results = response;
                     }
                 }
-                def.resolve({ result: results, xhr: xhr });
+
+                results = JSON.parse(results);
                 return results;
-            },
-            error: function (xhr, ts, et) {
-                def.reject({ xhr: xhr, textStatus: ts, errorThrown: et });
-                return null;
             }
-        });
+        };
+        var ajaxSettings: angular.IRequestConfig = <any>_.extend(requestProperties, requestDefaults);
 
-        xhr = Ps.getJQuery().ajax(ajaxSettings);
-
-        return def.promise;
+        return $http(ajaxSettings);
     }
 
 
@@ -135,8 +134,8 @@ class Services {
      * the error title/descriptor and the server's error response text
      */
     static callPostService(relativeUrl: string, data, parameterNames: string[] = null, parameterValues: string[] = null,
-            expectArrayResponse: boolean = false, responseDataPropertyName: string = null, requestProperties: JQueryAjaxSettings = {}): PsPromise<ServiceResult<any>, ServiceError> {
-        var def = Defer.newDefer<PsDeferred<ServiceResult<any>, ServiceError>>();
+            expectArrayResponse: boolean = false, responseDataPropertyName: string = null, requestProperties: angular.IRequestShortcutConfig = {},
+            $http?: angular.IHttpService): angular.IHttpPromise<any> {
         var paramAry = [];
         if (parameterNames != null && parameterValues != null) {
             if (parameterNames.length !== parameterValues.length) {
@@ -148,12 +147,16 @@ class Services {
         }
         psLog.logs.login.trace("calling post service", relativeUrl);
 
-        var xhr = null;
-        var ajaxSettings: JQueryAjaxSettings = _.extend(requestProperties, {
+        // TODO workaround
+        if ($http.defaults) {
+            $http.defaults.headers.post["Content-Type"] = "application/json";
+        }
+
+        var defaultProperties: angular.IRequestConfig = {
             url: Services.baseUrl() + relativeUrl + (paramAry.length > 0 ? "?" + paramAry.join("&") : ""),
             method: "POST",
             timeout: Services.defaultTimeOut(),
-            success: function (response) {
+            transformResponse: function (response) {
                 var results = null;
                 if (expectArrayResponse === true) {
                     results = [];
@@ -174,33 +177,30 @@ class Services {
                         results = response;
                     }
                 }
-                def.resolve({ result: results, xhr: xhr });
+
+                results = JSON.parse(results);
                 return results;
             },
-            error: function (xhr, ts, et) {
-                def.reject({ xhr: xhr, textStatus: ts, errorThrown: et });
-                return null;
-            }
-        });
+        };
+        var ajaxSettings: angular.IRequestConfig = <any>_.extend(requestProperties, defaultProperties);
 
         if (data != null) {
-            ajaxSettings.contentType = "application/json";
             ajaxSettings.data = JSON.stringify(data);
         }
 
-        xhr = Ps.getJQuery().ajax(ajaxSettings);
-
-        return def.promise;
+        return $http(ajaxSettings);
     }
 
 }
 
 module Services {
 
-    export class UserMaster {
+    export class Employee {
 
-        static search(postData: any): PsPromise<ServiceResult<any>, ServiceError> {
-            return <any>Util.svcCall("UserMasterService.svc/UserMaster/Search", ServiceData.SvcType.POST, null, ServiceData.SvcDataType.JSON, postData);
+        static search($http: angular.IHttpService, rangeCriteria: any, employeeCriteria): angular.IHttpPromise<SearchResult<Models.Employee>> {
+            var promise = Util.svcCall("EmployeeSvc.svc/Employee/Search", ServiceData.SvcType.POST, null, ServiceData.SvcDataType.JSON, { searchRange: rangeCriteria, searchCriteria: employeeCriteria },
+                undefined, $http);
+            return promise;
         }
 
     }
@@ -209,7 +209,8 @@ module Services {
     class Util {
 
         static svcCall<T>(url: string, callType: ServiceData.SvcType, urlParameters: { [index: string]: string },
-            postDataType: ServiceData.SvcDataType, postData: any, requestProperties?: JQueryAjaxSettings): Q.Promise<T> {
+                postDataType: ServiceData.SvcDataType, postData: any, requestProperties: angular.IRequestShortcutConfig,
+                $http: angular.IHttpService): angular.IHttpPromise<T> {
             switch (callType) {
                 case ServiceData.SvcType.GET:
                     var urlParamKeys = null;
@@ -218,11 +219,11 @@ module Services {
                         urlParamKeys = Object.keys(urlParameters);
                         urlParamVals = ObjectUtil.values(urlParameters, urlParamKeys);
                     }
-                    return <any>Services.callGetService(url, urlParamKeys, urlParamVals, false, null, requestProperties);
+                    return Services.callGetService(url, urlParamKeys, urlParamVals, false, null, requestProperties, ($http || <any>Ps.getJQuery().ajax));
                 case ServiceData.SvcType.DELETE:
                     throw new Error("unimplemented service call type 'DELETE'");
                 case ServiceData.SvcType.POST:
-                    return <any>Services.callPostService(url, postData, urlParamKeys, urlParamVals, false, null, requestProperties);
+                    return Services.callPostService(url, postData, urlParamKeys, urlParamVals, false, null, requestProperties, ($http || <any>Ps.getJQuery().ajax));
                 default:
                     throw new Error("unknown SvcType '" + callType + "'");
             }

@@ -15,9 +15,6 @@ class PageLoader {
     // static initializer to give pages access
     private static cctor = (function () {
         window["PageLoader"] = PageLoader;
-
-        // TODO debugging
-        console.log("PageLoader static initializer: " + (window["PageLoader"]));
     } ());
 
 

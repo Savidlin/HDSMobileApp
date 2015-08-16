@@ -1,5 +1,3 @@
-/* Copyright (c) 2014, HDS IP Holdings, LLC. All Rights Reserved. */
-
 using System;
 using System.Runtime.Serialization;
 

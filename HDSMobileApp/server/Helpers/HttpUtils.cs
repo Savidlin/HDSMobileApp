@@ -1,5 +1,4 @@
-﻿
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
 using System.IO;
@@ -7,6 +6,7 @@ using System.Net;
 using System.ServiceModel.Web;
 using System.Text;
 using System.Web.Script.Serialization;
+
 /// <summary>
 /// Utilities for making web request from PowerScope services to other services/APIs
 /// </summary>

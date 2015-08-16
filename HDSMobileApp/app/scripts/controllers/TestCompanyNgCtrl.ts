@@ -1,24 +1,16 @@
 ﻿"use strict";
+import ArrayUtil = require("../modules/utils/ArrayUtil");
+import Services = require("../modules/services/Services");
+
 
 class TestCompanyNgCtrl {
 
     
     public static initView(appTools: Main) {
 
-        // data in the case of method 1 where there is no json call
-        // var data = {
-        //   name: "test Company",
-        //   slogan: "testing placeholder slogan"
-        // };
-
         var app = angular.module('myCompany', []);
 
-        // 1st method not involving a json call
-        // app.controller('CompanyController', function() {
-        //   this.information = data;
-        // });
-
-        app.controller('CompanyController', ["$http", function ($http) {
+        app.controller('CompanyController', ["$scope", "$http", function ($scope, $http) {
             //make this a variable so we can use it in methods
             var company = this;
 
@@ -28,6 +20,40 @@ class TestCompanyNgCtrl {
             $http.get('app/rsc/company-information.json').success(function (data) {
                 company.information = data;
             });
+
+            company.slackers = [];
+
+            // wall of slackers
+            Services.Employee.search($http, {}, {}).success(function (data) {
+                //after data is recieved create our new slackers array of objects
+                var employees = createSlackersList(data.Items);
+
+                //sort the slackers notice we are using a custom sort prototype
+                employees = employees.sort(compare);
+
+                company.slackers = employees;
+
+                // TODO debugging
+                console.log("done creating slacker list: ", company.slackers);
+            });
+
+
+            function createSlackersList(employees: Models.Employee[]) {
+                var res = [];
+                //loop through employees array of objects
+                for (var i = 0; i < employees.length; i++) {
+                    var emplyI = employees[i];
+                    //create a temp objecct for addding into slackers array
+                    var tempObj = {
+                        name: emplyI.loginId.substr(16),
+                        vacationHours: emplyI.vacationHours,
+                        jobTitle: emplyI.jobTitle,
+                        usedHours: emplyI.vacationHours,
+                    };
+                    res.push(tempObj);
+                }
+                return res;
+            }
 
         }]);
 
@@ -51,6 +77,9 @@ class TestCompanyNgCtrl {
                 controllerAs: "productsCtrl"
             };
         });
+
+        // our custom sort prototype sorts usedHours property of a slacker from most to least
+        function compare(a: Models.Employee, b: Models.Employee) { return parseFloat(b.vacationHours) - parseFloat(a.vacationHours); }
 
     }
 
