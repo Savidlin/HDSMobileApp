@@ -47,7 +47,7 @@ var TestCompanyNgCtrl = (function() {
       };
     });
     function compare(a, b) {
-      return parseFloat(b.vacationHours) - parseFloat(a.vacationHours);
+      return b.vacationHours - a.vacationHours;
     }
   };
   TestCompanyNgCtrl.deregister = function(appTools, view) {};
@@ -56,7 +56,7 @@ var TestCompanyNgCtrl = (function() {
 module.exports = TestCompanyNgCtrl;
 
 
-//# sourceURL=C:/Users/TeamworkGuy2/Documents/Visual Studio 2015/Projects/HDSTeamBuilding/HDSMobileApp/app/scripts/controllers/TestCompanyNgCtrl.js
+//# sourceURL=d:/bv020117/Documents/Visual Studio 2015/Projects/HDSTeamBuilding/HDSMobileApp/app/scripts/controllers/TestCompanyNgCtrl.js
 },{"../modules/services/Services":11}],2:[function(require,module,exports){
 "use strict";
 "use strict";
@@ -84,7 +84,7 @@ var TestUserController = (function() {
 module.exports = TestUserController;
 
 
-//# sourceURL=C:/Users/TeamworkGuy2/Documents/Visual Studio 2015/Projects/HDSTeamBuilding/HDSMobileApp/app/scripts/controllers/TestUserController.js
+//# sourceURL=d:/bv020117/Documents/Visual Studio 2015/Projects/HDSTeamBuilding/HDSMobileApp/app/scripts/controllers/TestUserController.js
 },{"../modules/services/Services":11}],3:[function(require,module,exports){
 "use strict";
 var LocalStore = (function() {
@@ -158,7 +158,7 @@ var LocalStore = (function() {
 module.exports = LocalStore;
 
 
-//# sourceURL=C:/Users/TeamworkGuy2/Documents/Visual Studio 2015/Projects/HDSTeamBuilding/HDSMobileApp/app/scripts/modules/LocalStore.js
+//# sourceURL=d:/bv020117/Documents/Visual Studio 2015/Projects/HDSTeamBuilding/HDSMobileApp/app/scripts/modules/LocalStore.js
 },{}],4:[function(require,module,exports){
 "use strict";
 var LocalStore = require("./LocalStore");
@@ -263,7 +263,7 @@ var LocalStoreByDate = (function() {
 module.exports = LocalStoreByDate;
 
 
-//# sourceURL=C:/Users/TeamworkGuy2/Documents/Visual Studio 2015/Projects/HDSTeamBuilding/HDSMobileApp/app/scripts/modules/LocalStoreByDate.js
+//# sourceURL=d:/bv020117/Documents/Visual Studio 2015/Projects/HDSTeamBuilding/HDSMobileApp/app/scripts/modules/LocalStoreByDate.js
 },{"./LocalStore":3}],"qRPk4k":[function(require,module,exports){
 "use strict";
 "use strict";
@@ -301,7 +301,7 @@ var PageLoader = (function() {
 module.exports = PageLoader;
 
 
-//# sourceURL=C:/Users/TeamworkGuy2/Documents/Visual Studio 2015/Projects/HDSTeamBuilding/HDSMobileApp/app/scripts/modules/PageLoader.js
+//# sourceURL=d:/bv020117/Documents/Visual Studio 2015/Projects/HDSTeamBuilding/HDSMobileApp/app/scripts/modules/PageLoader.js
 },{"../controllers/TestCompanyNgCtrl":1,"../modules/utils/FunctionUtil":12,"../views/TestUserView":15,"./main":8}],"./app/scripts/modules/PageLoader.js":[function(require,module,exports){
 module.exports=require('qRPk4k');
 },{}],7:[function(require,module,exports){
@@ -391,7 +391,7 @@ var PageTools;
 module.exports = PageTools;
 
 
-//# sourceURL=C:/Users/TeamworkGuy2/Documents/Visual Studio 2015/Projects/HDSTeamBuilding/HDSMobileApp/app/scripts/modules/PageTools.js
+//# sourceURL=d:/bv020117/Documents/Visual Studio 2015/Projects/HDSTeamBuilding/HDSMobileApp/app/scripts/modules/PageTools.js
 },{}],8:[function(require,module,exports){
 "use strict";
 "use strict";
@@ -484,7 +484,7 @@ var Ps;
 module.exports = Ps;
 
 
-//# sourceURL=C:/Users/TeamworkGuy2/Documents/Visual Studio 2015/Projects/HDSTeamBuilding/HDSMobileApp/app/scripts/modules/main.js
+//# sourceURL=d:/bv020117/Documents/Visual Studio 2015/Projects/HDSTeamBuilding/HDSMobileApp/app/scripts/modules/main.js
 },{"./PageTools":7}],9:[function(require,module,exports){
 "use strict";
 var LocalStoreByDate = require("./LocalStoreByDate");
@@ -594,7 +594,7 @@ var LocalStoreAppender = (function() {
 module.exports = PsLog;
 
 
-//# sourceURL=C:/Users/TeamworkGuy2/Documents/Visual Studio 2015/Projects/HDSTeamBuilding/HDSMobileApp/app/scripts/modules/psLog.js
+//# sourceURL=d:/bv020117/Documents/Visual Studio 2015/Projects/HDSTeamBuilding/HDSMobileApp/app/scripts/modules/psLog.js
 },{"./LocalStoreByDate":4}],10:[function(require,module,exports){
 "use strict";
 var ServiceData;
@@ -614,7 +614,7 @@ var ServiceData;
 module.exports = ServiceData;
 
 
-//# sourceURL=C:/Users/TeamworkGuy2/Documents/Visual Studio 2015/Projects/HDSTeamBuilding/HDSMobileApp/app/scripts/modules/services/ServiceData.js
+//# sourceURL=d:/bv020117/Documents/Visual Studio 2015/Projects/HDSTeamBuilding/HDSMobileApp/app/scripts/modules/services/ServiceData.js
 },{}],11:[function(require,module,exports){
 "use strict";
 "use strict";
@@ -807,7 +807,7 @@ var Services;
 module.exports = Services;
 
 
-//# sourceURL=C:/Users/TeamworkGuy2/Documents/Visual Studio 2015/Projects/HDSTeamBuilding/HDSMobileApp/app/scripts/modules/services/Services.js
+//# sourceURL=d:/bv020117/Documents/Visual Studio 2015/Projects/HDSTeamBuilding/HDSMobileApp/app/scripts/modules/services/Services.js
 },{"../main":8,"../psLog":9,"../utils/ObjectUtil":14,"./ServiceData":10,"lodash":16}],12:[function(require,module,exports){
 "use strict";
 "use strict";
@@ -859,7 +859,7 @@ var FunctionUtil = (function() {
 module.exports = FunctionUtil;
 
 
-//# sourceURL=C:/Users/TeamworkGuy2/Documents/Visual Studio 2015/Projects/HDSTeamBuilding/HDSMobileApp/app/scripts/modules/utils/FunctionUtil.js
+//# sourceURL=d:/bv020117/Documents/Visual Studio 2015/Projects/HDSTeamBuilding/HDSMobileApp/app/scripts/modules/utils/FunctionUtil.js
 },{}],13:[function(require,module,exports){
 "use strict";
 "use strict";
@@ -963,7 +963,7 @@ var NumberUtil = (function() {
 module.exports = NumberUtil;
 
 
-//# sourceURL=C:/Users/TeamworkGuy2/Documents/Visual Studio 2015/Projects/HDSTeamBuilding/HDSMobileApp/app/scripts/modules/utils/NumberUtil.js
+//# sourceURL=d:/bv020117/Documents/Visual Studio 2015/Projects/HDSTeamBuilding/HDSMobileApp/app/scripts/modules/utils/NumberUtil.js
 },{}],14:[function(require,module,exports){
 "use strict";
 "use strict";
@@ -1178,7 +1178,7 @@ var ObjectUtil = (function() {
 module.exports = ObjectUtil;
 
 
-//# sourceURL=C:/Users/TeamworkGuy2/Documents/Visual Studio 2015/Projects/HDSTeamBuilding/HDSMobileApp/app/scripts/modules/utils/ObjectUtil.js
+//# sourceURL=d:/bv020117/Documents/Visual Studio 2015/Projects/HDSTeamBuilding/HDSMobileApp/app/scripts/modules/utils/ObjectUtil.js
 },{"./NumberUtil":13}],15:[function(require,module,exports){
 "use strict";
 "use strict";
@@ -1214,7 +1214,7 @@ var TestUserView = (function() {
 module.exports = TestUserView;
 
 
-//# sourceURL=C:/Users/TeamworkGuy2/Documents/Visual Studio 2015/Projects/HDSTeamBuilding/HDSMobileApp/app/scripts/views/TestUserView.js
+//# sourceURL=d:/bv020117/Documents/Visual Studio 2015/Projects/HDSTeamBuilding/HDSMobileApp/app/scripts/views/TestUserView.js
 },{"../controllers/TestUserController":2}],16:[function(require,module,exports){
 (function (global){
 /**

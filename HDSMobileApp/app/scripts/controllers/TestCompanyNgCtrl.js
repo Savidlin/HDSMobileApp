@@ -62,7 +62,7 @@ var TestCompanyNgCtrl = (function () {
             };
         });
         // our custom sort prototype sorts usedHours property of a slacker from most to least
-        function compare(a, b) { return parseFloat(b.vacationHours) - parseFloat(a.vacationHours); }
+        function compare(a, b) { return b.vacationHours - a.vacationHours; }
     };
     TestCompanyNgCtrl.deregister = function (appTools, view) {
     };

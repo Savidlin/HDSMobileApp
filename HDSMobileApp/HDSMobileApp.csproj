@@ -171,9 +171,6 @@
     <Content Include="app\rsc\company-products.json" />
     <Content Include="app\rsc\company-information.json" />
     <Content Include="packages.config" />
-    <Content Include="adventure_works.sqlite">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
     <None Include="Properties\PublishProfiles\local.pubxml" />
     <None Include="Properties\PublishProfiles\portlet.pubxml" />
     <None Include="Properties\PublishProfiles\PowerScope.pubxml" />
