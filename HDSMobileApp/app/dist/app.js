@@ -18,6 +18,33 @@ var TestCompanyNgCtrl = (function() {
         company.slackers = employees;
         console.log("done creating slacker list: ", company.slackers);
       });
+      Services.Customer.search($http, {}, {}).success(function(data) {
+        console.log("Customer: ", data);
+      });
+      Services.EmployeePayHistory.search($http, {}, {}).success(function(data) {
+        console.log("EmployeePayHistory: ", data);
+      });
+      Services.Person.search($http, {}, {}).success(function(data) {
+        console.log("Person: ", data);
+      });
+      Services.Product.search($http, {}, {}).success(function(data) {
+        console.log("Product: ", data);
+      });
+      Services.SalesOrderDetail.search($http, {}, {}).success(function(data) {
+        console.log("SalesOrderDetail: ", data);
+      });
+      Services.SalesOrderHeader.search($http, {}, {}).success(function(data) {
+        console.log("SalesOrderHeader: ", data);
+      });
+      Services.SalesPerson.search($http, {}, {}).success(function(data) {
+        console.log("SalesPerson: ", data);
+      });
+      Services.SalesTerritory.search($http, {}, {}).success(function(data) {
+        console.log("SalesTerritory: ", data);
+      });
+      Services.Store.search($http, {}, {}).success(function(data) {
+        console.log("Store: ", data);
+      });
       function createSlackersList(employees) {
         var res = [];
         for (var i = 0; i < employees.length; i++) {
@@ -56,7 +83,7 @@ var TestCompanyNgCtrl = (function() {
 module.exports = TestCompanyNgCtrl;
 
 
-//# sourceURL=d:/bv020117/Documents/Visual Studio 2015/Projects/HDSTeamBuilding/HDSMobileApp/app/scripts/controllers/TestCompanyNgCtrl.js
+//# sourceURL=C:/Users/TeamworkGuy2/Documents/Visual Studio 2015/Projects/HDSTeamBuilding/HDSMobileApp/app/scripts/controllers/TestCompanyNgCtrl.js
 },{"../modules/services/Services":11}],2:[function(require,module,exports){
 "use strict";
 "use strict";
@@ -84,7 +111,7 @@ var TestUserController = (function() {
 module.exports = TestUserController;
 
 
-//# sourceURL=d:/bv020117/Documents/Visual Studio 2015/Projects/HDSTeamBuilding/HDSMobileApp/app/scripts/controllers/TestUserController.js
+//# sourceURL=C:/Users/TeamworkGuy2/Documents/Visual Studio 2015/Projects/HDSTeamBuilding/HDSMobileApp/app/scripts/controllers/TestUserController.js
 },{"../modules/services/Services":11}],3:[function(require,module,exports){
 "use strict";
 var LocalStore = (function() {
@@ -158,7 +185,7 @@ var LocalStore = (function() {
 module.exports = LocalStore;
 
 
-//# sourceURL=d:/bv020117/Documents/Visual Studio 2015/Projects/HDSTeamBuilding/HDSMobileApp/app/scripts/modules/LocalStore.js
+//# sourceURL=C:/Users/TeamworkGuy2/Documents/Visual Studio 2015/Projects/HDSTeamBuilding/HDSMobileApp/app/scripts/modules/LocalStore.js
 },{}],4:[function(require,module,exports){
 "use strict";
 var LocalStore = require("./LocalStore");
@@ -263,7 +290,7 @@ var LocalStoreByDate = (function() {
 module.exports = LocalStoreByDate;
 
 
-//# sourceURL=d:/bv020117/Documents/Visual Studio 2015/Projects/HDSTeamBuilding/HDSMobileApp/app/scripts/modules/LocalStoreByDate.js
+//# sourceURL=C:/Users/TeamworkGuy2/Documents/Visual Studio 2015/Projects/HDSTeamBuilding/HDSMobileApp/app/scripts/modules/LocalStoreByDate.js
 },{"./LocalStore":3}],"qRPk4k":[function(require,module,exports){
 "use strict";
 "use strict";
@@ -301,7 +328,7 @@ var PageLoader = (function() {
 module.exports = PageLoader;
 
 
-//# sourceURL=d:/bv020117/Documents/Visual Studio 2015/Projects/HDSTeamBuilding/HDSMobileApp/app/scripts/modules/PageLoader.js
+//# sourceURL=C:/Users/TeamworkGuy2/Documents/Visual Studio 2015/Projects/HDSTeamBuilding/HDSMobileApp/app/scripts/modules/PageLoader.js
 },{"../controllers/TestCompanyNgCtrl":1,"../modules/utils/FunctionUtil":12,"../views/TestUserView":15,"./main":8}],"./app/scripts/modules/PageLoader.js":[function(require,module,exports){
 module.exports=require('qRPk4k');
 },{}],7:[function(require,module,exports){
@@ -391,7 +418,7 @@ var PageTools;
 module.exports = PageTools;
 
 
-//# sourceURL=d:/bv020117/Documents/Visual Studio 2015/Projects/HDSTeamBuilding/HDSMobileApp/app/scripts/modules/PageTools.js
+//# sourceURL=C:/Users/TeamworkGuy2/Documents/Visual Studio 2015/Projects/HDSTeamBuilding/HDSMobileApp/app/scripts/modules/PageTools.js
 },{}],8:[function(require,module,exports){
 "use strict";
 "use strict";
@@ -484,7 +511,7 @@ var Ps;
 module.exports = Ps;
 
 
-//# sourceURL=d:/bv020117/Documents/Visual Studio 2015/Projects/HDSTeamBuilding/HDSMobileApp/app/scripts/modules/main.js
+//# sourceURL=C:/Users/TeamworkGuy2/Documents/Visual Studio 2015/Projects/HDSTeamBuilding/HDSMobileApp/app/scripts/modules/main.js
 },{"./PageTools":7}],9:[function(require,module,exports){
 "use strict";
 var LocalStoreByDate = require("./LocalStoreByDate");
@@ -594,7 +621,7 @@ var LocalStoreAppender = (function() {
 module.exports = PsLog;
 
 
-//# sourceURL=d:/bv020117/Documents/Visual Studio 2015/Projects/HDSTeamBuilding/HDSMobileApp/app/scripts/modules/psLog.js
+//# sourceURL=C:/Users/TeamworkGuy2/Documents/Visual Studio 2015/Projects/HDSTeamBuilding/HDSMobileApp/app/scripts/modules/psLog.js
 },{"./LocalStoreByDate":4}],10:[function(require,module,exports){
 "use strict";
 var ServiceData;
@@ -614,7 +641,7 @@ var ServiceData;
 module.exports = ServiceData;
 
 
-//# sourceURL=d:/bv020117/Documents/Visual Studio 2015/Projects/HDSTeamBuilding/HDSMobileApp/app/scripts/modules/services/ServiceData.js
+//# sourceURL=C:/Users/TeamworkGuy2/Documents/Visual Studio 2015/Projects/HDSTeamBuilding/HDSMobileApp/app/scripts/modules/services/ServiceData.js
 },{}],11:[function(require,module,exports){
 "use strict";
 "use strict";
@@ -769,18 +796,116 @@ var Services = (function() {
 })();
 var Services;
 (function(Services) {
-  var Employee = (function() {
-    function Employee() {}
-    Employee.search = function($http, rangeCriteria, employeeCriteria) {
-      var promise = Util.svcCall("EmployeeSvc.svc/Employee/Search", ServiceData.SvcType.POST, null, ServiceData.SvcDataType.JSON, {
+  var Customer = (function() {
+    function Customer() {}
+    Customer.search = function($http, rangeCriteria, employeeCriteria) {
+      return Util.svcCall("CustomerSvc.svc/Customer/Search", ServiceData.SvcType.POST, null, ServiceData.SvcDataType.JSON, {
         searchRange: rangeCriteria,
         searchCriteria: employeeCriteria
       }, undefined, $http);
-      return promise;
+    };
+    return Customer;
+  })();
+  Services.Customer = Customer;
+  var Employee = (function() {
+    function Employee() {}
+    Employee.search = function($http, rangeCriteria, employeeCriteria) {
+      return Util.svcCall("EmployeeSvc.svc/Employee/Search", ServiceData.SvcType.POST, null, ServiceData.SvcDataType.JSON, {
+        searchRange: rangeCriteria,
+        searchCriteria: employeeCriteria
+      }, undefined, $http);
     };
     return Employee;
   })();
   Services.Employee = Employee;
+  var EmployeePayHistory = (function() {
+    function EmployeePayHistory() {}
+    EmployeePayHistory.search = function($http, rangeCriteria, employeePayHistoryCriteria) {
+      return Util.svcCall("EmployeePayHistorySvc.svc/EmployeePayHistory/Search", ServiceData.SvcType.POST, null, ServiceData.SvcDataType.JSON, {
+        searchRange: rangeCriteria,
+        searchCriteria: employeePayHistoryCriteria
+      }, undefined, $http);
+    };
+    return EmployeePayHistory;
+  })();
+  Services.EmployeePayHistory = EmployeePayHistory;
+  var Person = (function() {
+    function Person() {}
+    Person.search = function($http, rangeCriteria, personCriteria) {
+      return Util.svcCall("PersonSvc.svc/Person/Search", ServiceData.SvcType.POST, null, ServiceData.SvcDataType.JSON, {
+        searchRange: rangeCriteria,
+        searchCriteria: personCriteria
+      }, undefined, $http);
+    };
+    return Person;
+  })();
+  Services.Person = Person;
+  var Product = (function() {
+    function Product() {}
+    Product.search = function($http, rangeCriteria, productCriteria) {
+      return Util.svcCall("ProductSvc.svc/Product/Search", ServiceData.SvcType.POST, null, ServiceData.SvcDataType.JSON, {
+        searchRange: rangeCriteria,
+        searchCriteria: productCriteria
+      }, undefined, $http);
+    };
+    return Product;
+  })();
+  Services.Product = Product;
+  var SalesOrderDetail = (function() {
+    function SalesOrderDetail() {}
+    SalesOrderDetail.search = function($http, rangeCriteria, salesOrderDetailCriteria) {
+      return Util.svcCall("SalesOrderDetailSvc.svc/SalesOrderDetail/Search", ServiceData.SvcType.POST, null, ServiceData.SvcDataType.JSON, {
+        searchRange: rangeCriteria,
+        searchCriteria: salesOrderDetailCriteria
+      }, undefined, $http);
+    };
+    return SalesOrderDetail;
+  })();
+  Services.SalesOrderDetail = SalesOrderDetail;
+  var SalesOrderHeader = (function() {
+    function SalesOrderHeader() {}
+    SalesOrderHeader.search = function($http, rangeCriteria, salesOrderHeaderCriteria) {
+      return Util.svcCall("SalesOrderHeaderSvc.svc/SalesOrderHeader/Search", ServiceData.SvcType.POST, null, ServiceData.SvcDataType.JSON, {
+        searchRange: rangeCriteria,
+        searchCriteria: salesOrderHeaderCriteria
+      }, undefined, $http);
+    };
+    return SalesOrderHeader;
+  })();
+  Services.SalesOrderHeader = SalesOrderHeader;
+  var SalesPerson = (function() {
+    function SalesPerson() {}
+    SalesPerson.search = function($http, rangeCriteria, salesPersonCriteria) {
+      return Util.svcCall("SalesPersonSvc.svc/SalesPerson/Search", ServiceData.SvcType.POST, null, ServiceData.SvcDataType.JSON, {
+        searchRange: rangeCriteria,
+        searchCriteria: salesPersonCriteria
+      }, undefined, $http);
+    };
+    return SalesPerson;
+  })();
+  Services.SalesPerson = SalesPerson;
+  var SalesTerritory = (function() {
+    function SalesTerritory() {}
+    SalesTerritory.search = function($http, rangeCriteria, salesTerritoryCriteria) {
+      return Util.svcCall("SalesTerritorySvc.svc/SalesTerritory/Search", ServiceData.SvcType.POST, null, ServiceData.SvcDataType.JSON, {
+        searchRange: rangeCriteria,
+        searchCriteria: salesTerritoryCriteria
+      }, undefined, $http);
+    };
+    return SalesTerritory;
+  })();
+  Services.SalesTerritory = SalesTerritory;
+  var Store = (function() {
+    function Store() {}
+    Store.search = function($http, rangeCriteria, storeCriteria) {
+      return Util.svcCall("StoreSvc.svc/Store/Search", ServiceData.SvcType.POST, null, ServiceData.SvcDataType.JSON, {
+        searchRange: rangeCriteria,
+        searchCriteria: storeCriteria
+      }, undefined, $http);
+    };
+    return Store;
+  })();
+  Services.Store = Store;
   var Util = (function() {
     function Util() {}
     Util.svcCall = function(url, callType, urlParameters, postDataType, postData, requestProperties, $http) {
@@ -807,7 +932,7 @@ var Services;
 module.exports = Services;
 
 
-//# sourceURL=d:/bv020117/Documents/Visual Studio 2015/Projects/HDSTeamBuilding/HDSMobileApp/app/scripts/modules/services/Services.js
+//# sourceURL=C:/Users/TeamworkGuy2/Documents/Visual Studio 2015/Projects/HDSTeamBuilding/HDSMobileApp/app/scripts/modules/services/Services.js
 },{"../main":8,"../psLog":9,"../utils/ObjectUtil":14,"./ServiceData":10,"lodash":16}],12:[function(require,module,exports){
 "use strict";
 "use strict";
@@ -859,7 +984,7 @@ var FunctionUtil = (function() {
 module.exports = FunctionUtil;
 
 
-//# sourceURL=d:/bv020117/Documents/Visual Studio 2015/Projects/HDSTeamBuilding/HDSMobileApp/app/scripts/modules/utils/FunctionUtil.js
+//# sourceURL=C:/Users/TeamworkGuy2/Documents/Visual Studio 2015/Projects/HDSTeamBuilding/HDSMobileApp/app/scripts/modules/utils/FunctionUtil.js
 },{}],13:[function(require,module,exports){
 "use strict";
 "use strict";
@@ -963,7 +1088,7 @@ var NumberUtil = (function() {
 module.exports = NumberUtil;
 
 
-//# sourceURL=d:/bv020117/Documents/Visual Studio 2015/Projects/HDSTeamBuilding/HDSMobileApp/app/scripts/modules/utils/NumberUtil.js
+//# sourceURL=C:/Users/TeamworkGuy2/Documents/Visual Studio 2015/Projects/HDSTeamBuilding/HDSMobileApp/app/scripts/modules/utils/NumberUtil.js
 },{}],14:[function(require,module,exports){
 "use strict";
 "use strict";
@@ -1178,7 +1303,7 @@ var ObjectUtil = (function() {
 module.exports = ObjectUtil;
 
 
-//# sourceURL=d:/bv020117/Documents/Visual Studio 2015/Projects/HDSTeamBuilding/HDSMobileApp/app/scripts/modules/utils/ObjectUtil.js
+//# sourceURL=C:/Users/TeamworkGuy2/Documents/Visual Studio 2015/Projects/HDSTeamBuilding/HDSMobileApp/app/scripts/modules/utils/ObjectUtil.js
 },{"./NumberUtil":13}],15:[function(require,module,exports){
 "use strict";
 "use strict";
@@ -1214,7 +1339,7 @@ var TestUserView = (function() {
 module.exports = TestUserView;
 
 
-//# sourceURL=d:/bv020117/Documents/Visual Studio 2015/Projects/HDSTeamBuilding/HDSMobileApp/app/scripts/views/TestUserView.js
+//# sourceURL=C:/Users/TeamworkGuy2/Documents/Visual Studio 2015/Projects/HDSTeamBuilding/HDSMobileApp/app/scripts/views/TestUserView.js
 },{"../controllers/TestUserController":2}],16:[function(require,module,exports){
 (function (global){
 /**

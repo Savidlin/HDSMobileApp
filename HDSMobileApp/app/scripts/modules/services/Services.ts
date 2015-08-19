@@ -195,15 +195,77 @@ class Services {
 
 module Services {
 
-    export class Employee {
-
-        static search($http: angular.IHttpService, rangeCriteria: any, employeeCriteria): angular.IHttpPromise<SearchResult<Models.Employee>> {
-            var promise = Util.svcCall("EmployeeSvc.svc/Employee/Search", ServiceData.SvcType.POST, null, ServiceData.SvcDataType.JSON, { searchRange: rangeCriteria, searchCriteria: employeeCriteria },
-                undefined, $http);
-            return promise;
+    export class Customer {
+        static search($http: angular.IHttpService, rangeCriteria: any, employeeCriteria): angular.IHttpPromise<SearchResult<Models.Customer>> {
+            return Util.svcCall("CustomerSvc.svc/Customer/Search", ServiceData.SvcType.POST, null, ServiceData.SvcDataType.JSON, { searchRange: rangeCriteria, searchCriteria: employeeCriteria }, undefined, $http);
         }
-
     }
+
+
+    export class Employee {
+        static search($http: angular.IHttpService, rangeCriteria: any, employeeCriteria): angular.IHttpPromise<SearchResult<Models.Employee>> {
+            return Util.svcCall("EmployeeSvc.svc/Employee/Search", ServiceData.SvcType.POST, null, ServiceData.SvcDataType.JSON, { searchRange: rangeCriteria, searchCriteria: employeeCriteria }, undefined, $http);
+        }
+    }
+
+
+    export class EmployeePayHistory {
+        static search($http: angular.IHttpService, rangeCriteria: any, employeePayHistoryCriteria): angular.IHttpPromise<SearchResult<Models.EmployeePayHistory>> {
+            return Util.svcCall("EmployeePayHistorySvc.svc/EmployeePayHistory/Search", ServiceData.SvcType.POST, null, ServiceData.SvcDataType.JSON, { searchRange: rangeCriteria, searchCriteria: employeePayHistoryCriteria }, undefined, $http);
+        }
+    }
+
+
+    export class Person {
+        static search($http: angular.IHttpService, rangeCriteria: any, personCriteria): angular.IHttpPromise<SearchResult<Models.Person>> {
+            return Util.svcCall("PersonSvc.svc/Person/Search", ServiceData.SvcType.POST, null, ServiceData.SvcDataType.JSON, { searchRange: rangeCriteria, searchCriteria: personCriteria }, undefined, $http);
+        }
+    }
+
+
+    export class Product {
+        static search($http: angular.IHttpService, rangeCriteria: any, productCriteria): angular.IHttpPromise<SearchResult<Models.Product>> {
+            return Util.svcCall("ProductSvc.svc/Product/Search", ServiceData.SvcType.POST, null, ServiceData.SvcDataType.JSON, { searchRange: rangeCriteria, searchCriteria: productCriteria }, undefined, $http);
+        }
+    }
+
+
+    export class SalesOrderDetail {
+        static search($http: angular.IHttpService, rangeCriteria: any, salesOrderDetailCriteria): angular.IHttpPromise<SearchResult<Models.SalesOrderDetail>> {
+            return Util.svcCall("SalesOrderDetailSvc.svc/SalesOrderDetail/Search", ServiceData.SvcType.POST, null, ServiceData.SvcDataType.JSON, { searchRange: rangeCriteria, searchCriteria: salesOrderDetailCriteria }, undefined, $http);
+        }
+    }
+
+
+    export class SalesOrderHeader {
+        static search($http: angular.IHttpService, rangeCriteria: any, salesOrderHeaderCriteria): angular.IHttpPromise<SearchResult<Models.SalesOrderHeader>> {
+            return Util.svcCall("SalesOrderHeaderSvc.svc/SalesOrderHeader/Search", ServiceData.SvcType.POST, null, ServiceData.SvcDataType.JSON, { searchRange: rangeCriteria, searchCriteria: salesOrderHeaderCriteria }, undefined, $http);
+        }
+    }
+
+
+    export class SalesPerson {
+        static search($http: angular.IHttpService, rangeCriteria: any, salesPersonCriteria): angular.IHttpPromise<SearchResult<Models.SalesPerson>> {
+            return Util.svcCall("SalesPersonSvc.svc/SalesPerson/Search", ServiceData.SvcType.POST, null, ServiceData.SvcDataType.JSON, { searchRange: rangeCriteria, searchCriteria: salesPersonCriteria }, undefined, $http);
+        }
+    }
+
+
+    export class SalesTerritory {
+        static search($http: angular.IHttpService, rangeCriteria: any, salesTerritoryCriteria): angular.IHttpPromise<SearchResult<Models.SalesTerritory>> {
+            return Util.svcCall("SalesTerritorySvc.svc/SalesTerritory/Search", ServiceData.SvcType.POST, null, ServiceData.SvcDataType.JSON, { searchRange: rangeCriteria, searchCriteria: salesTerritoryCriteria }, undefined, $http);
+        }
+    }
+
+
+    export class Store {
+        static search($http: angular.IHttpService, rangeCriteria: any, storeCriteria): angular.IHttpPromise<SearchResult<Models.Store>> {
+            return Util.svcCall("StoreSvc.svc/Store/Search", ServiceData.SvcType.POST, null, ServiceData.SvcDataType.JSON, { searchRange: rangeCriteria, searchCriteria: storeCriteria }, undefined, $http);
+        }
+    }
+
+
+
 
 
     class Util {

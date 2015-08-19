@@ -37,6 +37,42 @@ class TestCompanyNgCtrl {
                 console.log("done creating slacker list: ", company.slackers);
             });
 
+            // Test
+            Services.Customer.search($http, {}, {}).success(function (data) {
+                console.log("Customer: ", data);
+            });
+
+            Services.EmployeePayHistory.search($http, {}, {}).success(function (data) {
+                console.log("EmployeePayHistory: ", data);
+            });
+
+            Services.Person.search($http, {}, {}).success(function (data) {
+                console.log("Person: ", data);
+            });
+
+            Services.Product.search($http, {}, {}).success(function (data) {
+                console.log("Product: ", data);
+            });
+
+            Services.SalesOrderDetail.search($http, {}, {}).success(function (data) {
+                console.log("SalesOrderDetail: ", data);
+            });
+
+            Services.SalesOrderHeader.search($http, {}, {}).success(function (data) {
+                console.log("SalesOrderHeader: ", data);
+            });
+
+            Services.SalesPerson.search($http, {}, {}).success(function (data) {
+                console.log("SalesPerson: ", data);
+            });
+
+            Services.SalesTerritory.search($http, {}, {}).success(function (data) {
+                console.log("SalesTerritory: ", data);
+            });
+
+            Services.Store.search($http, {}, {}).success(function (data) {
+                console.log("Store: ", data);
+            });
 
             function createSlackersList(employees: Models.Employee[]) {
                 var res = [];

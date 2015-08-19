@@ -3,11 +3,11 @@ using System.Runtime.Serialization;
 namespace HDSMobileApp.Entities.Searching {
 
     [DataContract]
-    public class EmployeeSearcher
+    public class SalesTerritorySearcher
     {
 
         [DataMember]
-        public long businessEntityId { get; set; }
+        public long salesTerritoryId { get; set; }
 
     }
 

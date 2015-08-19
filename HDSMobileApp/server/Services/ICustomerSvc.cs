@@ -8,12 +8,12 @@ namespace HDSMobileApp.Services
 {
 
     [ServiceContract]
-    public interface IEmployeeSvc
+    public interface ICustomerSvc
     {
         [OperationContract]
-        [WebInvoke(Method = "POST", UriTemplate = "/Employee/Search",
+        [WebInvoke(Method = "POST", UriTemplate = "/Customer/Search",
             RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
-        SearchResult<Employee> Search(Searchable<EmployeeSearcher> searchData);
+        SearchResult<Customer> Search(Searchable<CustomerSearcher> searchData);
 
     }
 

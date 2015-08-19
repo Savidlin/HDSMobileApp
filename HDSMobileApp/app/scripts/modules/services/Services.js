@@ -177,16 +177,96 @@ var Services = (function () {
 })();
 var Services;
 (function (Services) {
+    var Customer = (function () {
+        function Customer() {
+        }
+        Customer.search = function ($http, rangeCriteria, employeeCriteria) {
+            return Util.svcCall("CustomerSvc.svc/Customer/Search", ServiceData.SvcType.POST, null, ServiceData.SvcDataType.JSON, { searchRange: rangeCriteria, searchCriteria: employeeCriteria }, undefined, $http);
+        };
+        return Customer;
+    })();
+    Services.Customer = Customer;
     var Employee = (function () {
         function Employee() {
         }
         Employee.search = function ($http, rangeCriteria, employeeCriteria) {
-            var promise = Util.svcCall("EmployeeSvc.svc/Employee/Search", ServiceData.SvcType.POST, null, ServiceData.SvcDataType.JSON, { searchRange: rangeCriteria, searchCriteria: employeeCriteria }, undefined, $http);
-            return promise;
+            return Util.svcCall("EmployeeSvc.svc/Employee/Search", ServiceData.SvcType.POST, null, ServiceData.SvcDataType.JSON, { searchRange: rangeCriteria, searchCriteria: employeeCriteria }, undefined, $http);
         };
         return Employee;
     })();
     Services.Employee = Employee;
+    var EmployeePayHistory = (function () {
+        function EmployeePayHistory() {
+        }
+        EmployeePayHistory.search = function ($http, rangeCriteria, employeePayHistoryCriteria) {
+            return Util.svcCall("EmployeePayHistorySvc.svc/EmployeePayHistory/Search", ServiceData.SvcType.POST, null, ServiceData.SvcDataType.JSON, { searchRange: rangeCriteria, searchCriteria: employeePayHistoryCriteria }, undefined, $http);
+        };
+        return EmployeePayHistory;
+    })();
+    Services.EmployeePayHistory = EmployeePayHistory;
+    var Person = (function () {
+        function Person() {
+        }
+        Person.search = function ($http, rangeCriteria, personCriteria) {
+            return Util.svcCall("PersonSvc.svc/Person/Search", ServiceData.SvcType.POST, null, ServiceData.SvcDataType.JSON, { searchRange: rangeCriteria, searchCriteria: personCriteria }, undefined, $http);
+        };
+        return Person;
+    })();
+    Services.Person = Person;
+    var Product = (function () {
+        function Product() {
+        }
+        Product.search = function ($http, rangeCriteria, productCriteria) {
+            return Util.svcCall("ProductSvc.svc/Product/Search", ServiceData.SvcType.POST, null, ServiceData.SvcDataType.JSON, { searchRange: rangeCriteria, searchCriteria: productCriteria }, undefined, $http);
+        };
+        return Product;
+    })();
+    Services.Product = Product;
+    var SalesOrderDetail = (function () {
+        function SalesOrderDetail() {
+        }
+        SalesOrderDetail.search = function ($http, rangeCriteria, salesOrderDetailCriteria) {
+            return Util.svcCall("SalesOrderDetailSvc.svc/SalesOrderDetail/Search", ServiceData.SvcType.POST, null, ServiceData.SvcDataType.JSON, { searchRange: rangeCriteria, searchCriteria: salesOrderDetailCriteria }, undefined, $http);
+        };
+        return SalesOrderDetail;
+    })();
+    Services.SalesOrderDetail = SalesOrderDetail;
+    var SalesOrderHeader = (function () {
+        function SalesOrderHeader() {
+        }
+        SalesOrderHeader.search = function ($http, rangeCriteria, salesOrderHeaderCriteria) {
+            return Util.svcCall("SalesOrderHeaderSvc.svc/SalesOrderHeader/Search", ServiceData.SvcType.POST, null, ServiceData.SvcDataType.JSON, { searchRange: rangeCriteria, searchCriteria: salesOrderHeaderCriteria }, undefined, $http);
+        };
+        return SalesOrderHeader;
+    })();
+    Services.SalesOrderHeader = SalesOrderHeader;
+    var SalesPerson = (function () {
+        function SalesPerson() {
+        }
+        SalesPerson.search = function ($http, rangeCriteria, salesPersonCriteria) {
+            return Util.svcCall("SalesPersonSvc.svc/SalesPerson/Search", ServiceData.SvcType.POST, null, ServiceData.SvcDataType.JSON, { searchRange: rangeCriteria, searchCriteria: salesPersonCriteria }, undefined, $http);
+        };
+        return SalesPerson;
+    })();
+    Services.SalesPerson = SalesPerson;
+    var SalesTerritory = (function () {
+        function SalesTerritory() {
+        }
+        SalesTerritory.search = function ($http, rangeCriteria, salesTerritoryCriteria) {
+            return Util.svcCall("SalesTerritorySvc.svc/SalesTerritory/Search", ServiceData.SvcType.POST, null, ServiceData.SvcDataType.JSON, { searchRange: rangeCriteria, searchCriteria: salesTerritoryCriteria }, undefined, $http);
+        };
+        return SalesTerritory;
+    })();
+    Services.SalesTerritory = SalesTerritory;
+    var Store = (function () {
+        function Store() {
+        }
+        Store.search = function ($http, rangeCriteria, storeCriteria) {
+            return Util.svcCall("StoreSvc.svc/Store/Search", ServiceData.SvcType.POST, null, ServiceData.SvcDataType.JSON, { searchRange: rangeCriteria, searchCriteria: storeCriteria }, undefined, $http);
+        };
+        return Store;
+    })();
+    Services.Store = Store;
     var Util = (function () {
         function Util() {
         }
