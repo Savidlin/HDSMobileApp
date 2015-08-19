@@ -316,6 +316,28 @@ var ArrayUtil = (function () {
         }
         return -1;
     };
+    /** search for objects in an array with a property that matches the specified property value.
+     * For example: {@code findPropValue([ {text: "john's bid", value: 12}, {text: "test bid", value: 12}, { text: "overhill", value: 3 ], "value", 12)}
+     * returns: {@code {text: "john's bid", value: 12}, { text: "test bid", value: 12 } }
+     * because the matching object has a property "value" with a value of 12
+     *
+     * @param {Array} ary: the array to search
+     * @param {String} propName: the name of the property to search for on each object
+     * @param {Object} propValue: the property value to compare
+     * @return {Array} an array of objects with properties by the name 'propName' equal to the specified 'propValue', {@code []} if no matching object was found
+     */
+    ArrayUtil.findAllPropValue = function (ary, propName, propValue) {
+        if (ary == null || propName == null || propValue === undefined) {
+            return null;
+        }
+        var res = [];
+        for (var i = 0, size = ary.length; i < size; i++) {
+            if (ary[i][propName] === propValue) {
+                res.push(ary[i]);
+            }
+        }
+        return res;
+    };
     /** search for an object in an array with a property that matches the specified property value.
      * For example: {@code findPropValue([ {text: "john's bid", value: 12}, {text: "test bid", value: 12} ], "value", 12)}
      * returns: {@code {text: "john's bid", value: 12} }

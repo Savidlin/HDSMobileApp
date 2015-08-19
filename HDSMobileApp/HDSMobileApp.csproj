@@ -103,7 +103,10 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="app\lib\jquery-2.0.3.min.js" />
+    <Content Include="app\lib\jquery-ui-1.10.3.custom.js" />
     <Content Include="app\pages\products.html" />
+    <Content Include="app\pages\template-page.html" />
     <Content Include="app\tsDefinitions\lib\angularjs\README.md" />
     <Content Include="app\lib\numeral.js" />
     <Content Include="app\lib\log4javascript.min.js" />
@@ -113,17 +116,13 @@
     <Content Include="Global.asax" />
     <Content Include="app\css\jquery-ui-1.10.3.custom.css" />
     <Content Include="app\css\jquery-ui-progressbar.css" />
-    <Content Include="app\css\jquery.handsontable.full.css" />
     <Content Include="app\css\screen.css" />
     <Content Include="app\dist\app.js" />
     <Content Include="app\dist\vendor.js" />
-    <Content Include="app\lib\jquery-2.0.3.js" />
     <Content Include="app\lib\jquery.scrollTableBody-1.0.0.js" />
     <Content Include="app\lib\money.js" />
     <Content Include="app\lib\tree.jquery.js" />
     <Content Include="app\lib\handlebars.js" />
-    <Content Include="app\lib\jquery-2.0.3.min.js" />
-    <Content Include="app\lib\jquery-ui-1.10.3.custom.min.js" />
     <Content Include="app\lib\jquery.cookie.js" />
     <Content Include="app\lib\jquery.mobile-1.3.2.custom.min.js" />
     <Content Include="app\lib\jquery.ui.touch-punch.min.js" />
@@ -222,14 +221,18 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <TypeScriptCompile Include="app\scripts\controllers\TestCompanyNgCtrl.ts" />
+    <TypeScriptCompile Include="app\scripts\controllers\TestCompanyController.ts" />
+    <TypeScriptCompile Include="app\scripts\controllers\TemplateController.ts" />
     <TypeScriptCompile Include="app\scripts\controllers\TestUserController.ts" />
     <TypeScriptCompile Include="app\scripts\models\Models.d.ts" />
-    <TypeScriptCompile Include="app\scripts\models\ModelUtil.ts" />
     <TypeScriptCompile Include="app\scripts\models\ModelsImpl.ts" />
     <TypeScriptCompile Include="app\scripts\modules\Cookies.ts" />
+    <TypeScriptCompile Include="app\scripts\modules\Data.ts" />
+    <TypeScriptCompile Include="app\scripts\modules\DataCache.ts" />
     <TypeScriptCompile Include="app\scripts\modules\DateConverter.ts" />
     <TypeScriptCompile Include="app\scripts\modules\Defer.ts" />
+    <TypeScriptCompile Include="app\scripts\modules\Filter.ts" />
+    <TypeScriptCompile Include="app\scripts\modules\Join.ts" />
     <TypeScriptCompile Include="app\scripts\modules\LocalStore.ts" />
     <TypeScriptCompile Include="app\scripts\modules\LocalStoreByDate.ts" />
     <TypeScriptCompile Include="app\scripts\modules\main.ts" />
@@ -245,9 +248,8 @@
     <TypeScriptCompile Include="app\scripts\modules\utils\NumberUtil.ts" />
     <TypeScriptCompile Include="app\scripts\modules\utils\ObjectUtil.ts" />
     <TypeScriptCompile Include="app\scripts\modules\utils\StringUtil.ts" />
-    <TypeScriptCompile Include="app\scripts\modules\services\Services.ts" />
-    <TypeScriptCompile Include="app\scripts\modules\services\ServiceData.ts" />
-    <TypeScriptCompile Include="app\scripts\views\TestUserView.ts" />
+    <TypeScriptCompile Include="app\scripts\services\Services.ts" />
+    <TypeScriptCompile Include="app\scripts\services\ServiceData.ts" />
     <TypeScriptCompile Include="app\tsDefinitions\mobileapp.d.ts" />
     <TypeScriptCompile Include="app\tsDefinitions\lib\angularjs\angular-amd-tests.ts" />
     <TypeScriptCompile Include="app\tsDefinitions\lib\angularjs\angular-animate.d.ts" />
@@ -275,6 +277,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="app\images\" />
+    <Folder Include="app\scripts\views\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

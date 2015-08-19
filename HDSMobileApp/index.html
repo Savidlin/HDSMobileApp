@@ -1,15 +1,16 @@
 ﻿<!DOCTYPE html>
-<html ng-app="myCompany">
+<html>
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="format-detection" content="telephone=no">
     <title>HDS - Mobile App</title>
+
     <link rel="stylesheet" type="text/css" href="node_modules/bootstrap/dist/css/bootstrap.css" />
     <link rel="stylesheet" type="text/css" href="/app/css/screen.css" />
 
     <script type="text/javascript" src="node_modules/angular/angular.min.js"></script>
     <script type="text/javascript" src="/app/dist/vendor.js"></script>
+    <script type="text/javascript" src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
 </head>
 
 <body class="app" ng-controller="CompanyController as company">
@@ -64,10 +65,10 @@
 
     <script type="text/javascript" src="/app/dist/app.js"></script>
     <script type="text/javascript">
-        console.log("started UserMaster search");
-
-        PageLoader.defaultPageLoader.loadPage("TestUserView");
-        PageLoader.defaultPageLoader.loadPage("TestCompanyNgCtrl");
+        appGlobals.PageLoader.defaultPageLoader.loadPage({
+            ngAppName: "hds-mobile-app-test",
+            controllerNames: ["TestUserController", "TestCompanyController"]
+        });
     </script>
 
 </body>

@@ -77,56 +77,12 @@ interface IndexedSized<T> extends IndexedData<T> {
 }
 
 
-interface ItemMasterSearchCriteria {
-    user_identifier: string;
-    branches: number[]; // Branch_Number
-    customers: number[]; // Customer_Number
-    pricing_profiles: string[]; // Pricing_Profile_Number_# [1, 6]
-    packages: string[]; // Package_Number
-    language: string;
-    pricing?: boolean;
-    fast_lookups?: string[];
-}
-
-interface UserProfileData {
-    user_identifier: string;
-    branches: number[];
-    customers: number[];
-    pricing_profiles: string[];
-    packages: string[];
-    language: string;
-}
-
 interface PsLogs {
     login: log4javascript.Logger;
     syncing: log4javascript.Logger;
     services: log4javascript.Logger;
 }
 
-interface PsBidRelatedData {
-    Bid_ID: number;
-}
-
-interface PsBidRelatedDataOptionalModel {
-    Bid_ID?: number;
-}
-
-interface PsSyncable {
-    Last_Update_Date: number;
-    Synched: boolean;
-    Deleted: boolean;
-}
-
-interface PsSyncableOptionalModel {
-    Last_Update_Date?: number;
-    Synched?: boolean;
-    Deleted?: boolean;
-}
-
-interface PsBidStatus {
-    Bid_Status_ID: number;
-    Name: string;
-}
 
 interface PsPromise<T, R> extends Q.Promise<T> {
     then<U>(onFulfill?: (value: T) => U | Q.IPromise<U>, onReject?: (error: R) => U | Q.IPromise<U>, onProgress?: (progress: any) => any): Q.Promise<U>;
@@ -202,59 +158,18 @@ interface SearchResult<T> {
 }
 
 
-// TODO remove once all package functionality is moved to TypeScript and PackageGrid can directly access EditPackagePage's current package, similar to link between GridHelper and editBid.js
-interface PackageLegacyProxy {
-    addItemAction(index, rows);
-    getPackageInfo(): PackageInfo;
+/**
+ * @param <T> the type of view object returned
+ */
+interface WidgetView<T> {
+    initView: (appTools: Main, ngApp: ng.IModule) => T;
+    deregister: (appTools: Main, view: T) => void;
 }
 
 
-interface PackageInfo {
-    packageId: number;
-    isMaster: boolean;
-    seq: number;
-    itemIds: any[];
-}
-
-
-interface ModelProperty {
-    /** the property's data type, used to fill in default 'value', 'toService', 'toLocal', etc. */
-    type: string; //PropertyType;
-    /** default value of the property */
-    value?: any;
-    /** overrides 'properties.toServiceNameConverter' */
-    serviceName?: string;
-    /** the service property's data type, defaults to the same value as 'type' */
-    serviceType?: string; //PropertyType;
-    /** template code can be used to convert the property to a value that can be sent to a web service */
-    toService?: string;
-    /** template code can be used to get this property from another object and convert it to a valid value for this model */
-    toLocal?: string;
-    /** true if this property is a primary key for the model, false or absent if not */
-    primaryKey?: boolean;
-    /** true if this property should be automatically generated (only applies to 'primaryKey: true' properties), false or absent if not */
-    autoGenerate?: boolean;
-    /** true to require this property in model with optional properties,
-     * 'primaryKey' properties are implicitely required */
-    required?: boolean;
-}
-
-
-interface ModelDefinition {
-    toServiceNameConverter: (string) => string; // a function that takes a 'properties.propName' string and converts it to a different format for service calls
-    /** the properties/fields this model has, see {@link ModelProperty} */
-    properties: { [id: string]: ModelProperty };
-}
-
-
-interface TypeInfo {
-    dataType: string;
-}
-
-
-interface PropInfo extends TypeInfo {
-    paramName?: string;
-    required?: boolean
+interface NgAppBootstrapper<T> {
+    initNgApp: (appTools: Main, ngAppName: string) => { app: T; ngAppModule: ng.IModule };
+    deregisterApp: (appTools: Main, data: { app: T; ngAppModule: ng.IModule }) => void;
 }
 
 

@@ -3,10 +3,11 @@
  */
 "use strict";
 var _ = require("lodash");
-var psLog = require("../psLog");
-var ObjectUtil = require("../utils/ObjectUtil");
+var Defer = require("../modules/Defer");
+var psLog = require("../modules/psLog");
+var ObjectUtil = require("../modules/utils/ObjectUtil");
 var ServiceData = require("./ServiceData");
-var Ps = require("../main");
+var Ps = require("../modules/main");
 /** Services namespace
  * Utility functions for invoking Powerscope web API services
  * @author Benjamin
@@ -64,9 +65,7 @@ var Services = (function () {
             }
         }
         // TODO workaround
-        if ($http.defaults) {
-            $http.defaults.headers.get["Content-Type"] = "application/json";
-        }
+        $http.defaults.headers.get["Content-Type"] = "application/json";
         var requestDefaults = {
             url: Services.baseUrl() + relativeUrl + (paramAry.length > 0 ? "?" + paramAry.join("&") : ""),
             method: "GET",
@@ -97,7 +96,16 @@ var Services = (function () {
             }
         };
         var ajaxSettings = _.extend(requestProperties, requestDefaults);
-        return $http(ajaxSettings);
+        var httpRes = $http(ajaxSettings);
+        httpRes["done"] = function (successCb, failureCb) {
+            if (successCb) {
+                httpRes.success(successCb);
+            }
+            if (failureCb) {
+                httpRes.error(failureCb);
+            }
+        };
+        return httpRes;
     };
     /** call a web server using a POST request
      * @param {String} relativeUrl: the domain relative URL of the web service to call, for example "BidSearchService.svc/BidSearch"
@@ -128,10 +136,7 @@ var Services = (function () {
             }
         }
         psLog.logs.login.trace("calling post service", relativeUrl);
-        // TODO workaround
-        if ($http.defaults) {
-            $http.defaults.headers.post["Content-Type"] = "application/json";
-        }
+        $http.defaults.headers.post["Content-Type"] = "application/json";
         var defaultProperties = {
             url: Services.baseUrl() + relativeUrl + (paramAry.length > 0 ? "?" + paramAry.join("&") : ""),
             method: "POST",
@@ -165,7 +170,153 @@ var Services = (function () {
         if (data != null) {
             ajaxSettings.data = JSON.stringify(data);
         }
-        return $http(ajaxSettings);
+        var httpRes = $http(ajaxSettings);
+        httpRes["done"] = function (successCb, failureCb) {
+            if (successCb) {
+                httpRes.success(successCb);
+            }
+            if (failureCb) {
+                httpRes.error(failureCb);
+            }
+        };
+        return httpRes;
+    };
+    /** call a web server using a GET request
+     * @param {String} relativeUrl: the domain relative URL of the web service to call, for example "BidService.svc/Bid/GetById"
+     * @param {Array<String>} parameterNames: an array of parameter names to include in the request URL, for example ["userIdentifier", "bidId"]
+     * @param {Array<String>} parameterValues: an array of parameter values to include in the request URL, for example ["john_doe", 23848]
+     * @param {Boolean} expectArrayResponse: true if the expected response is an array, false if the expected response is a single object
+     * @param {String} [responseDataPropertyName]: the name of the property to return from the response object, if this value is null/undefined,
+     * then the entire response object is returned as is when received
+     * @return {Promise}
+     * resolve: @return {ServiceResult} response objects
+     * reject: @return {ServiceError} the error object containing the XHR request,
+     * the error title/descriptor and the server's error response text
+     */
+    Services.callJQueryGetService = function (relativeUrl, parameterNames, parameterValues, expectArrayResponse, responseDataPropertyName, requestProperties) {
+        if (parameterNames === void 0) { parameterNames = null; }
+        if (parameterValues === void 0) { parameterValues = null; }
+        if (expectArrayResponse === void 0) { expectArrayResponse = false; }
+        if (responseDataPropertyName === void 0) { responseDataPropertyName = null; }
+        if (requestProperties === void 0) { requestProperties = {}; }
+        var def = Defer.newDefer();
+        var paramAry = [];
+        if (parameterNames != null && parameterValues != null) {
+            if (parameterNames.length !== parameterValues.length) {
+                throw new Error("error calling service '" + relativeUrl + "', expected number of parameter names (" + parameterNames.length + ") to equal number of parameter values (" + parameterValues.length + ")");
+            }
+            for (var paramI = 0, size = parameterNames.length; paramI < size; paramI++) {
+                paramAry.push(encodeURIComponent(parameterNames[paramI]) + "=" + encodeURIComponent(parameterValues[paramI]));
+            }
+        }
+        var xhr = null;
+        var ajaxSettings = _.extend(requestProperties, {
+            url: Services.baseUrl() + relativeUrl + (paramAry.length > 0 ? "?" + paramAry.join("&") : ""),
+            method: "GET",
+            contentType: "application/json",
+            timeout: Services.defaultTimeOut(),
+            success: function (response) {
+                var results = null;
+                if (expectArrayResponse === true) {
+                    results = [];
+                    if (responseDataPropertyName != null) {
+                        if (response[responseDataPropertyName] != null) {
+                            results = response[responseDataPropertyName];
+                        }
+                    }
+                    else {
+                        results = response;
+                    }
+                }
+                else {
+                    if (responseDataPropertyName != null) {
+                        results = response[responseDataPropertyName];
+                    }
+                    else {
+                        results = response;
+                    }
+                }
+                def.resolve(results);
+                return results;
+            },
+            error: function (xhr, ts, et) {
+                def.reject({ xhr: xhr, textStatus: ts, errorThrown: et });
+                return null;
+            }
+        });
+        xhr = Ps.getJQuery().ajax(ajaxSettings);
+        return def.promise;
+    };
+    /** call a web server using a POST request
+     * @param {String} relativeUrl: the domain relative URL of the web service to call, for example "BidSearchService.svc/BidSearch"
+     * @param {Object} data: the object to encode using {@code JSON.stringify()} and send to the service
+     * @param {Array<String>} parameterNames: an array of parameter names to include in the request URL, for example ["userIdentifier", "bidId"]
+     * @param {Array<String>} parameterValues: an array of parameter values to include in the request URL, for example ["john_doe", 23848]
+     * @param {Boolean} expectArrayResponse: true if the expected response is an array, false if the expected response is a single object
+     * @param {String} [responseDataPropertyName]: the name of the property to return from the response object, if this value is null/undefined,
+     * then the entire response object is returned as is when received
+     * @return {Promise}
+     * resolve: @return {ServiceResult} response objects
+     * reject: @return {ServiceError} the error object containing the XHR request,
+     * the error title/descriptor and the server's error response text
+     */
+    Services.callJQueryPostService = function (relativeUrl, data, parameterNames, parameterValues, expectArrayResponse, responseDataPropertyName, requestProperties) {
+        if (parameterNames === void 0) { parameterNames = null; }
+        if (parameterValues === void 0) { parameterValues = null; }
+        if (expectArrayResponse === void 0) { expectArrayResponse = false; }
+        if (responseDataPropertyName === void 0) { responseDataPropertyName = null; }
+        if (requestProperties === void 0) { requestProperties = {}; }
+        var def = Defer.newDefer();
+        var paramAry = [];
+        if (parameterNames != null && parameterValues != null) {
+            if (parameterNames.length !== parameterValues.length) {
+                throw new Error("error calling service '" + relativeUrl + "', expected number of parameter names (" + parameterNames.length + ") to equal number of parameter values (" + parameterValues.length + ")");
+            }
+            for (var paramI = 0, size = parameterNames.length; paramI < size; paramI++) {
+                paramAry.push(encodeURIComponent(parameterNames[paramI]) + "=" + encodeURIComponent(parameterValues[paramI]));
+            }
+        }
+        psLog.logs.login.trace("calling post service", relativeUrl);
+        var xhr = null;
+        var ajaxSettings = _.extend(requestProperties, {
+            url: Services.baseUrl() + relativeUrl + (paramAry.length > 0 ? "?" + paramAry.join("&") : ""),
+            method: "POST",
+            timeout: Services.defaultTimeOut(),
+            success: function (response) {
+                var results = null;
+                if (expectArrayResponse === true) {
+                    results = [];
+                    if (responseDataPropertyName != null) {
+                        if (response[responseDataPropertyName] != null) {
+                            results = response[responseDataPropertyName];
+                        }
+                    }
+                    else {
+                        results = response;
+                    }
+                }
+                else {
+                    if (responseDataPropertyName != null) {
+                        results = response[responseDataPropertyName];
+                    }
+                    else {
+                        results = response;
+                    }
+                }
+                def.resolve(results);
+                return results;
+            },
+            error: function (xhr, ts, et) {
+                def.reject({ xhr: xhr, textStatus: ts, errorThrown: et });
+                return null;
+            }
+        });
+        if (data != null) {
+            ajaxSettings.contentType = "application/json";
+            ajaxSettings.data = JSON.stringify(data);
+        }
+        xhr = Ps.getJQuery().ajax(ajaxSettings);
+        return def.promise;
     };
     Services._baseUrl = "./";
     Services._pageBaseUrl = "/app/pages/";
@@ -279,11 +430,21 @@ var Services;
                         urlParamKeys = Object.keys(urlParameters);
                         urlParamVals = ObjectUtil.values(urlParameters, urlParamKeys);
                     }
-                    return Services.callGetService(url, urlParamKeys, urlParamVals, false, null, requestProperties, ($http || Ps.getJQuery().ajax));
+                    if ($http) {
+                        return Services.callGetService(url, urlParamKeys, urlParamVals, false, null, requestProperties, $http);
+                    }
+                    else {
+                        return Services.callJQueryGetService(url, urlParamKeys, urlParamVals, false, null, requestProperties);
+                    }
                 case ServiceData.SvcType.DELETE:
                     throw new Error("unimplemented service call type 'DELETE'");
                 case ServiceData.SvcType.POST:
-                    return Services.callPostService(url, postData, urlParamKeys, urlParamVals, false, null, requestProperties, ($http || Ps.getJQuery().ajax));
+                    if ($http) {
+                        return Services.callPostService(url, postData, urlParamKeys, urlParamVals, false, null, requestProperties, $http);
+                    }
+                    else {
+                        return Services.callJQueryPostService(url, postData, urlParamKeys, urlParamVals, false, null, requestProperties);
+                    }
                 default:
                     throw new Error("unknown SvcType '" + callType + "'");
             }

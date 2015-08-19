@@ -4,30 +4,6 @@
 
 declare module Models {
 
-    export interface UserMasterOptional {
-        User_Number?: number;
-        Name?: string;
-        User_Identifier?: string;
-        Primary_Branch_Number?: number;
-        Email_Address?: string;
-        Phone?: string;
-        Fax?: string;
-        Mobile?: string;
-    }
-
-
-    export interface UserMaster {
-        User_Number: number;
-        Name: string;
-        User_Identifier: string;
-        Primary_Branch_Number: number;
-        Email_Address: string;
-        Phone: string;
-        Fax: string;
-        Mobile: string;
-    }
-
-
     interface Customer {
         customerId: number;
         personId: number;
@@ -165,6 +141,38 @@ declare module Models {
         name: string;
         salesPersonId: number;
         demographics: string;
+    }
+
+
+    // custom models
+    export interface SalesOrderObj {
+        salesOrderHeader: SalesOrderHeader;
+        salesOrderDetails: SalesOrderDetail[];
+    }
+
+
+    // left over test code
+    export interface UserMasterOptional {
+        User_Number?: number;
+        Name?: string;
+        User_Identifier?: string;
+        Primary_Branch_Number?: number;
+        Email_Address?: string;
+        Phone?: string;
+        Fax?: string;
+        Mobile?: string;
+    }
+
+
+    export interface UserMaster {
+        User_Number: number;
+        Name: string;
+        User_Identifier: string;
+        Primary_Branch_Number: number;
+        Email_Address: string;
+        Phone: string;
+        Fax: string;
+        Mobile: string;
     }
 
 }

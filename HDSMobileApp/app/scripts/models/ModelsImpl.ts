@@ -1,9 +1,5 @@
 /// <reference path="../../tsDefinitions/mobileapp.d.ts" />
-/* @license (c) Copyright 2014 HDS IP Holdings, LLC. All Rights Reserved.
- * @generated
- */
 "use strict";
-import ModelUtil = require("./ModelUtil");
 
 module ModelsImpl {
 

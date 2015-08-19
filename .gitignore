@@ -3,6 +3,8 @@ bin/
 node_modules/
 obj/
 desktop.ini
+*/**/app.js
+*/**/app.js.map
 ## end customization for HDSMobileApp
 
 
@@ -222,3 +224,4 @@ FakesAssemblies/
 **/*.Server/GeneratedArtifacts
 **/*.Server/ModelManifest.xml
 _Pvt_Extensions
+HDSMobileApp/app/dist/app.js

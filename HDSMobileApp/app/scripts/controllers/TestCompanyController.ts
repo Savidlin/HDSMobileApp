@@ -1,16 +1,23 @@
 ﻿"use strict";
 import ArrayUtil = require("../modules/utils/ArrayUtil");
-import Services = require("../modules/services/Services");
+import Services = require("../services/Services");
 
 
-class TestCompanyNgCtrl {
+class TestCompanyController implements WidgetView<any> {
+    private information: any;
+    private slackers: any[];
+    private products: any[];
 
-    
-    public static initView(appTools: Main) {
 
-        var app = angular.module('myCompany', []);
+    public initView(appTools: Main, ngApp: ng.IModule) {
+        this.setupCompanyController(ngApp);
 
-        app.controller('CompanyController', ["$scope", "$http", function ($scope, $http) {
+        this.setupProductsDirective(ngApp);
+    }
+
+
+    public setupCompanyController(ngApp: ng.IModule) {
+        ngApp.controller('CompanyController', ["$scope", "$http", function ($scope, $http) {
             //make this a variable so we can use it in methods
             var company = this;
 
@@ -21,15 +28,13 @@ class TestCompanyNgCtrl {
                 company.information = data;
             });
 
-            company.slackers = [];
-
             // wall of slackers
-            Services.Employee.search($http, {}, {}).success(function (data) {
+            Services.Employee.search($http, {}, {}).done(function (data) {
                 //after data is recieved create our new slackers array of objects
                 var employees = createSlackersList(data.Items);
 
                 //sort the slackers notice we are using a custom sort prototype
-                employees = employees.sort(compare);
+                employees = employees.sort(TestCompanyController.sortVacationHours);
 
                 company.slackers = employees;
 
@@ -37,42 +42,6 @@ class TestCompanyNgCtrl {
                 console.log("done creating slacker list: ", company.slackers);
             });
 
-            // Test
-            Services.Customer.search($http, {}, {}).success(function (data) {
-                console.log("Customer: ", data);
-            });
-
-            Services.EmployeePayHistory.search($http, {}, {}).success(function (data) {
-                console.log("EmployeePayHistory: ", data);
-            });
-
-            Services.Person.search($http, {}, {}).success(function (data) {
-                console.log("Person: ", data);
-            });
-
-            Services.Product.search($http, {}, {}).success(function (data) {
-                console.log("Product: ", data);
-            });
-
-            Services.SalesOrderDetail.search($http, {}, {}).success(function (data) {
-                console.log("SalesOrderDetail: ", data);
-            });
-
-            Services.SalesOrderHeader.search($http, {}, {}).success(function (data) {
-                console.log("SalesOrderHeader: ", data);
-            });
-
-            Services.SalesPerson.search($http, {}, {}).success(function (data) {
-                console.log("SalesPerson: ", data);
-            });
-
-            Services.SalesTerritory.search($http, {}, {}).success(function (data) {
-                console.log("SalesTerritory: ", data);
-            });
-
-            Services.Store.search($http, {}, {}).success(function (data) {
-                console.log("Store: ", data);
-            });
 
             function createSlackersList(employees: Models.Employee[]) {
                 var res = [];
@@ -90,11 +59,14 @@ class TestCompanyNgCtrl {
                 }
                 return res;
             }
-
         }]);
+    }
+
+
+    public setupProductsDirective(ngApp: ng.IModule) {
 
         // define a directive and now we can use products in the html
-        app.directive("products", function () {
+        ngApp.directive("products", function () {
             return {
                 // E is for element we are defining our own element
                 // A is for attribute if you were to use directive as an attribute
@@ -113,17 +85,19 @@ class TestCompanyNgCtrl {
                 controllerAs: "productsCtrl"
             };
         });
+    }
 
-        // our custom sort prototype sorts usedHours property of a slacker from most to least
-        function compare(a: Models.Employee, b: Models.Employee) { return b.vacationHours - a.vacationHours; }
+
+    public deregister(appTools: any, view: TestCompanyController): void {
 
     }
 
 
-    public static deregister(appTools: any, view: TestCompanyNgCtrl): void {
-
+    public static sortVacationHours(a: Models.Employee, b: Models.Employee) {
+        // our custom sort prototype sorts usedHours property of a slacker from most to least
+        return b.vacationHours - a.vacationHours;
     }
 
 }
 
-export = TestCompanyNgCtrl;
+export = TestCompanyController;
