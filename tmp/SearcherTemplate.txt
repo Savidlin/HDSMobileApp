@@ -1,0 +1,14 @@
+using System.Runtime.Serialization;
+
+namespace HDSMobileApp.Entities.Searching {
+
+    [DataContract]
+    public class $dtoName$Searcher
+    {
+
+        [DataMember]
+        public $primaryKeyType$ $primaryKey$ { get; set; }
+
+    }
+
+}

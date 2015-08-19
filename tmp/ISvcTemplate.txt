@@ -1,0 +1,20 @@
+using System.ServiceModel;
+using System.ServiceModel.Web;
+using HDSMobileApp.Entities;
+using HDSMobileApp.Entities.Base.Searching;
+using HDSMobileApp.Entities.Searching;
+
+namespace HDSMobileApp.Services
+{
+
+    [ServiceContract]
+    public interface I$dtoName$Svc
+    {
+        [OperationContract]
+        [WebInvoke(Method = "POST", UriTemplate = "/$dtoName$/Search",
+            RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
+        SearchResult<$dtoName$> Search(Searchable<$dtoName$Searcher> searchData);
+
+    }
+
+}

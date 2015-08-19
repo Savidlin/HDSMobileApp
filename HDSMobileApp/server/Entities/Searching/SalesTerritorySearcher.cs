@@ -7,7 +7,7 @@ namespace HDSMobileApp.Entities.Searching {
     {
 
         [DataMember]
-        public long salesTerritoryId { get; set; }
+        public long territoryId { get; set; }
 
     }
 

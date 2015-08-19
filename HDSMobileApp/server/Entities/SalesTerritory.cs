@@ -38,7 +38,7 @@ namespace HDSMobileApp.Entities {
         [DataMember]
         [Column("CostLastYear")]
         public double costLastYear { get; set; }
-
+        
     }
 
 }

@@ -17,7 +17,7 @@ namespace HDSMobileApp.Services.Impl
 
         public SearchResult<SalesTerritory> Search(Searchable<SalesTerritorySearcher> searchData)
         {
-            return QueryHelper.ApplyGenericSearch(HDSMobileAppDataStores.SalesTerritory, Logger, SearchMethodName, searchData.searchRange, searchData.searchCriteria, "salesTerritoryId", this.ConstructQueryConditions);
+            return QueryHelper.ApplyGenericSearch(HDSMobileAppDataStores.SalesTerritory, Logger, SearchMethodName, searchData.searchRange, searchData.searchCriteria, "territoryId", this.ConstructQueryConditions);
         }
 
 

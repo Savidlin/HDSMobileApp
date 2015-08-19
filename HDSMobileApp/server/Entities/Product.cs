@@ -37,7 +37,7 @@ namespace HDSMobileApp.Entities {
 
         [DataMember]
         [Column("weight")]
-        public double? weight { get; set; }
+        public string weight { get; set; }
 
         [DataMember]
         [Column("DaysToManufacture")]
@@ -58,24 +58,24 @@ namespace HDSMobileApp.Entities {
 
         [DataMember]
         [Column("ProductSubcategoryID")]
-        public long? productSubcategoryId { get; set; }
+        public string productSubcategoryId { get; set; }
 
         [DataMember]
         [Column("ProductModelID")]
-        public long? productModelId { get; set; }
+        public string productModelId { get; set; }
 
         [DataMember]
         [Column("SellStartDate")]
-        public DateTime? sellStartDate { get; set; }
+        public string sellStartDate { get; set; }
 
         [DataMember]
         [Column("SellEndDate")]
-        public DateTime? sellEndDate { get; set; }
+        public string sellEndDate { get; set; }
 
         [DataMember]
         [Column("DiscontinuedDate")]
-        public DateTime? discontinuedDate { get; set; }
-
+        public string discontinuedDate { get; set; }
+        
     }
 
 }

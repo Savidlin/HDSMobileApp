@@ -45,7 +45,6 @@ namespace HDSMobileApp.Entities {
         public DateTime? hireDate { get; set; }
 
         [DataMember]
-        [DefaultValue(null)]
         [Column("SalariedFlag")]
         public string salariedFlag { get; set; }
 
@@ -58,6 +57,7 @@ namespace HDSMobileApp.Entities {
         public int sickLeaveHours { get; set; }
 
         [DataMember]
+        [DefaultValue(null)]
         [Column("CurrentFlag")]
         public string currentFlag { get; set; }
 

@@ -1,0 +1,38 @@
+using log4net;
+using System.Linq;
+using HDSMobileApp.Entities.Base.Searching;
+using HDSMobileApp.Entities.Searching;
+using HDSMobileApp.Helpers;
+using HDSMobileApp.Entities;
+
+namespace HDSMobileApp.Services.Impl
+{
+
+    public class $dtoName$Svc : I$dtoName$Svc
+    {
+        private static readonly ILog Logger = LogManager.GetLogger(typeof($dtoName$Svc).Name);
+
+        private static readonly string SearchMethodName = typeof($dtoName$Svc).FullName + ".Search";
+
+
+        public SearchResult<$dtoName$> Search(Searchable<$dtoName$Searcher> searchData)
+        {
+            return QueryHelper.ApplyGenericSearch(HDSMobileAppDataStores.$dtoName$, Logger, SearchMethodName, searchData.searchRange, searchData.searchCriteria, "$primaryKey$", this.ConstructQueryConditions);
+        }
+
+
+        /** Construct query conditions by applying given UserMaster criteria to query object.
+         * @return The updated query
+         */
+        private IQueryable<$dtoName$> ConstructQueryConditions(IQueryable<$dtoName$> query, SearchRange rangeCriteria, $dtoName$Searcher criteria)
+        {
+            //if (criteria.$primaryKey$ != null) {
+            //    $primaryKeyType$ entityId = criteria.$primaryKey$;
+            //    query = query.Where(i => i.$primaryKey$ == entityId);
+            //}
+            return query;
+        }
+
+    }
+
+}

@@ -1,4 +1,5 @@
 using System;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Runtime.Serialization;
 
@@ -16,6 +17,7 @@ namespace HDSMobileApp.Entities {
         public string personType { get; set; }
 
         [DataMember]
+        [DefaultValue(null)]
         [Column("NameStyle")]
         public string nameStyle { get; set; }
 

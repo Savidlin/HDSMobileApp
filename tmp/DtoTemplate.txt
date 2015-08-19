@@ -1,0 +1,17 @@
+using System;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Runtime.Serialization;
+
+namespace HDSMobileApp.Entities {
+
+    [DataContract]
+    public class $dtoName$ {
+
+$forloop(props)$        [DataMember]
+$forloop(props)$        [Column("$loopi.dbName$")]
+$forloop(props)$        public $loopi.svcType$ $loopi.svcName$ { get; set; }
+$forloop(props)$
+
+    }
+
+}
