@@ -24,9 +24,7 @@ namespace HDSMobileApp.Helpers {
 
 
         /// <summary>
-        /// <para>
         /// Ensure that a string doesn't exceed maximum allowed length
-        /// </para>
         /// </summary>
         /// <param name="str">Input string</param>
         /// <param name="maxLength">Maximum length</param>
@@ -38,9 +36,7 @@ namespace HDSMobileApp.Helpers {
 
 
         /// <summary>
-        /// <para>
         /// Ensures that a string only contains numeric values
-        /// </para>
         /// </summary>
         /// <param name="str">Input string</param>
         /// <returns>Input string with only numeric values, empty string if input is null/empty</returns>
@@ -60,9 +56,7 @@ namespace HDSMobileApp.Helpers {
 
 
         /// <summary>
-        /// <para>
         /// Checks whether the given value is zero or negative.
-        /// </para>
         /// </summary>
         /// <param name="value">The value to check.</param>
         /// <param name="parameterName">The actual parameter name of the argument being checked.</param>
@@ -92,9 +86,7 @@ namespace HDSMobileApp.Helpers {
 
 
         /// <summary>
-        /// <para>
         /// Checks whether the given object is null.
-        /// </para>
         /// </summary>
         /// <param name="value">The object to check.</param>
         /// <param name="parameterName">The actual parameter name of the argument being checked.</param>
@@ -108,9 +100,7 @@ namespace HDSMobileApp.Helpers {
 
 
         /// <summary>
-        /// <para>
         /// Checks whether the given string is null or empty.
-        /// </para>
         /// </summary>
         /// <param name="value">The object to check.</param>
         /// <param name="parameterName">The actual parameter name of the argument being checked.</param>
@@ -126,9 +116,7 @@ namespace HDSMobileApp.Helpers {
 
 
         /// <summary>
-        /// <para>
         /// Checks whether the given input is valid.
-        /// </para>
         /// </summary>
         /// <param name="valid">The condation to check.</param>
         /// <param name="errorMessage">The actual parameter name of the argument being checked.</param>
@@ -141,9 +129,7 @@ namespace HDSMobileApp.Helpers {
 
 
         /// <summary>
-        /// <para>
         /// Gets the string representation of the given object.
-        /// </para>
         /// </summary>
         /// <param name="obj">The object to describe.</param>
         /// <returns>The string representation of the object.</returns>
@@ -155,7 +141,7 @@ namespace HDSMobileApp.Helpers {
                 return obj.ToString();
             }
             try {
-                return loggerSerializer.Serialize(obj);
+                return obj.ToString(); //loggerSerializer.Serialize(obj);
             }
             catch {
                 return "Object cannot be represented.";

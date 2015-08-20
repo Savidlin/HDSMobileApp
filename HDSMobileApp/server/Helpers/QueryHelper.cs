@@ -137,7 +137,7 @@ namespace HDSMobileApp.Helpers
                     var result = new SearchResult<R>();
                     using (var db = new HDSMobileAppDbContext()) {
 
-                        IQueryable<T> query = dbSetModifier != null ? dbSetModifier(db, db.GetDbSet(dbSetRef)) : db.GetDbSet(dbSetRef);
+                        IQueryable<T> query = dbSetModifier != null ? db.GetDbSet(dbSetRef, dbSetModifier) : db.GetDbSet(dbSetRef);
 
                         IQueryable<R> resQuery = queryConstructor(db, query, rangeCriteria, objCriteria);
 

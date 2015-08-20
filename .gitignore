@@ -5,6 +5,7 @@ obj/
 desktop.ini
 */**/app.js
 */**/app.js.map
+*/**/vendor.js
 ## end customization for HDSMobileApp
 
 

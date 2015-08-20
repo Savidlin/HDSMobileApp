@@ -7,72 +7,118 @@ using System.Data.Entity.Core.Common;
 using System.Data.SQLite.EF6;
 using log4net;
 using System.IO;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading;
+using System.Diagnostics;
 
 namespace HDSMobileApp.Services.Impl
 {
 
-    public class DbSetInfo<T> where T : class
-    {
+    public class DbSetInfo<T> where T : class {
+        private static readonly ILog Logger = LogManager.GetLogger(typeof(HDSMobileAppDbContextCached).Name);
+
+
+        public DbSetInfo(Func<HDSMobileAppDbContextCached, DbSet<T>> dbSetGetter, bool caching = true) {
+            this.DtoType = typeof(T);
+            this._DbSetGetter = dbSetGetter;
+            this.CachingEnabled = caching;
+        }
+
+        public bool CachingEnabled { get; set; }
+
         public Type DtoType { get; set; }
 
-        public Func<HDSMobileAppDbContext, DbSet<T>> DbSetGetter { get; set; }
+        public IQueryable<T> Data { get; private set; }
+
+        private Func<HDSMobileAppDbContextCached, DbSet<T>> _DbSetGetter;
+
+        public IQueryable<T> GetDbSet(HDSMobileAppDbContext db, Func<HDSMobileAppDbContext, DbSet<T>, IQueryable<T>> dbSetModifier = null) {
+            if (this.CachingEnabled && this.Data != null) {
+                return this.Data;
+            }
+
+            IQueryable<T> data = db.ExecuteCachedDbWork((cachedDb) => {
+                Stopwatch stopWatch = new Stopwatch();
+                stopWatch.Start();
+
+                DbSet<T> dbSet = _DbSetGetter(cachedDb);
+                if (this.CachingEnabled) {
+                    IQueryable<T> dbData = null;
+                    if (dbSetModifier != null) {
+                        dbData = dbSetModifier(db, dbSet);
+                    }
+                    else {
+                        dbData = dbSet;
+                    }
+                    this.Data = dbData.ToList().AsQueryable();
+
+                    stopWatch.Stop();
+                    TimeSpan time = stopWatch.Elapsed;
+                    Logger.Debug("cached data for set " + (typeof(T).ToString()) + " (" + time.TotalMilliseconds + " ms): " + this.Data.Count());
+
+                    return this.Data;
+                }
+                else {
+                    stopWatch.Stop();
+                    TimeSpan time = stopWatch.Elapsed;
+                    Logger.Debug("loaded data for set " + (typeof(T).ToString()) + " (" + time.TotalMilliseconds + " ms): " + this.Data.Count());
+
+                    return dbSet;
+                }
+            });
+            return data;
+        }
+
+        public Action<HDSMobileAppDbContext> GetDbSetCacheInitializer() {
+            return (db) => {
+                this.GetDbSet(db);
+            };
+        }
 
     }
+
+
 
 
     public class HDSMobileAppDataStores {
 
-        public static DbSetInfo<Customer> Customer = new DbSetInfo<Customer> {
-            DtoType = typeof(Customer),
-            DbSetGetter = (HDSMobileAppDbContext ctx) => ctx.CustomerSet,
-        };
+        public static DbSetInfo<Customer> Customer = new DbSetInfo<Customer>((ctx) => ctx.CustomerSet);
 
-        public static DbSetInfo<Employee> Employee = new DbSetInfo<Employee> {
-            DtoType = typeof(Employee),
-            DbSetGetter = (HDSMobileAppDbContext ctx) => ctx.EmployeeSet,
-        };
+        public static DbSetInfo<Employee> Employee = new DbSetInfo<Employee>((ctx) => ctx.EmployeeSet);
 
-        public static DbSetInfo<EmployeePayHistory> EmployeePayHistory = new DbSetInfo<EmployeePayHistory> {
-            DtoType = typeof(EmployeePayHistory),
-            DbSetGetter = (HDSMobileAppDbContext ctx) => ctx.EmployeePayHistorySet,
-        };
+        public static DbSetInfo<EmployeePayHistory> EmployeePayHistory = new DbSetInfo<EmployeePayHistory>((ctx) => ctx.EmployeePayHistorySet);
 
-        public static DbSetInfo<Person> Person = new DbSetInfo<Person> {
-            DtoType = typeof(Person),
-            DbSetGetter = (HDSMobileAppDbContext ctx) => ctx.PersonSet,
-        };
+        public static DbSetInfo<Person> Person = new DbSetInfo<Person>((ctx) => ctx.PersonSet);
 
-        public static DbSetInfo<Product> Product = new DbSetInfo<Product> {
-            DtoType = typeof(Product),
-            DbSetGetter = (HDSMobileAppDbContext ctx) => ctx.ProductSet,
-        };
+        public static DbSetInfo<Product> Product = new DbSetInfo<Product>((ctx) => ctx.ProductSet);
 
-        public static DbSetInfo<SalesOrderDetail> SalesOrderDetail = new DbSetInfo<SalesOrderDetail> {
-            DtoType = typeof(SalesOrderDetail),
-            DbSetGetter = (HDSMobileAppDbContext ctx) => ctx.SalesOrderDetailSet,
-        };
+        public static DbSetInfo<SalesOrderDetail> SalesOrderDetail = new DbSetInfo<SalesOrderDetail>((ctx) => ctx.SalesOrderDetailSet);
 
-        public static DbSetInfo<SalesOrderHeader> SalesOrderHeader = new DbSetInfo<SalesOrderHeader> {
-            DtoType = typeof(SalesOrderHeader),
-            DbSetGetter = (HDSMobileAppDbContext ctx) => ctx.SalesOrderHeaderSet,
-        };
+        public static DbSetInfo<SalesOrderHeader> SalesOrderHeader = new DbSetInfo<SalesOrderHeader>((ctx) => ctx.SalesOrderHeaderSet);
 
-        public static DbSetInfo<SalesPerson> SalesPerson = new DbSetInfo<SalesPerson> {
-            DtoType = typeof(SalesPerson),
-            DbSetGetter = (HDSMobileAppDbContext ctx) => ctx.SalesPersonSet,
-        };
+        public static DbSetInfo<SalesPerson> SalesPerson = new DbSetInfo<SalesPerson>((ctx) => ctx.SalesPersonSet);
 
-        public static DbSetInfo<SalesTerritory> SalesTerritory = new DbSetInfo<SalesTerritory> {
-            DtoType = typeof(SalesTerritory),
-            DbSetGetter = (HDSMobileAppDbContext ctx) => ctx.SalesTerritorySet,
-        };
+        public static DbSetInfo<SalesTerritory> SalesTerritory = new DbSetInfo<SalesTerritory>((ctx) => ctx.SalesTerritorySet);
 
-        public static DbSetInfo<Store> Store = new DbSetInfo<Store> {
-            DtoType = typeof(Store),
-            DbSetGetter = (HDSMobileAppDbContext ctx) => ctx.StoreSet,
+        public static DbSetInfo<Store> Store = new DbSetInfo<Store>((ctx) => ctx.StoreSet);
+
+        public static List<Action<HDSMobileAppDbContext>> AllDbStoreInitializers = new List<Action<HDSMobileAppDbContext>> {
+            Customer.GetDbSetCacheInitializer(),
+            Employee.GetDbSetCacheInitializer(),
+            EmployeePayHistory.GetDbSetCacheInitializer(),
+            Person.GetDbSetCacheInitializer(),
+            Product.GetDbSetCacheInitializer(),
+            SalesOrderDetail.GetDbSetCacheInitializer(),
+            SalesOrderHeader.GetDbSetCacheInitializer(),
+            SalesPerson.GetDbSetCacheInitializer(),
+            SalesTerritory.GetDbSetCacheInitializer(),
+            Store.GetDbSetCacheInitializer()
         };
 
     }
+
+
 
 
     public class SQLiteConfiguration : DbConfiguration {
@@ -93,30 +139,89 @@ namespace HDSMobileApp.Services.Impl
      * @version 1.0
      * @copyright Copyright (c) 2014, HDS IP Holdings, LLC. All Rights Reserved
      */
-    public class HDSMobileAppDbContext : DbContext
-    {
-        private static readonly ILog Logger = LogManager.GetLogger(typeof(HDSMobileAppDbContext).Name);
+    public class HDSMobileAppDbContext: IDisposable {
+        private static readonly ILog Logger = LogManager.GetLogger(typeof(HDSMobileAppDbContextCached).Name);
+
+        private static readonly object cachedDbContextLock = new object();
+        private static HDSMobileAppDbContextCached cachedDbContext;
+
+
+        public HDSMobileAppDbContext() {
+            lock(cachedDbContextLock) {
+                if (cachedDbContext == null) {
+                    cachedDbContext = new HDSMobileAppDbContextCached();
+
+                    Stopwatch stopWatch = new Stopwatch();
+                    stopWatch.Start();
+
+                    LoadAllDbSets();
+
+                    stopWatch.Stop();
+                    TimeSpan time = stopWatch.Elapsed;
+
+                    Logger.Debug("loaded DB into memory (" + time.TotalSeconds + " secs): " + HDSMobileAppDataStores.Customer.CachingEnabled);
+                }
+            }
+        }
+
+
+        public bool HasCachedDb() {
+            bool res = false;
+            lock (cachedDbContextLock) {
+                res = cachedDbContext != null;
+            }
+            return res;
+        }
+
+
+        internal T ExecuteCachedDbWork<T>(Func<HDSMobileAppDbContextCached, T> work) {
+            T res;
+            lock (cachedDbContextLock) {
+                res = work(cachedDbContext);
+            }
+            return res;
+        }
+
+
+        public IQueryable<T> GetDbSet<T>(DbSetInfo<T> dbSetInfo, Func<HDSMobileAppDbContext, DbSet<T>, IQueryable<T>> dbSetModifier = null) where T : class {
+            return dbSetInfo.GetDbSet(this, dbSetModifier);
+        }
+
+
+        public void Dispose() {
+            lock(cachedDbContextLock) {
+                if (cachedDbContext != null) {
+                    cachedDbContext.Dispose();
+                }
+            }
+        }
+
+
+        private void LoadAllDbSets() {
+            HDSMobileAppDataStores.AllDbStoreInitializers.ForEach((dbSet) => dbSet(this));
+        }
+
+    }
+
+
+
+
+    public class HDSMobileAppDbContextCached : DbContext {
+        private static readonly ILog Logger = LogManager.GetLogger(typeof(HDSMobileAppDbContextCached).Name);
 
         private static readonly string SqliteConnectionString = ConfigurationManager.AppSettings["SqliteDatabaseFilePathRelative"];
 
         private static readonly string ConnectionString = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, SqliteConnectionString);
 
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="HDSMobileAppDbContext"/> class.
-        /// </summary>
-        public HDSMobileAppDbContext(): base(new SQLiteConnection("Data Source=" + ConnectionString), true)
+        /** Initializes a new instance of the <see cref="HDSMobileAppDbContextCached"/> class.
+         */
+        public HDSMobileAppDbContextCached(): base(new SQLiteConnection("Data Source=" + ConnectionString), true)
         {
             this.Configuration.LazyLoadingEnabled = false;
             this.Configuration.ProxyCreationEnabled = false;
 
-            Logger.Debug("Initializing database: ");
-        }
-
-
-        public DbSet<T> GetDbSet<T>(DbSetInfo<T> dbSetInfo) where T : class
-        {
-            return dbSetInfo.DbSetGetter(this);
+            Logger.Debug("Initializing database source: ");
         }
 
 
@@ -147,7 +252,7 @@ namespace HDSMobileApp.Services.Impl
         /// <param Name="modelBuilder">the model builder.</param>
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            Database.SetInitializer<HDSMobileAppDbContext>(null);
+            Database.SetInitializer<HDSMobileAppDbContextCached>(null);
 
             modelBuilder.Entity<Employee>().ToTable("Employee");
             modelBuilder.Entity<Employee>().HasKey(i => i.businessEntityId);
