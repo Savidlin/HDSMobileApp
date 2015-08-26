@@ -1,0 +1,70 @@
+﻿<div class="row" id="tableHeader">
+    <div class="col-md-6 col-xs-12">
+        <h3>Sales department</h3>
+    </div>
+    <div class="col-md-4 col-md-offset-2 col-xs-12">
+        <input type="text" class="form-control pull-right salesSearch" placeholder="search" ng-model="searchTerm" />
+    </div>
+</div>
+
+<div class="table-responsive" id="tableRow">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    <!--when header is clicked call order function in scope passing the string of the attribute-->
+                    <a href="" ng-click="order('businessEntityId')">ID</a>
+                    <!-- down arrow will show only if the predicate matches the header and reverse is true meaning descending -->
+                    <span class="glyphicon glyphicon-triangle-bottom pull-right" ng-show="predicate == 'businessEntityId' && reverse"></span>
+                    <!-- up arrow will show only if the predicate matches the header and the reverse is false meaning ascending -->
+                    <span class="glyphicon glyphicon-triangle-top pull-right" ng-show="predicate == 'businessEntityId' && !reverse"></span>
+                </th>
+                <th>
+                    <a href="" ng-click="order('salesQuota')">Quota</a>
+                    <span class="glyphicon glyphicon-triangle-bottom pull-right" ng-show="predicate == 'salesQuota' && reverse"></span>
+                    <span class="glyphicon glyphicon-triangle-top pull-right" ng-show="predicate == 'salesQuota' && !reverse"></span>
+                </th>
+                <th>
+                    <a href="" ng-click="order('salesYTD')">Sales</a>
+                    <span class="glyphicon glyphicon-triangle-bottom pull-right" ng-show="predicate == 'salesYTD' && reverse"></span>
+                    <span class="glyphicon glyphicon-triangle-top pull-right" ng-show="predicate == 'salesYTD' && !reverse"></span>
+                </th>
+                <th>
+                    <a href="" ng-click="order('commissionPct')">Commission</a>
+                    <span class="glyphicon glyphicon-triangle-bottom pull-right" ng-show="predicate == 'commissionPct' && reverse"></span>
+                    <span class="glyphicon glyphicon-triangle-top pull-right" ng-show="predicate == 'commissionPct' && !reverse"></span>
+                </th>
+                <th>
+                    <a href="" ng-click="order('jobTitle')">Job Title</a>
+                    <span class="glyphicon glyphicon-triangle-bottom pull-right" ng-show="predicate == 'jobTitle' && reverse"></span>
+                    <span class="glyphicon glyphicon-triangle-top pull-right" ng-show="predicate == 'jobTitle' && !reverse"></span>
+                </th>
+                <th>
+                    <a href="" ng-click="order('organizationLevel')">Level</a>
+                    <span class="glyphicon glyphicon-triangle-bottom pull-right" ng-show="predicate == 'organizationLevel' && reverse"></span>
+                    <span class="glyphicon glyphicon-triangle-top pull-right" ng-show="predicate == 'organizationLevel' && !reverse"></span>
+                </th>
+                <th>
+                    <a href="" ng-click="order('firstName')">Name</a>
+                    <span class="glyphicon glyphicon-triangle-bottom pull-right" ng-show="predicate == 'firstName' && reverse"></span>
+                    <span class="glyphicon glyphicon-triangle-top pull-right" ng-show="predicate == 'firstName' && !reverse"></span>
+                </th>
+            </tr>
+        </thead>
+        <!-- filter is data binded with the form model searchTerm -->
+        <!-- orderBy the predicate which is a string and the argumetn for the filter is reverse which can be true or false -->
+        <!-- if reverse is false ascending if true is decending  -->
+        <tbody>
+            <tr ng-repeat="person in SalesCtrl.salesPeopleFull | filter: searchTerm | orderBy: predicate:reverse">
+                <td>{{person.businessEntityId}}</td>
+                <td>{{person.salesQuota | currency}}</td>
+                <td>{{person.salesYTD | currency}}</td>
+                <td>{{person.commissionPct}}</td>
+                <td>{{person.jobTitle}}</td>
+                <td>{{person.organizationLevel}}</td>
+                <td>{{person.firstName + " " + person.lastName}}</td>
+
+            </tr>
+        </tbody>
+    </table>
+</div>
