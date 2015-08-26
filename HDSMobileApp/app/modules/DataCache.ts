@@ -23,6 +23,7 @@ class DataCache {
 
         // don't reload after first load, unless explicitly requested
         if (DataCache.isDoneLoading && !forceReload) {
+            console.log("reusing existing data");
             var dfd = Defer.newDefer();
             dfd.resolve(null);
             return dfd.promise;
@@ -48,14 +49,17 @@ class DataCache {
             var svcDfd = Defer.newDefer();
             var svc = services[i].service;
 
-            (function (idx) {
-                svc.search($http, {}, {}).done(function (data) {
+            (function (idx,serviceDfd,service) {
+                console.log("start service " + idx);
+                service.search($http, {}, {}).done(function (data) {
+                    console.log("done service " + idx);
                     services[idx].setResult(data.Items);
-                    svcDfd.resolve(null);
+                    serviceDfd.resolve(null);
                 });
-            } (i));
+                svcDfds.push(serviceDfd.promise);
+            } (i,svcDfd,svc));
 
-            svcDfds.push(svcDfd);
+            
         }
 
         // promise that completes when all services calls complete
@@ -63,6 +67,7 @@ class DataCache {
 
         Defer.when(svcDfds).done(function () {
             DataCache.isDoneLoading = true;
+            console.log("all services done");
             dfd.resolve(null);
         }, function (err) {
             DataCache.loadError = err;
