@@ -43,6 +43,12 @@ class DemoSalesPersonsController implements WidgetView<any> {
                         $scope.reverse = ($scope.predicate === predicate) ? !$scope.reverse : true;
                         $scope.predicate = predicate;
                     };
+
+                    //reset the searchTerm and refocus to the search box
+                    $scope.inputClear = function () {
+                        $scope.searchTerm = "";
+                        jQuery('.salesSearch').focus();
+                    };
                 }],
                 // add an alias for a controller
                 controllerAs: "SalesCtrl"

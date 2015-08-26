@@ -1,75 +1,22 @@
-/* set default styles */
-body, article, p, h1, h2, h3, ul, li, div, span, nav, section, aside, td, button {
-    margin: 0;
-    padding: 0;
+#searchClear {
+    position: absolute;
+    top: 30px;
+    right: 20px;
+    cursor: pointer;
 }
 
-html {
-    height:100%;
+.salesSearch {
+    margin-top: 20px;
 }
 
-body {
-    min-height: 100%;
-    position: relative;
-    width: 100%;
-    overflow-x: hidden;
+#tableHeader {
+    margin-bottom: 20px;
 }
 
-body.app {
-    height:100%;
-}
-
-ul, li {
-    list-style: none;
-}
-
-a, a:hover, a:active, a:visited {
-    text-decoration: none;
-    color: #0084bf;
-}
-
-a:hover {
-    text-decoration: underline;
-}
-
-table {
-    width: 100%;
-    border-collapse: collapse;
-    border-spacing: 0;
-}
-
-:focus {
-    outline: 0;
-}
-
-[title] {
-    -webkit-user-select: none;
-}
-
-body {
-    font: 14px Helvetica, Arial, sans-serif;
-    background-color: #f4f4f4;
-    color: #231f20;
-    min-width: 768px;
-}
-
-.clear {
-    clear: both;
-}
-
-.clearfix:after {
-    visibility: hidden;
-    display: block;
-    content: "";
-    clear: both;
-    height: 0;
-}
-
-.hidden {
-    display: none;
-}
-
-.content {
-    margin: 0 14px;
-    position: relative;
+.header {
+    background-color: #337ab7;
+    padding: 50px;
+    border-radius: 4px;
+    text-align: center;
+    color: white;
 }
