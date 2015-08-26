@@ -1,5 +1,5 @@
 ﻿"use strict";
-import Services = require("../services/Services");
+import Services = require("../../services/Services");
 
 class TODO_NAME implements WidgetView<any> {
 

@@ -1,38 +1,51 @@
-/// <reference path="../../tsDefinitions/mobileapp.d.ts" />
+﻿/// <reference path="../tsDefinitions/mobileapp.d.ts" />
 "use strict";
-var FunctionUtil = require("../modules/utils/FunctionUtil");
-var TestUserController = require("../controllers/TestUserController");
-var TestCompanyController = require("../controllers/TestCompanyController");
-var Ps = require("./main");
-var DataCache = require("./DataCache");
-var Data = require("./Data");
+import FunctionUtil = require("../utils/FunctionUtil");
+import TestCompanyController = require("../scenarios/tests/TestCompanyController");
+import DemoSalesPersonsController = require("../scenarios/demo/DemoSalesPersonsController");
+import Ps = require("./main");
+import DataCache = require("./DataCache");
+import Data = require("./Data");
+
 /** Page initializers for HDS Mobile App
  * @since 2015-8-12
  */
-var PageLoader = (function () {
-    function PageLoader() {
-        // add references to views here
-        this.getViews = FunctionUtil.createLazyInitializedField(function () { return ({
-            TestUserController: new TestUserController(),
-            TestCompanyController: new TestCompanyController(),
-        }); });
-        // add references to app bootstrappers here
-        this.getAppBootstrappers = FunctionUtil.createLazyInitializedField(function () { return ({}); });
-    }
-    PageLoader.prototype.loadPage = function (pageLoadInfo) {
+class PageLoader {
+    private static _defaultPageLoader = new PageLoader();
+
+
+    // static initializer to give pages access
+    private static cctor = (function () {
+        window["appGlobals"] = {
+            PageLoader: PageLoader,
+            Data: Data,
+            DataCache: DataCache,
+        };
+    } ());
+
+
+    public loadPage(pageLoadInfo: { ngAppName: string; controllerNames: string[]; appLoaderName?: string; }) {
         var that = this;
         Ps.resetAppNewPage(null, null, window);
+
         // TODO debugging
         console.log("init loading data...");
+
         DataCache.loadData(undefined, false).done(function () {
-            var ngAppName = null;
+            var ngAppName: string = null;
+
             // if no 'appLoaderName' is supplied, then create a default angular.module and pass it to each controller
             if (pageLoadInfo.appLoaderName == null) {
                 var names = pageLoadInfo.controllerNames;
+
                 ngAppName = pageLoadInfo.ngAppName;
+
                 // TODO debugging
+                console.log("done loading data...");
                 console.log("loading app: ", ngAppName, "using controllers: ", names);
+
                 var ngAppModule = angular.module(ngAppName, []);
+
                 var views = [];
                 for (var i = 0, size = names.length; i < size; i++) {
                     var viewFactory = that.getViews()[names[i]];
@@ -45,35 +58,42 @@ var PageLoader = (function () {
                     }
                 }
             }
+            // call the custom bootstrapper class matching 'appLoaderName' to create the angular.module()
             else {
                 // TODO debugging
                 console.log("loading app: ", pageLoadInfo.ngAppName, "using custom bootstrapper: ", pageLoadInfo.appLoaderName);
+
                 var appObj = that.getAppBootstrappers()[pageLoadInfo.appLoaderName].initNgApp(Ps, pageLoadInfo.ngAppName);
                 ngAppName = appObj.ngAppModule.name;
             }
+
             // bootstrap the angular page here!
             var domContext = Ps.getPageDocument();
             angular.element(domContext).ready(function () {
                 angular.bootstrap(domContext, [ngAppName]);
             });
+
         });
-    };
-    Object.defineProperty(PageLoader, "defaultPageLoader", {
-        get: function () {
-            return PageLoader._defaultPageLoader;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    PageLoader._defaultPageLoader = new PageLoader();
-    // static initializer to give pages access
-    PageLoader.cctor = (function () {
-        window["appGlobals"] = {
-            PageLoader: PageLoader,
-            Data: Data,
-            DataCache: DataCache,
-        };
-    }());
-    return PageLoader;
-})();
-module.exports = PageLoader;
+    }
+
+
+    // add references to views here
+    public getViews = FunctionUtil.createLazyInitializedField(() => <StringMap<WidgetView<any>>>({
+        TestCompanyController: new TestCompanyController(),
+        DemoSalesPersonsController: new DemoSalesPersonsController(),
+    }));
+
+
+    // add references to app bootstrappers here
+    public getAppBootstrappers = FunctionUtil.createLazyInitializedField(() => <StringMap<NgAppBootstrapper<any>>>({
+
+    }));
+
+
+    public static get defaultPageLoader() {
+        return PageLoader._defaultPageLoader;
+    }
+
+}
+
+export = PageLoader;

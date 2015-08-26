@@ -13,14 +13,29 @@
     <script type="text/javascript" src="/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
 </head>
 
-<body class="app" ng-controller="CompanyController as company">
+<body class="app">
+
+    <span><a href="/">Home</a></span>
 
     <div class="container">
-        <ul>
-            <li><a href="/app/scenarios/demo/DemoSalesPersonsPage.html">DemoSalesPersonsPage</a></li>
-            <li><a href="/app/scenarios/tests/TestCompanyPage.html">TestCompanyPage</a></li>
-        </ul>
+
+        <div class="row">
+            <div class="col-md-12">
+                <h1 class="header">Adventure Works Sales Dashboard</h1>
+            </div>
+        </div>
+
+        <sales-table></sales-table>
+
     </div><!--./container-->
+
+    <script type="text/javascript" src="/app/dist/app.js"></script>
+    <script type="text/javascript">
+        appGlobals.PageLoader.defaultPageLoader.loadPage({
+            ngAppName: "hds-mobile-app-test",
+            controllerNames: ["DemoSalesPersonsController"]
+        });
+    </script>
 
 </body>
 </html>

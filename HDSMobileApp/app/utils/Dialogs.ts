@@ -1,40 +1,56 @@
-/// <reference path="../../../tsDefinitions/lib/jquery/jquery.d.ts" />
-/// <reference path="../../../tsDefinitions/lib/jquery/jqueryui.d.ts" />
+﻿/// <reference path="../tsDefinitions/lib/jquery/jquery.d.ts" />
+/// <reference path="../tsDefinitions/lib/jquery/jqueryui.d.ts" />
 "use strict";
-var Ps = require("../main");
+import Ps = require("../modules/main");
+
+interface DialogOptions {
+    name?;
+    id?;
+    close?;
+    callback?;
+    width?;
+    maxWidth?;
+}
+
 /** Dialogs namespace
  * for managing, showing, and closing UI dialog boxes
  * @since 2015-1-9
  */
 // TODO needs refactoring for unified dialog handling
-var Dialogs = (function () {
-    function Dialogs() {
-    }
-    Dialogs.showDbSaveDialog = function (message) {
+class Dialogs {
+
+    static showDbSaveDialog(message?: string): JQuery {
         var dlg = Dialogs.openDialogNoCloseNoOK(message || "Please wait while data is saved...");
         return dlg;
-    };
-    Dialogs.closeDbSaveDialog = function (dlg) {
+    }
+
+
+    static closeDbSaveDialog(dlg: JQuery) {
         Dialogs.closeDialogNoCloseNoOK();
-    };
+    }
+
+
     // TODO partially replaces openDialog() and openDialogWithTitle()
-    Dialogs.openDialogOk = function (title, message, callback) {
+    static openDialogOk(title: string, message: string, callback?: () => void): JQuery {
         var dlg = Dialogs.openDialog(message, callback);
         dlg.dialog("option", "title", title || "");
         return dlg;
-    };
+    }
+
+
     /** open dialog with message
      * @param {String} message the text to display in the dialog
      * @param {Function()} callback the function to call when the dialog is closed
      */
     //static openDialog(message: (index: number, oldHtml: string) => string, callback): JQuery;
-    Dialogs.openDialog = function (message, callback) {
+    static openDialog(message: string, callback?: () => void): JQuery {
         var dlg = Ps.getJQueryContext().find("#dialog");
         //dlg.dialog("close");
         dlg.find("p").html(message);
         if (dlg.find("button").length === 0 && dlg.find(".light-button").length === 0) {
             dlg.append("<div style='text-align: center;'>" +
                 "<button style='padding: 5px; text-align:center; margin-top: 25px; display:inline-block; width: 50px;'>Ok</button></div>");
+
             var btn = dlg.find("button");
             var btnCb = function openDialogCallback() {
                 btn.off("click", btnCb);
@@ -44,11 +60,14 @@ var Dialogs = (function () {
                 dlg.dialog("close");
             };
             btn.on("click", btnCb);
+
             dlg.dialog("option", "title", '');
         }
         dlg.dialog("open");
         return dlg;
-    };
+    }
+
+
     /** Create a popup dialog box with the specified title and message.
      * For example:
      * opeDialogWithTitle("Title", "Would you like to saving this very important data?", [{
@@ -75,14 +94,14 @@ var Dialogs = (function () {
      * @param {Object} [dialogOptions]: an list of optional properties to pass to the jQuery UI dialog that is created, for example 'minWidth' or 'buttons'
      */
     //static openDialogWithTitle(title: string, (index: number, oldHtml: string) => string, callback, dialogOptions): JQuery;
-    Dialogs.openDialogWithTitle = function (title, message, callback, dialogOptions) {
+    static openDialogWithTitle(title: string, message: string, callback?: (() => void) | DialogOptions[], dialogOptions?: DialogOptions): JQuery {
         var dlg = Ps.getJQueryContext().find("#dialog-with-title");
         //dlg.dialog("close");
         dlg.html("<p></p>");
         dlg.find("p").html(message);
         // setup buttons
         if (Array.isArray(callback)) {
-            var buttons = callback;
+            var buttons: DialogOptions[] = <DialogOptions[]>callback;
             var buttonsHtml = ["<div style='text-align: center;'>"];
             for (var i = 0, size = buttons.length; i < size; i++) {
                 buttonsHtml.push("<button id='" + (buttons[i].id ? buttons[i].id : "dialogWithTitleButton" + i) + "' style='padding: 5px; margin: 5px; text-align:center; margin-top: 25px; display:inline-block; " +
@@ -93,6 +112,7 @@ var Dialogs = (function () {
             dlg.append(buttonsHtml.join("\n"));
             for (var i = 0, size = buttons.length; i < size; i++) {
                 var btn = dlg.find("#" + (buttons[i].id ? buttons[i].id : "dialogWithTitleButton" + i));
+
                 var btnCb = (function (buttonObj, btn) {
                     var cbFunc = function openDialogWithTitleCallback1() {
                         if (buttonObj.close) {
@@ -104,7 +124,8 @@ var Dialogs = (function () {
                         btn.off("click", cbFunc);
                     };
                     return cbFunc;
-                }(buttons[i], btn));
+                } (buttons[i], btn));
+
                 btn.on("click", btnCb);
             }
         }
@@ -116,7 +137,7 @@ var Dialogs = (function () {
             var btn = dlg.find("button");
             var btnCb = function openDialogWithTitleCallback2() {
                 if (callback) {
-                    callback();
+                    (<() => void>callback)();
                 }
                 dlg.dialog("close");
                 btn.off("click", btnCb);
@@ -129,7 +150,9 @@ var Dialogs = (function () {
         }
         dlg.dialog("open");
         return dlg;
-    };
+    }
+
+
     /** open dialog box with message and ok and cancel buttons
      * @param {String} message the text to display in the dialog
      * @param {Function()} okayCallback a parameterless function. If the dialog has a default
@@ -138,7 +161,7 @@ var Dialogs = (function () {
      * "Cancel" or exit button, this function is called when the user clicks on that "Cancel" or exit button
      */
     //static openDialogOkCancel(message: (index: number, oldHtml: string) => string, okayCallback: () => void, cancelCallback: () => void): JQuery
-    Dialogs.openDialogOkCancel = function (message, okayCallback, cancelCallback) {
+    static openDialogOkCancel(message: string, okayCallback?: () => void, cancelCallback?: () => void): JQuery {
         var dlg = Ps.getJQueryContext().find("#dialog-ok-cancel");
         dlg.dialog("close");
         dlg.find("p").html(message);
@@ -155,9 +178,11 @@ var Dialogs = (function () {
         var dlgConfirm = dlg.parent().find(".dialog-ok-cancel-ok");
         var dlgCancel = dlg.parent().find(".dialog-ok-cancel-cancel");
         var dlgExit = dlg.parent().find(".ui-dialog-titlebar-close");
+
         dlgConfirm.on("click", clickedOk);
         dlgCancel.on("click", clickedCancel);
         dlgExit.on("click", clickedCancel);
+
         dlg.on("dialogclose", function () {
             dlgConfirm.off("click", clickedOk);
             dlgCancel.off("click", clickedCancel);
@@ -166,29 +191,32 @@ var Dialogs = (function () {
         dlg.dialog("option", "title", "info");
         dlg.dialog("open");
         return dlg;
-    };
+    }
+
+
     /** open dialog with message and no close X button
      * @param {String} message the message to display in the dialog box
      */
     //static openDialogNoClose(message: (index: number, oldHtml: string) => string, title: string): JQuery
-    Dialogs.openDialogNoClose = function (message, title) {
+    static openDialogNoClose(message: string, title?: string): JQuery {
         var dlg = Ps.getJQueryContext().find("#noclosedialog");
         dlg.dialog("close");
         dlg.html(message);
         if (typeof title !== "undefined") {
             dlg.dialog("option", "title", title);
-        }
-        else {
+        } else {
             dlg.dialog("option", "title", '');
         }
         dlg.dialog("open");
         return dlg;
-    };
+    }
+
+
     /** open a dialog box with a message and no close X and no okay button
      * @param {String} message the message to display in the dialog box
      */
     //static openDialogNoCloseNoOK(message: (index: number, oldHtml: string) => string): JQuery
-    Dialogs.openDialogNoCloseNoOK = function (message) {
+    static openDialogNoCloseNoOK(message: string): JQuery {
         var dlg = Ps.getJQueryContext().find("#dialog");
         dlg.dialog("close");
         dlg.find("p").html(message);
@@ -196,37 +224,46 @@ var Dialogs = (function () {
         Ps.getJQueryContext().find(".ui-dialog-titlebar-close").css({ visibility: "hidden" });
         dlg.dialog("open");
         return dlg;
-    };
+    }
+
+
     /** close a dialog box, or if none is provided, close the default dialog box
      */
-    Dialogs.closeDialog = function (dlg) {
+    static closeDialog(dlg: JQuery) {
         dlg.dialog("close");
-    };
+    }
+
+
     /** close the default dialog box
      * TODO remove/refactor, left 2015-2-9 for backward compatibility
      */
-    Dialogs.closeDialogNoCloseNoOK = function () {
+    static closeDialogNoCloseNoOK() {
         Ps.getJQueryContext().find("#dialog").dialog("close");
-    };
+    }
+
+
+
     /** Popup trigger behavior
      */
-    Dialogs.setPopupTrigger = function (params) {
+    static setPopupTrigger(params: { popup: JQuery | string; trigger?: string; container?: JQuery; callback?: (elem: Element) => void; hide? ; noCloseOnPopup? ; noPosition? ; positionOffset? ; direction? ; }) {
         var jqc = Ps.getJQueryContext();
-        var popup = typeof params.popup === "string" ? jqc.find(params.popup) : params.popup;
+        var popup = typeof params.popup === "string" ? jqc.find(<string>params.popup) : <JQuery>params.popup;
         var trigger = params.trigger;
         var container = params.container;
         var callback = params.callback;
+
         if (trigger) {
             jqc.find(container).on("click", trigger, onClick);
-        }
-        else {
+        } else {
             jqc.find(container).on("click", onClick);
         }
-        function onClick(e) {
+
+        function onClick(e: JQueryEventObject) {
             var jq = Ps.getJQuery();
             var jqc = Ps.getJQueryContext();
             var button = jq(this);
-            function closePopup(e) {
+
+            function closePopup(e: JQueryEventObject) {
                 var targetId = e.target["id"];
                 if (targetId && targetId != "" && jqc.find("#" + targetId).closest(".ui-autocomplete").length > 0) {
                     return false;
@@ -234,9 +271,11 @@ var Dialogs = (function () {
                 button.removeClass("active");
                 popup.hide().trigger("hide.popup");
             }
+
             jq(Ps.getPageWindow()).one("resize", function (e) {
                 closePopup(e);
             });
+
             if (!button.hasClass("active")) {
                 e.stopPropagation();
                 button.trigger("click.closePopup");
@@ -263,27 +302,36 @@ var Dialogs = (function () {
                 }
             }
         }
-    };
+    }
+
+
     // show popup
-    Dialogs.showPopup = function (params) {
+    static showPopup(params: { popup; caller; direction? ; noPosition; positionOffset?: { top: number; left: number; }; noCloseOnPopup? ; closeHandler?: (event: JQueryEventObject) => void }) {
         var jqc = Ps.getJQueryContext();
         var caller = jqc.find(params.caller);
         var popup = jqc.find(params.popup);
         var pageHeight = Ps.getPageDocument().body.clientHeight;
+
         popup.trigger("showing.popup").css({
             top: '',
             bottom: ''
         });
+
         popup.show().removeClass("show-up show-left");
+
         caller.addClass("active");
+
         var tail = popup.find(".tail");
         var offset = caller.offset();
         var tailPosition = tail.position();
         var popupHeight = popup.height();
+
         offset.top += caller.outerHeight();
+
         if (tailPosition) {
             offset.left += caller.outerWidth() / 2;
             offset.left -= tailPosition.left + tail.width() / 2;
+
             var contentWidth = Ps.getJQueryContext().width();
             if (params.direction == "vertical" && offset.left + popup.outerWidth() > contentWidth - 2) {
                 var diff = contentWidth - (offset.left + popup.outerWidth() + 2);
@@ -291,11 +339,14 @@ var Dialogs = (function () {
                 offset.left += diff;
             }
         }
+
         if (!params.noPosition) {
+
             if (params.positionOffset) {
                 offset.left += params.positionOffset.left;
                 offset.top += params.positionOffset.top;
             }
+
             if (popupHeight + offset.top > pageHeight) {
                 offset.top -= (caller.outerHeight() + popupHeight);
                 if (params.positionOffset) {
@@ -303,7 +354,9 @@ var Dialogs = (function () {
                 }
                 popup.addClass("show-up");
             }
+
             popup.offset(offset);
+
             if (popup.hasClass("show-up")) {
                 popup.css({
                     bottom: (pageHeight - offset.top - popup.height()) + "px",
@@ -311,18 +364,24 @@ var Dialogs = (function () {
                 });
             }
         }
+
         popup.trigger("show.popup");
+
         if (params.noCloseOnPopup) {
             popup.off("click.clickOnPopup").on("click.clickOnPopup", function (e) {
                 e.stopPropagation();
             });
         }
+
         if (typeof params.closeHandler == "function") {
             setTimeout(function () {
                 Ps.getJQueryContext().one("click.closePopup", params.closeHandler);
             }, 0);
         }
-    };
-    return Dialogs;
-})();
-module.exports = Dialogs;
+    }
+
+}
+/* end Dialogs namespace definition */
+
+
+export = Dialogs;

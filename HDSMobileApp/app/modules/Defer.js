@@ -1,4 +1,4 @@
-/// <reference path="../../tsDefinitions/lib/Q.d.ts" />
+/// <reference path="../tsDefinitions/lib/Q.d.ts" />
 /* @license (c) Copyright 2014 HDS IP Holdings, LLC. All Rights Reserved. */
 var Q = require("q");
 /** Defer namespace

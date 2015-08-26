@@ -1,5 +1,5 @@
 ﻿"use strict";
-import ArrayUtil = require("./utils/ArrayUtil");
+import ArrayUtil = require("../utils/ArrayUtil");
 import DataCache = require("./DataCache");
 
 module Data {

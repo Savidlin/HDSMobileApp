@@ -1,5 +1,5 @@
 "use strict";
-var Services = require("../services/Services");
+var Services = require("../../services/Services");
 var TestCompanyController = (function () {
     function TestCompanyController() {
     }
@@ -14,7 +14,7 @@ var TestCompanyController = (function () {
                 //set-up http get request to json data and assign it to information
                 //upon sucess of getting json file data (the json file) is passed into a fucntion that assigns it to
                 //company.information
-                $http.get('app/rsc/company-information.json').success(function (data) {
+                $http.get('/app/rsc/company-information.json').success(function (data) {
                     company.information = data;
                 });
                 // wall of slackers
@@ -53,11 +53,11 @@ var TestCompanyController = (function () {
                 // A is for attribute if you were to use directive as an attribute
                 restrict: "E",
                 //point to html file
-                templateUrl: "app/pages/products.html",
+                templateUrl: "/app/pages/products.html",
                 //add in a controller
                 controller: ["$http", function ($http) {
                         var company = this;
-                        $http.get('app/rsc/company-products.json').success(function (data) {
+                        $http.get('/app/rsc/company-products.json').success(function (data) {
                             company.products = data;
                         });
                     }],

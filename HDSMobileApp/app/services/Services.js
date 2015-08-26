@@ -1,59 +1,42 @@
-﻿/* @license (c) Copyright 2014 HDS IP Holdings, LLC. All Rights Reserved.
+/* @license (c) Copyright 2014 HDS IP Holdings, LLC. All Rights Reserved.
  * @since 2015-2-9
  */
 "use strict";
-import _ = require("lodash");
-import Defer = require("../modules/Defer");
-import psLog = require("../modules/psLog");
-import ObjectUtil = require("../modules/utils/ObjectUtil");
-import FunctionUtil = require("../modules/utils/FunctionUtil");
-import ServiceData = require("./ServiceData");
-import Ps = require("../modules/main");
-
+var _ = require("lodash");
+var Defer = require("../modules/Defer");
+var psLog = require("../modules/psLog");
+var ObjectUtil = require("../utils/ObjectUtil");
+var ServiceData = require("./ServiceData");
+var Ps = require("../modules/main");
 /** Services namespace
  * Utility functions for invoking Powerscope web API services
  * @author Benjamin
  * @since 2014-11-25
  */
-class Services {
-    private static _baseUrl = "./";
-    private static _pageBaseUrl = "/app/pages/";
-    private static _defaultTimeOut = 600000;
-    private static _handshakeTimeout = 30000;
-    //checks online status
-    static offlineChecked: boolean = false;
-
-
-    static pageBaseUrl(): string {
+var Services = (function () {
+    function Services() {
+    }
+    Services.pageBaseUrl = function () {
         return Services._pageBaseUrl;
-    }
-
-
+    };
     /** a url which, when added to the beginning of the current url, relatives it to the base powerscope app directory */
-    static baseUrl(): string {
+    Services.baseUrl = function () {
         return Services._baseUrl;
-    }
-
-
+    };
     /** the default service call timeout period in milliseconds */
-    static defaultTimeOut(): number {
+    Services.defaultTimeOut = function () {
         return Services._defaultTimeOut;
-    }
-
-
+    };
     /** the default server handshake timeout period in milliseconds */
-    static handshakeTimeout(): number {
+    Services.handshakeTimeout = function () {
         return Services._handshakeTimeout;
-    }
-
+    };
     /** Call when a new page has been loaded (or the current page reloaded) by an outside source, such as the user
      * @param url optional new page URL being navigated to
      */
-    static navigated(url?: string) {
+    Services.navigated = function (url) {
         Services._baseUrl = "/";
-    }
-
-
+    };
     /** call a web server using a GET request
      * @param {String} relativeUrl: the domain relative URL of the web service to call, for example "BidService.svc/Bid/GetById"
      * @param {Array<String>} parameterNames: an array of parameter names to include in the request URL, for example ["userIdentifier", "bidId"]
@@ -66,9 +49,12 @@ class Services {
      * reject: @return {ServiceError} the error object containing the XHR request,
      * the error title/descriptor and the server's error response text
      */
-    static callGetService(relativeUrl: string, parameterNames: string[] = null, parameterValues: string[] = null,
-            expectArrayResponse: boolean = false, responseDataPropertyName: string = null, requestProperties: angular.IRequestShortcutConfig = {},
-            $http?: angular.IHttpService): PsPromise<any, any> {
+    Services.callGetService = function (relativeUrl, parameterNames, parameterValues, expectArrayResponse, responseDataPropertyName, requestProperties, $http) {
+        if (parameterNames === void 0) { parameterNames = null; }
+        if (parameterValues === void 0) { parameterValues = null; }
+        if (expectArrayResponse === void 0) { expectArrayResponse = false; }
+        if (responseDataPropertyName === void 0) { responseDataPropertyName = null; }
+        if (requestProperties === void 0) { requestProperties = {}; }
         var paramAry = [];
         if (parameterNames != null && parameterValues != null) {
             if (parameterNames.length !== parameterValues.length) {
@@ -78,11 +64,9 @@ class Services {
                 paramAry.push(encodeURIComponent(parameterNames[paramI]) + "=" + encodeURIComponent(parameterValues[paramI]));
             }
         }
-
         // TODO workaround
         $http.defaults.headers.get["Content-Type"] = "application/json";
-
-        var requestDefaults: angular.IRequestConfig = {
+        var requestDefaults = {
             url: Services.baseUrl() + relativeUrl + (paramAry.length > 0 ? "?" + paramAry.join("&") : ""),
             method: "GET",
             timeout: Services.defaultTimeOut(),
@@ -107,16 +91,13 @@ class Services {
                         results = response;
                     }
                 }
-
                 results = JSON.parse(results);
                 return results;
             }
         };
-        var ajaxSettings: angular.IRequestConfig = <any>_.extend(requestProperties, requestDefaults);
-
+        var ajaxSettings = _.extend(requestProperties, requestDefaults);
         var httpRes = $http(ajaxSettings);
-
-        httpRes["done"] = function (successCb?, failureCb?) {
+        httpRes["done"] = function (successCb, failureCb) {
             if (successCb) {
                 httpRes.success(successCb);
             }
@@ -124,11 +105,8 @@ class Services {
                 httpRes.error(failureCb);
             }
         };
-
-        return <any>httpRes;
-    }
-
-
+        return httpRes;
+    };
     /** call a web server using a POST request
      * @param {String} relativeUrl: the domain relative URL of the web service to call, for example "BidSearchService.svc/BidSearch"
      * @param {Object} data: the object to encode using {@code JSON.stringify()} and send to the service
@@ -142,9 +120,12 @@ class Services {
      * reject: @return {ServiceError} the error object containing the XHR request,
      * the error title/descriptor and the server's error response text
      */
-    static callPostService(relativeUrl: string, data, parameterNames: string[] = null, parameterValues: string[] = null,
-            expectArrayResponse: boolean = false, responseDataPropertyName: string = null, requestProperties: angular.IRequestShortcutConfig = {},
-            $http?: angular.IHttpService): PsPromise<any, any> {
+    Services.callPostService = function (relativeUrl, data, parameterNames, parameterValues, expectArrayResponse, responseDataPropertyName, requestProperties, $http) {
+        if (parameterNames === void 0) { parameterNames = null; }
+        if (parameterValues === void 0) { parameterValues = null; }
+        if (expectArrayResponse === void 0) { expectArrayResponse = false; }
+        if (responseDataPropertyName === void 0) { responseDataPropertyName = null; }
+        if (requestProperties === void 0) { requestProperties = {}; }
         var paramAry = [];
         if (parameterNames != null && parameterValues != null) {
             if (parameterNames.length !== parameterValues.length) {
@@ -155,10 +136,8 @@ class Services {
             }
         }
         psLog.logs.login.trace("calling post service", relativeUrl);
-
         $http.defaults.headers.post["Content-Type"] = "application/json";
-
-        var defaultProperties: angular.IRequestConfig = {
+        var defaultProperties = {
             url: Services.baseUrl() + relativeUrl + (paramAry.length > 0 ? "?" + paramAry.join("&") : ""),
             method: "POST",
             timeout: Services.defaultTimeOut(),
@@ -183,20 +162,16 @@ class Services {
                         results = response;
                     }
                 }
-
                 results = JSON.parse(results);
                 return results;
             },
         };
-        var ajaxSettings: angular.IRequestConfig = <any>_.extend(requestProperties, defaultProperties);
-
+        var ajaxSettings = _.extend(requestProperties, defaultProperties);
         if (data != null) {
             ajaxSettings.data = JSON.stringify(data);
         }
-
         var httpRes = $http(ajaxSettings);
-
-        httpRes["done"] = function (successCb?, failureCb?) {
+        httpRes["done"] = function (successCb, failureCb) {
             if (successCb) {
                 httpRes.success(successCb);
             }
@@ -204,12 +179,8 @@ class Services {
                 httpRes.error(failureCb);
             }
         };
-
-        return <any>httpRes;
-    }
-
-
-
+        return httpRes;
+    };
     /** call a web server using a GET request
      * @param {String} relativeUrl: the domain relative URL of the web service to call, for example "BidService.svc/Bid/GetById"
      * @param {Array<String>} parameterNames: an array of parameter names to include in the request URL, for example ["userIdentifier", "bidId"]
@@ -222,9 +193,13 @@ class Services {
      * reject: @return {ServiceError} the error object containing the XHR request,
      * the error title/descriptor and the server's error response text
      */
-    static callJQueryGetService<T>(relativeUrl: string, parameterNames: string[] = null, parameterValues: string[] = null,
-        expectArrayResponse: boolean = false, responseDataPropertyName: string = null, requestProperties: JQueryAjaxSettings = {}): PsPromise<T, ServiceError> {
-        var def = Defer.newDefer<PsDeferred<T, ServiceError>>();
+    Services.callJQueryGetService = function (relativeUrl, parameterNames, parameterValues, expectArrayResponse, responseDataPropertyName, requestProperties) {
+        if (parameterNames === void 0) { parameterNames = null; }
+        if (parameterValues === void 0) { parameterValues = null; }
+        if (expectArrayResponse === void 0) { expectArrayResponse = false; }
+        if (responseDataPropertyName === void 0) { responseDataPropertyName = null; }
+        if (requestProperties === void 0) { requestProperties = {}; }
+        var def = Defer.newDefer();
         var paramAry = [];
         if (parameterNames != null && parameterValues != null) {
             if (parameterNames.length !== parameterValues.length) {
@@ -234,9 +209,8 @@ class Services {
                 paramAry.push(encodeURIComponent(parameterNames[paramI]) + "=" + encodeURIComponent(parameterValues[paramI]));
             }
         }
-
         var xhr = null;
-        var ajaxSettings: JQueryAjaxSettings = _.extend(requestProperties, {
+        var ajaxSettings = _.extend(requestProperties, {
             url: Services.baseUrl() + relativeUrl + (paramAry.length > 0 ? "?" + paramAry.join("&") : ""),
             method: "GET",
             contentType: "application/json",
@@ -270,13 +244,9 @@ class Services {
                 return null;
             }
         });
-
         xhr = Ps.getJQuery().ajax(ajaxSettings);
-
         return def.promise;
-    }
-
-
+    };
     /** call a web server using a POST request
      * @param {String} relativeUrl: the domain relative URL of the web service to call, for example "BidSearchService.svc/BidSearch"
      * @param {Object} data: the object to encode using {@code JSON.stringify()} and send to the service
@@ -290,9 +260,13 @@ class Services {
      * reject: @return {ServiceError} the error object containing the XHR request,
      * the error title/descriptor and the server's error response text
      */
-    static callJQueryPostService<T>(relativeUrl: string, data, parameterNames: string[] = null, parameterValues: string[] = null,
-        expectArrayResponse: boolean = false, responseDataPropertyName: string = null, requestProperties: JQueryAjaxSettings = {}): PsPromise<T, ServiceError> {
-        var def = Defer.newDefer<PsDeferred<T, ServiceError>>();
+    Services.callJQueryPostService = function (relativeUrl, data, parameterNames, parameterValues, expectArrayResponse, responseDataPropertyName, requestProperties) {
+        if (parameterNames === void 0) { parameterNames = null; }
+        if (parameterValues === void 0) { parameterValues = null; }
+        if (expectArrayResponse === void 0) { expectArrayResponse = false; }
+        if (responseDataPropertyName === void 0) { responseDataPropertyName = null; }
+        if (requestProperties === void 0) { requestProperties = {}; }
+        var def = Defer.newDefer();
         var paramAry = [];
         if (parameterNames != null && parameterValues != null) {
             if (parameterNames.length !== parameterValues.length) {
@@ -303,9 +277,8 @@ class Services {
             }
         }
         psLog.logs.login.trace("calling post service", relativeUrl);
-
         var xhr = null;
-        var ajaxSettings: JQueryAjaxSettings = _.extend(requestProperties, {
+        var ajaxSettings = _.extend(requestProperties, {
             url: Services.baseUrl() + relativeUrl + (paramAry.length > 0 ? "?" + paramAry.join("&") : ""),
             method: "POST",
             timeout: Services.defaultTimeOut(),
@@ -338,98 +311,117 @@ class Services {
                 return null;
             }
         });
-
         if (data != null) {
             ajaxSettings.contentType = "application/json";
             ajaxSettings.data = JSON.stringify(data);
         }
-
         xhr = Ps.getJQuery().ajax(ajaxSettings);
-
         return def.promise;
-    }
-
-}
-
-module Services {
-
-    export class Customer {
-        static search($http: angular.IHttpService, rangeCriteria: any, employeeCriteria): PsPromise<SearchResult<Models.Customer>, any> {
-            return <any>Util.svcCall("CustomerSvc.svc/Customer/Search", ServiceData.SvcType.POST, null, ServiceData.SvcDataType.JSON, { searchRange: rangeCriteria, searchCriteria: employeeCriteria }, undefined, $http);
+    };
+    Services._baseUrl = "/";
+    Services._pageBaseUrl = "/app/pages/";
+    Services._defaultTimeOut = 600000;
+    Services._handshakeTimeout = 30000;
+    //checks online status
+    Services.offlineChecked = false;
+    return Services;
+})();
+var Services;
+(function (Services) {
+    var Customer = (function () {
+        function Customer() {
         }
-    }
-
-
-    export class Employee {
-        static search($http: angular.IHttpService, rangeCriteria: any, employeeCriteria): PsPromise<SearchResult<Models.Employee>, any> {
-            return <any>Util.svcCall("EmployeeSvc.svc/Employee/Search", ServiceData.SvcType.POST, null, ServiceData.SvcDataType.JSON, { searchRange: rangeCriteria, searchCriteria: employeeCriteria }, undefined, $http);
+        Customer.search = function ($http, rangeCriteria, employeeCriteria) {
+            return Util.svcCall("CustomerSvc.svc/Customer/Search", ServiceData.SvcType.POST, null, ServiceData.SvcDataType.JSON, { searchRange: rangeCriteria, searchCriteria: employeeCriteria }, undefined, $http);
+        };
+        return Customer;
+    })();
+    Services.Customer = Customer;
+    var Employee = (function () {
+        function Employee() {
         }
-    }
-
-
-    export class EmployeePayHistory {
-        static search($http: angular.IHttpService, rangeCriteria: any, employeePayHistoryCriteria): PsPromise<SearchResult<Models.EmployeePayHistory>, any> {
-            return <any>Util.svcCall("EmployeePayHistorySvc.svc/EmployeePayHistory/Search", ServiceData.SvcType.POST, null, ServiceData.SvcDataType.JSON, { searchRange: rangeCriteria, searchCriteria: employeePayHistoryCriteria }, undefined, $http);
+        Employee.search = function ($http, rangeCriteria, employeeCriteria) {
+            return Util.svcCall("EmployeeSvc.svc/Employee/Search", ServiceData.SvcType.POST, null, ServiceData.SvcDataType.JSON, { searchRange: rangeCriteria, searchCriteria: employeeCriteria }, undefined, $http);
+        };
+        return Employee;
+    })();
+    Services.Employee = Employee;
+    var EmployeePayHistory = (function () {
+        function EmployeePayHistory() {
         }
-    }
-
-
-    export class Person {
-        static search($http: angular.IHttpService, rangeCriteria: any, personCriteria): PsPromise<SearchResult<Models.Person>, any> {
-            return <any>Util.svcCall("PersonSvc.svc/Person/Search", ServiceData.SvcType.POST, null, ServiceData.SvcDataType.JSON, { searchRange: rangeCriteria, searchCriteria: personCriteria }, undefined, $http);
+        EmployeePayHistory.search = function ($http, rangeCriteria, employeePayHistoryCriteria) {
+            return Util.svcCall("EmployeePayHistorySvc.svc/EmployeePayHistory/Search", ServiceData.SvcType.POST, null, ServiceData.SvcDataType.JSON, { searchRange: rangeCriteria, searchCriteria: employeePayHistoryCriteria }, undefined, $http);
+        };
+        return EmployeePayHistory;
+    })();
+    Services.EmployeePayHistory = EmployeePayHistory;
+    var Person = (function () {
+        function Person() {
         }
-    }
-
-
-    export class Product {
-        static search($http: angular.IHttpService, rangeCriteria: any, productCriteria): PsPromise<SearchResult<Models.Product>, any> {
-            return <any>Util.svcCall("ProductSvc.svc/Product/Search", ServiceData.SvcType.POST, null, ServiceData.SvcDataType.JSON, { searchRange: rangeCriteria, searchCriteria: productCriteria }, undefined, $http);
+        Person.search = function ($http, rangeCriteria, personCriteria) {
+            return Util.svcCall("PersonSvc.svc/Person/Search", ServiceData.SvcType.POST, null, ServiceData.SvcDataType.JSON, { searchRange: rangeCriteria, searchCriteria: personCriteria }, undefined, $http);
+        };
+        return Person;
+    })();
+    Services.Person = Person;
+    var Product = (function () {
+        function Product() {
         }
-    }
-
-
-    export class SalesOrderDetail {
-        static search($http: angular.IHttpService, rangeCriteria: any, salesOrderDetailCriteria): PsPromise<SearchResult<Models.SalesOrderDetail>, any> {
-            return <any>Util.svcCall("SalesOrderDetailSvc.svc/SalesOrderDetail/Search", ServiceData.SvcType.POST, null, ServiceData.SvcDataType.JSON, { searchRange: rangeCriteria, searchCriteria: salesOrderDetailCriteria }, undefined, $http);
+        Product.search = function ($http, rangeCriteria, productCriteria) {
+            return Util.svcCall("ProductSvc.svc/Product/Search", ServiceData.SvcType.POST, null, ServiceData.SvcDataType.JSON, { searchRange: rangeCriteria, searchCriteria: productCriteria }, undefined, $http);
+        };
+        return Product;
+    })();
+    Services.Product = Product;
+    var SalesOrderDetail = (function () {
+        function SalesOrderDetail() {
         }
-    }
-
-
-    export class SalesOrderHeader {
-        static search($http: angular.IHttpService, rangeCriteria: any, salesOrderHeaderCriteria): PsPromise<SearchResult<Models.SalesOrderHeader>, any> {
-            return <any>Util.svcCall("SalesOrderHeaderSvc.svc/SalesOrderHeader/Search", ServiceData.SvcType.POST, null, ServiceData.SvcDataType.JSON, { searchRange: rangeCriteria, searchCriteria: salesOrderHeaderCriteria }, undefined, $http);
+        SalesOrderDetail.search = function ($http, rangeCriteria, salesOrderDetailCriteria) {
+            return Util.svcCall("SalesOrderDetailSvc.svc/SalesOrderDetail/Search", ServiceData.SvcType.POST, null, ServiceData.SvcDataType.JSON, { searchRange: rangeCriteria, searchCriteria: salesOrderDetailCriteria }, undefined, $http);
+        };
+        return SalesOrderDetail;
+    })();
+    Services.SalesOrderDetail = SalesOrderDetail;
+    var SalesOrderHeader = (function () {
+        function SalesOrderHeader() {
         }
-    }
-
-
-    export class SalesPerson {
-        static search($http: angular.IHttpService, rangeCriteria: any, salesPersonCriteria): PsPromise<SearchResult<Models.SalesPerson>, any> {
-            return <any>Util.svcCall("SalesPersonSvc.svc/SalesPerson/Search", ServiceData.SvcType.POST, null, ServiceData.SvcDataType.JSON, { searchRange: rangeCriteria, searchCriteria: salesPersonCriteria }, undefined, $http);
+        SalesOrderHeader.search = function ($http, rangeCriteria, salesOrderHeaderCriteria) {
+            return Util.svcCall("SalesOrderHeaderSvc.svc/SalesOrderHeader/Search", ServiceData.SvcType.POST, null, ServiceData.SvcDataType.JSON, { searchRange: rangeCriteria, searchCriteria: salesOrderHeaderCriteria }, undefined, $http);
+        };
+        return SalesOrderHeader;
+    })();
+    Services.SalesOrderHeader = SalesOrderHeader;
+    var SalesPerson = (function () {
+        function SalesPerson() {
         }
-    }
-
-
-    export class SalesTerritory {
-        static search($http: angular.IHttpService, rangeCriteria: any, salesTerritoryCriteria): PsPromise<SearchResult<Models.SalesTerritory>, any> {
-            return <any>Util.svcCall("SalesTerritorySvc.svc/SalesTerritory/Search", ServiceData.SvcType.POST, null, ServiceData.SvcDataType.JSON, { searchRange: rangeCriteria, searchCriteria: salesTerritoryCriteria }, undefined, $http);
+        SalesPerson.search = function ($http, rangeCriteria, salesPersonCriteria) {
+            return Util.svcCall("SalesPersonSvc.svc/SalesPerson/Search", ServiceData.SvcType.POST, null, ServiceData.SvcDataType.JSON, { searchRange: rangeCriteria, searchCriteria: salesPersonCriteria }, undefined, $http);
+        };
+        return SalesPerson;
+    })();
+    Services.SalesPerson = SalesPerson;
+    var SalesTerritory = (function () {
+        function SalesTerritory() {
         }
-    }
-
-
-    export class Store {
-        static search($http: angular.IHttpService, rangeCriteria: any, storeCriteria): PsPromise<SearchResult<Models.Store>, any> {
-            return <any>Util.svcCall("StoreSvc.svc/Store/Search", ServiceData.SvcType.POST, null, ServiceData.SvcDataType.JSON, { searchRange: rangeCriteria, searchCriteria: storeCriteria }, undefined, $http);
+        SalesTerritory.search = function ($http, rangeCriteria, salesTerritoryCriteria) {
+            return Util.svcCall("SalesTerritorySvc.svc/SalesTerritory/Search", ServiceData.SvcType.POST, null, ServiceData.SvcDataType.JSON, { searchRange: rangeCriteria, searchCriteria: salesTerritoryCriteria }, undefined, $http);
+        };
+        return SalesTerritory;
+    })();
+    Services.SalesTerritory = SalesTerritory;
+    var Store = (function () {
+        function Store() {
         }
-    }
-
-
-
-
-    class Util {
-
-        static svcCall<T>(url: string, callType: ServiceData.SvcType, urlParameters: { [index: string]: string },
-                postDataType: ServiceData.SvcDataType, postData: any, requestProperties: angular.IRequestShortcutConfig,
-                $http: angular.IHttpService): PsPromise<T, any> {
+        Store.search = function ($http, rangeCriteria, storeCriteria) {
+            return Util.svcCall("StoreSvc.svc/Store/Search", ServiceData.SvcType.POST, null, ServiceData.SvcDataType.JSON, { searchRange: rangeCriteria, searchCriteria: storeCriteria }, undefined, $http);
+        };
+        return Store;
+    })();
+    Services.Store = Store;
+    var Util = (function () {
+        function Util() {
+        }
+        Util.svcCall = function (url, callType, urlParameters, postDataType, postData, requestProperties, $http) {
             switch (callType) {
                 case ServiceData.SvcType.GET:
                     var urlParamKeys = null;
@@ -442,7 +434,7 @@ module Services {
                         return Services.callGetService(url, urlParamKeys, urlParamVals, false, null, requestProperties, $http);
                     }
                     else {
-                        return <any>Services.callJQueryGetService(url, urlParamKeys, urlParamVals, false, null, requestProperties);
+                        return Services.callJQueryGetService(url, urlParamKeys, urlParamVals, false, null, requestProperties);
                     }
                 case ServiceData.SvcType.DELETE:
                     throw new Error("unimplemented service call type 'DELETE'");
@@ -451,16 +443,13 @@ module Services {
                         return Services.callPostService(url, postData, urlParamKeys, urlParamVals, false, null, requestProperties, $http);
                     }
                     else {
-                        return <any>Services.callJQueryPostService(url, postData, urlParamKeys, urlParamVals, false, null, requestProperties);
+                        return Services.callJQueryPostService(url, postData, urlParamKeys, urlParamVals, false, null, requestProperties);
                     }
                 default:
                     throw new Error("unknown SvcType '" + callType + "'");
             }
-        }
-
-    }
-
-}
-
-
-export = Services;
+        };
+        return Util;
+    })();
+})(Services || (Services = {}));
+module.exports = Services;

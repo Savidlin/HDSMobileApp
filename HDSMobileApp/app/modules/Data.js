@@ -1,5 +1,5 @@
 "use strict";
-var ArrayUtil = require("./utils/ArrayUtil");
+var ArrayUtil = require("../utils/ArrayUtil");
 var DataCache = require("./DataCache");
 var Data;
 (function (Data) {

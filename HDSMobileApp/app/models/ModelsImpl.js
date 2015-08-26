@@ -1,4 +1,4 @@
-/// <reference path="../../tsDefinitions/mobileapp.d.ts" />
+/// <reference path="../tsDefinitions/mobileapp.d.ts" />
 "use strict";
 var ModelsImpl;
 (function (ModelsImpl) {
