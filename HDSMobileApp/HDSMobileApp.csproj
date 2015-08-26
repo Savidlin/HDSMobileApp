@@ -106,12 +106,14 @@
     <Content Include="app\lib\jquery-2.0.3.min.js" />
     <Content Include="app\lib\jquery-ui-1.10.3.custom.js" />
     <Content Include="app\pages\products.html" />
+    <Content Include="app\pages\sales-table.html" />
     <Content Include="app\pages\template-page.html" />
+    <Content Include="app\scenarios\demo\DemoSalesPersonsPage.html" />
+    <Content Include="app\scenarios\tests\TestCompanyPage.html" />
     <Content Include="app\tsDefinitions\lib\angularjs\README.md" />
     <Content Include="app\lib\numeral.js" />
     <Content Include="app\lib\log4javascript.min.js" />
     <Content Include="index.html" />
-    <Content Include="karma.conf.js" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="app\css\jquery-ui-1.10.3.custom.css" />
@@ -167,8 +169,6 @@
     <Compile Include="server\Helpers\Misc.cs" />
     <Compile Include="server\Helpers\TimedCache.cs" />
     <Compile Include="server\Entities\Base\IdentifiableEntity.cs" />
-    <Compile Include="server\Exceptions\EntityNotFoundException.cs" />
-    <Compile Include="server\Exceptions\ObjectConverterException.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -221,35 +221,35 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <TypeScriptCompile Include="app\scripts\controllers\TestCompanyController.ts" />
-    <TypeScriptCompile Include="app\scripts\controllers\TemplateController.ts" />
-    <TypeScriptCompile Include="app\scripts\controllers\TestUserController.ts" />
-    <TypeScriptCompile Include="app\scripts\models\Models.d.ts" />
-    <TypeScriptCompile Include="app\scripts\models\ModelsImpl.ts" />
-    <TypeScriptCompile Include="app\scripts\modules\Cookies.ts" />
-    <TypeScriptCompile Include="app\scripts\modules\Data.ts" />
-    <TypeScriptCompile Include="app\scripts\modules\DataCache.ts" />
-    <TypeScriptCompile Include="app\scripts\modules\DateConverter.ts" />
-    <TypeScriptCompile Include="app\scripts\modules\Defer.ts" />
-    <TypeScriptCompile Include="app\scripts\modules\Filter.ts" />
-    <TypeScriptCompile Include="app\scripts\modules\Join.ts" />
-    <TypeScriptCompile Include="app\scripts\modules\LocalStore.ts" />
-    <TypeScriptCompile Include="app\scripts\modules\LocalStoreByDate.ts" />
-    <TypeScriptCompile Include="app\scripts\modules\main.ts" />
-    <TypeScriptCompile Include="app\scripts\modules\PageLoader.ts" />
-    <TypeScriptCompile Include="app\scripts\modules\psLog.ts" />
-    <TypeScriptCompile Include="app\scripts\modules\ProcessLogs.ts" />
-    <TypeScriptCompile Include="app\scripts\modules\psInstance.ts" />
-    <TypeScriptCompile Include="app\scripts\modules\utils\Dialogs.ts" />
-    <TypeScriptCompile Include="app\scripts\modules\utils\ArrayUtil.ts" />
-    <TypeScriptCompile Include="app\scripts\modules\utils\EnumUtil.ts" />
-    <TypeScriptCompile Include="app\scripts\modules\utils\ErrorUtil.ts" />
-    <TypeScriptCompile Include="app\scripts\modules\utils\FunctionUtil.ts" />
-    <TypeScriptCompile Include="app\scripts\modules\utils\NumberUtil.ts" />
-    <TypeScriptCompile Include="app\scripts\modules\utils\ObjectUtil.ts" />
-    <TypeScriptCompile Include="app\scripts\modules\utils\StringUtil.ts" />
-    <TypeScriptCompile Include="app\scripts\services\Services.ts" />
-    <TypeScriptCompile Include="app\scripts\services\ServiceData.ts" />
+    <TypeScriptCompile Include="app\scenarios\demo\DemoSalesPersonsController.ts" />
+    <TypeScriptCompile Include="app\scenarios\tests\TestCompanyController.ts" />
+    <TypeScriptCompile Include="app\scenarios\tests\TemplateController.ts" />
+    <TypeScriptCompile Include="app\models\Models.d.ts" />
+    <TypeScriptCompile Include="app\models\ModelsImpl.ts" />
+    <TypeScriptCompile Include="app\modules\Cookies.ts" />
+    <TypeScriptCompile Include="app\modules\Data.ts" />
+    <TypeScriptCompile Include="app\modules\DataCache.ts" />
+    <TypeScriptCompile Include="app\modules\DateConverter.ts" />
+    <TypeScriptCompile Include="app\modules\Defer.ts" />
+    <TypeScriptCompile Include="app\modules\Filter.ts" />
+    <TypeScriptCompile Include="app\modules\Join.ts" />
+    <TypeScriptCompile Include="app\modules\LocalStore.ts" />
+    <TypeScriptCompile Include="app\modules\LocalStoreByDate.ts" />
+    <TypeScriptCompile Include="app\modules\main.ts" />
+    <TypeScriptCompile Include="app\modules\PageLoader.ts" />
+    <TypeScriptCompile Include="app\modules\psLog.ts" />
+    <TypeScriptCompile Include="app\modules\ProcessLogs.ts" />
+    <TypeScriptCompile Include="app\modules\psInstance.ts" />
+    <TypeScriptCompile Include="app\utils\Dialogs.ts" />
+    <TypeScriptCompile Include="app\utils\ArrayUtil.ts" />
+    <TypeScriptCompile Include="app\utils\EnumUtil.ts" />
+    <TypeScriptCompile Include="app\utils\ErrorUtil.ts" />
+    <TypeScriptCompile Include="app\utils\FunctionUtil.ts" />
+    <TypeScriptCompile Include="app\utils\NumberUtil.ts" />
+    <TypeScriptCompile Include="app\utils\ObjectUtil.ts" />
+    <TypeScriptCompile Include="app\utils\StringUtil.ts" />
+    <TypeScriptCompile Include="app\services\Services.ts" />
+    <TypeScriptCompile Include="app\services\ServiceData.ts" />
     <TypeScriptCompile Include="app\tsDefinitions\mobileapp.d.ts" />
     <TypeScriptCompile Include="app\tsDefinitions\lib\angularjs\angular-amd-tests.ts" />
     <TypeScriptCompile Include="app\tsDefinitions\lib\angularjs\angular-animate.d.ts" />
@@ -277,7 +277,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="app\images\" />
-    <Folder Include="app\scripts\views\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

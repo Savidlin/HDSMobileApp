@@ -4,7 +4,7 @@
 /// <reference path="./lib/log4javascript.d.ts" />
 /// <reference path="./lib/numeral.d.ts" />
 /// <reference path="./lib/Q.d.ts" />
-/// <reference path="../scripts/models/Models.d.ts" />
+/// <reference path="../models/Models.d.ts" />
 /* @license (c) Copyright 2014 HDS IP Holdings, LLC. All Rights Reserved.
  * @author Benjamin
  * @since 2015-2-9

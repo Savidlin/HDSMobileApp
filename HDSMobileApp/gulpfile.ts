@@ -23,7 +23,7 @@ var exec = execObj.exec;
 /** File paths */
 var dist = 'app/dist';
 var modelsDir = {
-    base: "app/scripts/models/"
+    base: "app/models/"
 };
 
 var bannerLines = [
@@ -37,12 +37,12 @@ var vendorFiles = [
     "app/lib/**/*.js"
 ];
 
-var requireFiles = "./app/scripts/modules/PageLoader.js";
+var requireFiles = "./app/modules/PageLoader.js";
 
 var watchifyOptions = {
-    entries: ["./app/scripts/modules/PageLoader.js"],
+    entries: ["./app/modules/PageLoader.js"],
     extensions: [".js"],
-    paths: ["node_modules", "./app/scripts/controllers", "./app/scripts/models", "./app/scripts/modules", "./app/scripts/views"]
+    paths: ["node_modules", "./app/controllers", "./app/models", "./app/modules", "./app/views"]
 };
 
 
@@ -56,7 +56,7 @@ function compileScripts(debug: boolean) {
     var bundler = watchify(watchifyOptions);
     bundler.require(requireFiles);
     bundler.transform(reactify);
-    bundler.transform(es6ify.configure(/.jsx|app\\scripts\\(?!.*\.ts)|app\/scripts\/(?!.*\.ts)/));
+    bundler.transform(es6ify.configure(/.jsx|app\\(?!.*\.ts)|app\/(?!.*\.ts)/));
 
     var pathChecks = [
         "controllers/",
