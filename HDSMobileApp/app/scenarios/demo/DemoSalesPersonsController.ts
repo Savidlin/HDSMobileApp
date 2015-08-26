@@ -2,7 +2,7 @@
 import Services = require("../../services/Services");
 import Data = require("../../modules/Data");
 
-class SalesPeopleController implements WidgetView<any> {
+class DemoSalesPersonsController implements WidgetView<any> {
 
     public initView(appTools: Main, ngApp: ng.IModule) {
         // NOTE: DO NOT 'angular.module(...)', use the 'ngApp' parameter above
@@ -27,51 +27,10 @@ class SalesPeopleController implements WidgetView<any> {
                     // TODO debugging
                     console.log("starting controller DemoSalesPersonsController, Data=", Data.getCustomers());
 
-                    Services.SalesPerson.search($http, {}, {}).done(function (data) {
-                        var employee;
-                        var person;
-                        //data.Items is the actually array of objects that we want not the full return object
-                        var salesPeople = data.Items
+                    var salesPersons = Data.getSalesPersons();
 
-                        Services.Employee.search($http, {}, {}).done(function (data) {
-                            //data.Items is the actually array of objects that we want not the full return object
-                            employee = data.Items;
-                        });
-
-                        Services.Person.search($http, {}, {}).done(function (data) {
-                            //data.Items is the actually array of objects that we want not the full return object
-                            person = data.Items;
-                            sales.salesPeopleFull = joinSalesData(salesPeople, employee, person);
-                            console.log("sales people full:", sales.salesPeopleFull);
-                        });
-
-                    });
-
-                    function joinSalesData(salesPeople: Models.SalesPerson[], employee: Models.Employee[], person: Models.Person[]) {
-
-                        // loop through all sales people
-                        for (var i = 0; i < salesPeople.length; i++) {
-                    
-                            // loop through all employees to find a record that matches for the current sales person in loop
-                            for (var j = 0; j < employee.length; j++) {
-
-                                if (salesPeople[i].businessEntityId == employee[j].businessEntityId) {
-                                    // take every attribute of employee and add it to salesPeople
-                                    jQuery.extend(salesPeople[i], employee[j]);
-                                }
-                            }
-
-                            // loop through all person records for a matching sales person
-                            for (var k = 0; k < person.length; k++) {
-
-                                if (salesPeople[i].businessEntityId == person[k].businessEntityId) {
-                                    // take every attribute of employee and add it to salesPeople
-                                    jQuery.extend(salesPeople[i], person[k]);
-                                }
-                            }
-                        }
-                        return salesPeople;
-                    }
+                    sales.salesPeopleFull = DemoSalesPersonsController.joinSalesData(salesPersons);
+                    console.log("sales people full:", sales.salesPeopleFull);
 
                     // set an initial value to sort by
                     $scope.predicate = 'businessEntityId';
@@ -91,10 +50,27 @@ class SalesPeopleController implements WidgetView<any> {
         });
     }
 
-    public deregister(appTools: Main, view: SalesPeopleController) {
+
+    public static joinSalesData(salesPersons: Models.SalesPerson[]): Models.SalesPerson[] {
+        // loop through all sales people
+        for (var i = 0; i < salesPersons.length; i++) {
+            // loop through all employees to find a record that matches for the current sales person in loop
+            var employee = Data.getEmployeeById(salesPersons[i].businessEntityId);
+            jQuery.extend(salesPersons[i], employee);
+
+            // loop through all person records for a matching sales person
+            var person = Data.getPersonById(salesPersons[i].businessEntityId);
+            jQuery.extend(salesPersons[i], person);
+        }
+
+        return salesPersons;
+    }
+
+
+    public deregister(appTools: Main, view: DemoSalesPersonsController) {
 
     }
 
 }
 
-export = SalesPeopleController;
+export = DemoSalesPersonsController;
