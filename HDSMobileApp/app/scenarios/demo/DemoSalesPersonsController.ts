@@ -19,7 +19,7 @@ class DemoSalesPersonsController implements WidgetView<any> {
                 // A is for attribute if you were to use directive as an attribute
                 restrict: "E",
                 //point to html file
-                templateUrl: "/app/pages/sales-table.html",
+                templateUrl: "/app/scenarios/demo/sales-table.html",
                 //add in a controller
                 controller: ["$scope", "$http", function ($scope, $http) {
                     var sales = this;

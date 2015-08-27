@@ -4,10 +4,9 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>HDS - Mobile App</title>
-
-    <link rel="stylesheet" type="text/css" href="/node_modules/bootstrap/dist/css/bootstrap.css" />
     <link rel="stylesheet" type="text/css" href="/app/css/bootstrap.min.css" />
     <link rel="stylesheet" type="text/css" href="/app/css/screen.css" />
+    <link rel="stylesheet" type="text/css" href="custom.css" />
     <script type="text/javascript" src="/node_modules/angular/angular.min.js"></script>
     <script type="text/javascript" src="/app/dist/vendor.js"></script>
     <script type="text/javascript" src="/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
@@ -18,18 +17,13 @@
 
     <div id="content">
         <navbar></navbar>
-        <div class="container-fluid">
-            <div class="jumbotron">
-                <div class="container">
-                    <h2>Adventure Works Sales Dashboard</h2>
-                    <p>This is a demo.</p>
-                </div>
-            </div>
-        </div><!--./container-fluid-->
-
         <div class="container">
-            <sales-table></sales-table>
+            <div class="row">
+                <h2>Scenerio #3</h2>
+                <p>This is a scenario.</p>
+            </div>
         </div>
+
         <footer></footer>
     </div>
 
@@ -37,7 +31,7 @@
     <script type="text/javascript">
         appGlobals.PageLoader.defaultPageLoader.loadPage({
             ngAppName: "hds-mobile-app-test",
-            controllerNames: ["DemoSalesPersonsController", "GlobalDirectivesController"]
+            controllerNames: ["GlobalDirectivesController"]
         });
     </script>
 

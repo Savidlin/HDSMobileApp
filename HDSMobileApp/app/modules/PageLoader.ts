@@ -3,6 +3,7 @@
 import FunctionUtil = require("../utils/FunctionUtil");
 import TestCompanyController = require("../scenarios/tests/TestCompanyController");
 import DemoSalesPersonsController = require("../scenarios/demo/DemoSalesPersonsController");
+import GlobalDirectivesController = require("../scenarios/global/controllers/GlobalDirectivesController");
 import Ps = require("./main");
 import DataCache = require("./DataCache");
 import Data = require("./Data");
@@ -81,6 +82,7 @@ class PageLoader {
     public getViews = FunctionUtil.createLazyInitializedField(() => <StringMap<WidgetView<any>>>({
         TestCompanyController: new TestCompanyController(),
         DemoSalesPersonsController: new DemoSalesPersonsController(),
+        GlobalDirectivesController: new GlobalDirectivesController
     }));
 
 
