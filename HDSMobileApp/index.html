@@ -9,16 +9,18 @@
     <script type="text/javascript" src="/node_modules/angular/angular.min.js"></script>
     <script type="text/javascript" src="/app/dist/vendor.js"></script>
     <script type="text/javascript" src="/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/app/dist/loading.js"></script>
 </head>
 
 <body class="app">
-    <navbar></navbar>
-    <div class="container">
-        <h2>Welcome</h2>
-    </div><!--./container-->
-
-    <footer></footer>
-
+    <div id="content">
+        <navbar></navbar>
+        <div class="container">
+            <h2>Welcome</h2>
+            <p>This is the home page.</p>
+        </div><!--./container-->
+        <footer></footer>
+    </div>
     <script type="text/javascript" src="/app/dist/app.js"></script>
     <script type="text/javascript">
         appGlobals.PageLoader.defaultPageLoader.loadPage({
