@@ -5,27 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>HDS - Mobile App</title>
 
-    <link rel="stylesheet" type="text/css" href="/node_modules/bootstrap/dist/css/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="/app/css/bootstrap.min.css" />
     <link rel="stylesheet" type="text/css" href="/app/css/screen.css" />
-
     <script type="text/javascript" src="/node_modules/angular/angular.min.js"></script>
     <script type="text/javascript" src="/app/dist/vendor.js"></script>
     <script type="text/javascript" src="/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
 </head>
 
 <body class="app" ng-controller="CompanyController as company">
-
-    <span><a href="/">Home</a></span>
-
-    <main id="content">
-        <div id="test-user-view">
-            <span class="title-description">Enter a user name to validate (try 'Billy'):</span>
-            <input type="text" class="text-field user-name-input" />
-            <input type="button" class="btn validate-user-name" value="Search" />
-            <span class="user-name-result"></span>
-        </div>
-    </main>
-
+    <navbar></navbar>
     <div class="container">
         <!-- first example of pulling data from a controller -->
         <div class="row">
@@ -58,11 +46,13 @@
         <!-- end todo -->
     </div><!--./container-->
 
+    <footer></footer>
+
     <script type="text/javascript" src="/app/dist/app.js"></script>
     <script type="text/javascript">
         appGlobals.PageLoader.defaultPageLoader.loadPage({
             ngAppName: "hds-mobile-app-test",
-            controllerNames: ["TestCompanyController"]
+            controllerNames: ["TestCompanyController", "GlobalDirectivesController"]
         });
     </script>
 </body>
