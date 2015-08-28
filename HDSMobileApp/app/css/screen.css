@@ -66,3 +66,18 @@ a:focus {
 .jumbotron {
     background-color:#eee;
 }
+
+.loading {
+    margin-top:15%;
+}
+
+.loading p {
+    display:inline;
+    margin-left:20px;
+}
+
+.loading img {
+    border-radius:5px;
+    display:inline-block;
+    position:absolute;
+}
