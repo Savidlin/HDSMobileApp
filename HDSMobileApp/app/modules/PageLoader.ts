@@ -1,7 +1,6 @@
 ﻿/// <reference path="../tsDefinitions/mobileapp.d.ts" />
 "use strict";
 import FunctionUtil = require("../utils/FunctionUtil");
-import TestCompanyController = require("../scenarios/tests/TestCompanyController");
 import DemoSalesPersonsController = require("../scenarios/demo/DemoSalesPersonsController");
 import GlobalDirectivesController = require("../scenarios/global/controllers/GlobalDirectivesController");
 import Ps = require("./main");
@@ -80,7 +79,6 @@ class PageLoader {
 
     // add references to views here
     public getViews = FunctionUtil.createLazyInitializedField(() => <StringMap<WidgetView<any>>>({
-        TestCompanyController: new TestCompanyController(),
         DemoSalesPersonsController: new DemoSalesPersonsController(),
         GlobalDirectivesController: new GlobalDirectivesController
     }));

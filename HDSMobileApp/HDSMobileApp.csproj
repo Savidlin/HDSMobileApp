@@ -103,6 +103,7 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="app\dist\loading.js" />
     <Content Include="app\lib\jquery-2.0.3.min.js" />
     <Content Include="app\lib\jquery-ui-1.10.3.custom.js" />
     <Content Include="app\scenarios\global\partials\footer.html" />
@@ -121,11 +122,9 @@
     <Content Include="app\scenarios\scenerio5\custom.css" />
     <Content Include="app\scenarios\scenerio5\instructions.txt" />
     <Content Include="app\scenarios\scenerio5\scenerio5.html" />
-    <Content Include="app\scenarios\tests\products.html" />
     <Content Include="app\scenarios\demo\sales-table.html" />
     <Content Include="app\scenarios\demo\DemoSalesPersonsPage.html" />
     <Content Include="app\scenarios\scenerio1\scenerio1.html" />
-    <Content Include="app\scenarios\tests\TestCompanyPage.html" />
     <Content Include="app\tsDefinitions\lib\angularjs\README.md" />
     <Content Include="app\lib\log4javascript.min.js" />
     <Content Include="index.html" />
@@ -212,8 +211,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="package.json" />
-    <Content Include="app\rsc\company-products.json" />
-    <Content Include="app\rsc\company-information.json" />
     <Content Include="packages.config" />
     <Content Include="database\adventure_works-v2.sqlite">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -234,8 +231,6 @@
   <ItemGroup>
     <TypeScriptCompile Include="app\scenarios\global\controllers\GlobalDirectivesController.ts" />
     <TypeScriptCompile Include="app\scenarios\demo\DemoSalesPersonsController.ts" />
-    <TypeScriptCompile Include="app\scenarios\tests\TestCompanyController.ts" />
-    <TypeScriptCompile Include="app\scenarios\tests\TemplateController.ts" />
     <TypeScriptCompile Include="app\models\Models.d.ts" />
     <TypeScriptCompile Include="app\models\ModelsImpl.ts" />
     <TypeScriptCompile Include="app\modules\Cookies.ts" />

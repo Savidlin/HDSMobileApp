@@ -1,7 +1,6 @@
 /// <reference path="../tsDefinitions/mobileapp.d.ts" />
 "use strict";
 var FunctionUtil = require("../utils/FunctionUtil");
-var TestCompanyController = require("../scenarios/tests/TestCompanyController");
 var DemoSalesPersonsController = require("../scenarios/demo/DemoSalesPersonsController");
 var GlobalDirectivesController = require("../scenarios/global/controllers/GlobalDirectivesController");
 var Ps = require("./main");
@@ -14,7 +13,6 @@ var PageLoader = (function () {
     function PageLoader() {
         // add references to views here
         this.getViews = FunctionUtil.createLazyInitializedField(function () { return ({
-            TestCompanyController: new TestCompanyController(),
             DemoSalesPersonsController: new DemoSalesPersonsController(),
             GlobalDirectivesController: new GlobalDirectivesController
         }); });
