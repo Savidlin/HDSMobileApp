@@ -5,7 +5,7 @@
             "<div class='row'>" +
                 "<div class='col-md-3 col-md-offset-5'>" +
                     "<img class='img-responsive run' src='/app/images/loading.gif'>" +
-                    "<p class='devour'>...............Loading...............</p>" +
+                    "<p class='devour'>...............Loading</p>" +
                 "</div>" +
             "</div>" +
         "</div>"
