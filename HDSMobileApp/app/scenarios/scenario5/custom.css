@@ -1,3 +1,5 @@
-﻿body {
-
+﻿.table-hover > tbody>tr:hover {
+    background-color: #008cba;
+    color: white;
+    cursor: pointer;
 }
