@@ -12,6 +12,7 @@
     <script type="text/javascript" src="/app/dist/vendor.js"></script>
     <script type="text/javascript" src="/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="/app/dist/loading.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
 </head>
 
 <body class="app">
@@ -20,9 +21,12 @@
         <navbar></navbar>
         <div class="container">
             <div class="row">
-                <h2>Scenerio #5</h2>
-                <p>This is a scenario.</p>
+                <h2>Product Lookup</h2>
+                <p>products are sortable and searchable by all attributes</p>
             </div>
+
+            <product-Table></product-Table>
+
         </div>
 
         <footer></footer>
@@ -32,7 +36,7 @@
     <script type="text/javascript">
         appGlobals.PageLoader.defaultPageLoader.loadPage({
             ngAppName: "hds-mobile-app-test",
-            controllerNames: ["GlobalDirectivesController"]
+            controllerNames: ["ProductLookupController", "GlobalDirectivesController"]
         });
     </script>
 

@@ -121,6 +121,8 @@
     <Content Include="app\scenarios\scenario4\scenario4.html" />
     <Content Include="app\scenarios\scenario5\custom.css" />
     <Content Include="app\scenarios\scenario5\instructions.txt" />
+    <Content Include="app\scenarios\scenario5\product-table.html" />
+    <Content Include="app\scenarios\scenario5\productLookupController.js" />
     <Content Include="app\scenarios\scenario5\scenario5.html" />
     <Content Include="app\scenarios\demo\sales-table.html" />
     <Content Include="app\scenarios\demo\DemoSalesPersonsPage.html" />
@@ -247,6 +249,7 @@
     <TypeScriptCompile Include="app\modules\psLog.ts" />
     <TypeScriptCompile Include="app\modules\ProcessLogs.ts" />
     <TypeScriptCompile Include="app\modules\psInstance.ts" />
+    <TypeScriptCompile Include="app\scenarios\scenario5\ProductLookupController.ts" />
     <TypeScriptCompile Include="app\utils\Dialogs.ts" />
     <TypeScriptCompile Include="app\utils\ArrayUtil.ts" />
     <TypeScriptCompile Include="app\utils\EnumUtil.ts" />
