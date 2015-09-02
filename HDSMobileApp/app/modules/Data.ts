@@ -93,7 +93,7 @@ module Data {
 
     //couldn't use newley created model Models.SalesPeopleEmployee[] as return type
     //another jquery extend issue
-    export function joinEmployeeSalesPeople(territoryId: number): any {
+    export function joinEmployeeSalesPeople(territoryId: number): Models.SalesPeopleEmployee[] {
         var salesPeople = Data.getSalesPeopleByTerritoryId(territoryId);
         var employees = DataCache.employeeData;
         var temp = new Object();
@@ -107,7 +107,7 @@ module Data {
                 }
             }
         }
-        return salesPeople;
+        return <Models.SalesPeopleEmployee[]>salesPeople;
     }
 
     export function getSalesPersons(): Models.SalesPerson[] {
