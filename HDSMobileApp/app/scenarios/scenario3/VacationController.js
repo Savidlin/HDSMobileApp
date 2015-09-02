@@ -21,6 +21,7 @@ var VacationController = (function () {
                         //get all the employees and set them as an instance variable for the controller
                         this.employees = Data.getEmployees();
                         console.log(this.employees);
+                        $scope.vacationChange = false;
                         // set an initial value to sort by
                         $scope.predicate = 'businessEntityId';
                         // set an initial reverse value
@@ -39,9 +40,22 @@ var VacationController = (function () {
                         };
                         //this function is called when a user clicks on a table row
                         //the product the user clicked on is passed in as product
-                        $scope.showProduct = function (product) {
+                        $scope.showProduct = function (emp) {
                             //set the scope variables 
-                            $scope.product = product;
+                            $scope.employee = emp;
+                        };
+                        $scope.submit = function (emp, vacHoursTaken) {
+                            // set employee's vacation hours to what they were minus what the user inputed
+                            emp.vacationHours -= vacHoursTaken;
+                            // reset model value so when user clicks another employee they can see a fresh box
+                            $scope.vacHoursTaken = "";
+                            $scope.vacationChange = true;
+                        };
+                        $scope.cancel = function () {
+                            $scope.vacationChange = false;
+                        };
+                        $scope.dismissAlert = function () {
+                            $scope.vacationChange = false;
                         };
                     }],
                 // add an alias for a controller

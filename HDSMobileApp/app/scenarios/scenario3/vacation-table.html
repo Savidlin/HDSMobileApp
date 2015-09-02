@@ -70,9 +70,7 @@
                 <td>{{emp.jobTitle}}</td>
                 <td>{{emp.vacationHours}}</td>
                 <td>{{emp.sickLeaveHours}}</td>
-                <td>{{emp.organizationLevel}}</td>
-                
-
+                <td>{{emp.organizationLevel}}</td> 
             </tr>
         </tbody>
     </table>
@@ -84,24 +82,24 @@
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                     <!--product is a scope variable and is set to whatever product the user clicks on-->
-                    <h2 class="modal-title" id="myModalLabel">{{product.name}}</h2>
+                    <h2 class="modal-title" id="myModalLabel">{{employee.firstName}} {{employee.lastName}}</h2>
                 </div>
                 <div class="modal-body">
-                    <!-- we will repeat this row for every attribute in the product object -->
-                    <div class="row" ng-repeat="(key,value) in product">
-                        <div class="col-md-6">
-                            <!-- key will be the attribute name such as 'color' -->
-                            <p><strong>{{key}}</strong></p>
+                    <div class="row">
+                        <div class="col-md-6 col-md-offset-3">
+                            <p><strong>Vacation Hours Remaining :</strong>  {{employee.vacationHours - vacHoursTaken}}</p>
                         </div>
-                        <div class="col-md-6">
-                            <!-- value will be the attributes value such as 'black' -->
-                            <!-- if value isn't a blank string output value. if it is blank output "n/a" -->
-                            <p>{{ value ? value : "n/a" }}</p>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <input type="number" class="form-control vacHourInput" placeholder="Vacation Hours Taken" ng-model="vacHoursTaken" />
                         </div>
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" data-dismiss="modal">Done</button>
+                    <!-- pressing submit will run a function that changes the object the effect will be lost on page refresh until we have a way to insert into database if we even want to do that -->
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="submit(employee,vacHoursTaken)">Submit</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal" ng-click="cancel()">Cancel</button>
                 </div>
             </div>
         </div>
