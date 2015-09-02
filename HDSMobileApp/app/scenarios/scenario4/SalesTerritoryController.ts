@@ -22,9 +22,10 @@ class ProductLookupController implements WidgetView<any> {
                 templateUrl: "/app/scenarios/scenario4/territory-table.html",
                 //add in a controller
                 controller: ["$scope", "$http", function ($scope, $http) {
-
+                    
                     //get all the territories and set them as an instance variable for the controller
                     this.territories = Data.getSalesTerritorys();
+                    console.log(this.territories);
 
                     // set an initial value to sort by
                     $scope.predicate = 'territoryId';
@@ -47,9 +48,26 @@ class ProductLookupController implements WidgetView<any> {
 
                     //this function is called when a user clicks on a table row
                     //the product the user clicked on is passed in as product
-                    $scope.showProduct = function (product) {
-                        //set the scope variables 
-                        $scope.product = product;
+                    $scope.showTerritory = function (territory) {
+                        //var tempObj = {};
+                        //jQuery.extend(tempObj, territory);
+                        //jQuery.extend(tempObj, Data.getSalesPeopleByTerritoryId(territory.territoryId));
+                        //jQuery.extend(tempObj, tempObj.businessEntityId);
+                        var salesPeople = Data.getSalesPeopleByTerritoryId(territory.territoryId);
+                        var employees = Data.getEmployees();
+
+                        for (var i = 0; i < salesPeople.length; i++) {
+
+                            for (var j = 0; j < employees.length; j++) {
+
+                                if (salesPeople[i].businessEntityId == employees[j].businessEntityId) {
+                                    jQuery.extend(salesPeople[i], employees[j]);
+                                }
+                            }
+                        }
+                        console.log(salesPeople);
+                        $scope.terrSalesPeople = salesPeople;
+                        $scope.territory = territory;
                     };
                 }],
                 // add an alias for a controller

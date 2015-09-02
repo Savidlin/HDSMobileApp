@@ -75,6 +75,22 @@ module Data {
         return ArrayUtil.findPropValue(getSalesPersons(), "businessEntityId", businessEntityId);
     }
 
+    export function getSalesPeopleByTerritoryId(territoryId: number): Models.SalesPerson[]{
+
+        //return ArrayUtil.findPropValue(getSalesPersons(), "territoryId", territoryId);
+        var salesPpl = DataCache.salesPersonData;
+        var retMe = [];
+
+        for (var i = 0; i < salesPpl.length; i++) {
+
+            if (salesPpl[i].territoryId == territoryId) {
+                retMe.push(salesPpl[i]);
+            }
+        }
+
+        return retMe;
+    }
+
     export function getSalesPersons(): Models.SalesPerson[] {
         return DataCache.salesPersonData;
     }

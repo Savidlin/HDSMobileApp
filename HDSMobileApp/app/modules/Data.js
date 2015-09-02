@@ -67,6 +67,18 @@ var Data;
         return ArrayUtil.findPropValue(getSalesPersons(), "businessEntityId", businessEntityId);
     }
     Data.getSalesPersonById = getSalesPersonById;
+    function getSalesPeopleByTerritoryId(territoryId) {
+        //return ArrayUtil.findPropValue(getSalesPersons(), "territoryId", territoryId);
+        var salesPpl = DataCache.salesPersonData;
+        var retMe = [];
+        for (var i = 0; i < salesPpl.length; i++) {
+            if (salesPpl[i].territoryId == territoryId) {
+                retMe.push(salesPpl[i]);
+            }
+        }
+        return retMe;
+    }
+    Data.getSalesPeopleByTerritoryId = getSalesPeopleByTerritoryId;
     function getSalesPersons() {
         return DataCache.salesPersonData;
     }
