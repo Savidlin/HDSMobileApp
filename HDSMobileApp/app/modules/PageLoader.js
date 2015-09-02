@@ -4,6 +4,7 @@ var FunctionUtil = require("../utils/FunctionUtil");
 var DemoSalesPersonsController = require("../scenarios/demo/DemoSalesPersonsController");
 var GlobalDirectivesController = require("../scenarios/global/controllers/GlobalDirectivesController");
 var ProductLookupController = require("../scenarios/scenario5/ProductLookupController");
+var VacationController = require("../scenarios/scenario3/VacationController");
 var Ps = require("./main");
 var DataCache = require("./DataCache");
 var Data = require("./Data");
@@ -16,7 +17,8 @@ var PageLoader = (function () {
         this.getViews = FunctionUtil.createLazyInitializedField(function () { return ({
             DemoSalesPersonsController: new DemoSalesPersonsController(),
             GlobalDirectivesController: new GlobalDirectivesController(),
-            ProductLookupController: new ProductLookupController()
+            ProductLookupController: new ProductLookupController(),
+            VacationController: new VacationController()
         }); });
         // add references to app bootstrappers here
         this.getAppBootstrappers = FunctionUtil.createLazyInitializedField(function () { return ({}); });
