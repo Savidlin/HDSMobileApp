@@ -18,17 +18,17 @@ var ProductLookupController = (function () {
                 templateUrl: "/app/scenarios/scenario4/territory-table.html",
                 //add in a controller
                 controller: ["$scope", "$http", function ($scope, $http) {
-                        //get all the products and set them as an instance variable for the controller
-                        this.products = Data.getProducts();
+                        //get all the territories and set them as an instance variable for the controller
+                        this.territories = Data.getSalesTerritorys();
                         // set an initial value to sort by
-                        $scope.predicate = 'productId';
+                        $scope.predicate = 'territoryId';
                         // set an initial reverse value
                         // false is ascending true is decending
                         // Made a decision to start by decending because the data looked nicer that way on the table
-                        $scope.reverse = true;
+                        $scope.reverse = false;
                         $scope.order = function (predicate) {
                             // if the same header is clicked on again reverse the sort boolean and set the current predicate
-                            $scope.reverse = ($scope.predicate === predicate) ? !$scope.reverse : false;
+                            $scope.reverse = ($scope.predicate === predicate) ? !$scope.reverse : true;
                             $scope.predicate = predicate;
                         };
                         //reset the searchTerm and refocus to the search box
