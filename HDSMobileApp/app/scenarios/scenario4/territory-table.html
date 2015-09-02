@@ -1,0 +1,110 @@
+﻿<div class="row" id="tableHeader">
+
+    <div class="col-md-6 col-xs-12">
+        <h3>Product Table</h3>
+    </div>
+
+    <div class="col-md-4 col-md-offset-2 col-xs-12">
+        <!-- the model of searchTerm will be used to filter the product table and is an example of two way data binding -->
+        <input type="text" class="form-control  salesSearch" placeholder="search" ng-model="searchTerm" />
+        <!-- if ng-show evaluates to true the 'x' icon will show up so if the length of the model searchTerm is > 0 it will be true -->
+        <!-- meaning if there is text in the search box the input clear button will appear -->
+        <!-- when clicked it calls the inputClear function in ProductLookupController which contains javascript and jquery that clears search box -->
+        <span id="searchClear" class="fa fa-times-circle-o" ng-click="inputClear()" ng-show="searchTerm.length > 0"></span>
+    </div>
+</div>
+
+<div class="table-responsive" id="tableRow">
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>
+                    <!--when header is clicked call order function in scope passing the string of the attribute-->
+                    <a href="" ng-click="order('productId')">ID</a>
+                    <!-- down arrow will show only if the predicate matches the header and reverse is true meaning descending -->
+                    <span class="fa fa-sort-desc" ng-show="predicate == 'productId' && reverse"></span>
+                    <!-- up arrow will show only if the predicate matches the header and the reverse is false meaning ascending -->
+                    <span class="fa fa-sort-asc" ng-show="predicate == 'productId' && !reverse"></span>
+                </th>
+                <th>
+                    <a href="" ng-click="order('name')">Name</a>
+                    <span class="fa fa-sort-desc pull-right" ng-show="predicate == 'name' && reverse"></span>
+                    <span class="fa fa-sort-asc pull-right" ng-show="predicate == 'name' && !reverse"></span>
+                </th>
+                <th>
+                    <a href="" ng-click="order('productNumber')">Product Number</a>
+                    <span class="fa fa-sort-desc pull-right" ng-show="predicate == 'productNumber' && reverse"></span>
+                    <span class="fa fa-sort-asc pull-right" ng-show="predicate == 'productNumber' && !reverse"></span>
+                </th>
+                <th>
+                    <a href="" ng-click="order('stdCost')">STD Cost</a>
+                    <span class="fa fa-sort-desc pull-right" ng-show="predicate == 'stdCost' && reverse"></span>
+                    <span class="fa fa-sort-asc pull-right" ng-show="predicate == 'stdCost' && !reverse"></span>
+                </th>
+                <th>
+                    <a href="" ng-click="order('listPrice')">List Price</a>
+                    <span class="fa fa-sort-desc pull-right" ng-show="predicate == 'listPrice' && reverse"></span>
+                    <span class="fa fa-sort-asc pull-right" ng-show="predicate == 'listPrice' && !reverse"></span>
+                </th>
+                <th>
+                    <a href="" ng-click="order('subcatId')">Subcategory</a>
+                    <span class="fa fa-sort-desc pull-right" ng-show="predicate == 'subcatId' && reverse"></span>
+                    <span class="fa fa-sort-asc pull-right" ng-show="predicate == 'subcatId' && !reverse"></span>
+                </th>
+                <th>
+                    <a href="" ng-click="order('weight')">Weight</a>
+                    <span class="fa fa-sort-desc pull-right" ng-show="predicate == 'weight' && reverse"></span>
+                    <span class="fa fa-sort-asc pull-right" ng-show="predicate == 'weight' && !reverse"></span>
+                </th>
+            </tr>
+        </thead>
+        <!-- filter is data binded with the form model searchTerm -->
+        <!-- orderBy the predicate which is a string and the argumetn for the filter is reverse which can be true or false -->
+        <!-- if reverse is false ascending if true is decending  -->
+        <tbody>
+            <tr ng-repeat="product in TerritoryCtrl.products | filter: searchTerm | orderBy: predicate:reverse" ng-click="showProduct(product)" data-toggle="modal" data-target="#myModal">
+                <!-- we are repeating a table row for every product in our controller instance variable products -->
+                <td>{{product.productId}}</td>
+                <td>{{product.name}}</td>
+                <td>{{product.productNumber}}</td>
+                <td>{{product.standardCost | currency}}</td>
+                <td>{{product.listPrice | currency}}</td>
+                <td>{{product.productSubcategoryId}}</td>
+                <td>{{product.weight}}</td>
+
+            </tr>
+        </tbody>
+    </table>
+
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <!--product is a scope variable and is set to whatever product the user clicks on-->
+                    <h2 class="modal-title" id="myModalLabel">{{product.name}}</h2>
+                </div>
+                <div class="modal-body">
+                    <!-- we will repeat this row for every attribute in the product object -->
+                    <div class="row" ng-repeat="(key,value) in product">
+                        <div class="col-md-6">
+                            <!-- key will be the attribute name such as 'color' -->
+                            <p><strong>{{key}}</strong></p>
+                        </div>
+                        <div class="col-md-6">
+                            <!-- value will be the attributes value such as 'black' -->
+                            <!-- if value isn't a blank string output value. if it is blank output "n/a" -->
+                            <p>{{ value ? value : "n/a" }}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">Done</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>
