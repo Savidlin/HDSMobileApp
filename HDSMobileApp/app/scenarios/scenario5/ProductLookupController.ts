@@ -23,15 +23,14 @@ class ProductLookupController implements WidgetView<any> {
                 //add in a controller
                 controller: ["$scope", "$http", function ($scope, $http) {
 
+                    //get all the products and set them as an instance variable for the controller
                     this.products = Data.getProducts();
-
-                    //var fullProducts = ProductLookupController.joinProductData(this.products);
-                    
 
                     // set an initial value to sort by
                     $scope.predicate = 'productId';
                     // set an initial reverse value
                     // false is ascending true is decending
+                    // Made a decision to start by decending because the data looked nicer that way on the table
                     $scope.reverse = true;
 
                     $scope.order = function (predicate) {
@@ -46,11 +45,10 @@ class ProductLookupController implements WidgetView<any> {
                         jQuery('.salesSearch').focus();
                     };
 
+                    //this function is called when a user clicks on a table row
+                    //the product the user clicked on is passed in as product
                     $scope.showProduct = function (product) {
-                        console.log(product);
-                        //var fullProduct = ProductLookupController.findProduct(fullProducts, product);
-                        //console.log(fullProduct);
-                        $scope.prodName = product.name;
+                        //set the scope variables 
                         $scope.product = product;
                     };
                 }],
@@ -59,35 +57,6 @@ class ProductLookupController implements WidgetView<any> {
             };
         });
     }
-
-
-    //public static joinProductData(product: Models.Product[]): any {
-
-    //    var orderHeader = Data.getSalesOrderHeaders();
-    //    var orderDetail = Data.getSalesOrderDetails();
-    //    var salesFull = [];
-    //    var temp = {};
-    //    console.log("start product join");
-    //    for (var i = 0; i < orderHeader.length; i++) {
-    //        jQuery.extend(temp, orderHeader[i]);
-    //        jQuery.extend(temp, Data.getSalesOrderDetailById(orderHeader[i].salesOrderId));
-    //        jQuery.extend(temp, Data.getProductById(orderDetail[i].productId));
-    //        salesFull.push(temp);
-    //    }
-    //    return salesFull;
-    //}
-
-    //public static findProduct(fullProducts, product): any {
-    //    console.log(fullProducts[0].productId);
-    //    console.log(product.productId);
-    //    for (var i = 0; i < fullProducts.length; i++) {
-    //        if (product.productId == fullProducts[i].productId) {
-    //            return fullProducts[i];
-    //        }
-    //    }
-    //    return null;
-    //}
-
 
     public deregister(appTools: Main, view: ProductLookupController) {
 

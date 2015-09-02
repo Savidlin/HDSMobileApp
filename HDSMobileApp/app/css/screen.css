@@ -4,6 +4,13 @@
     right: 20px;
     font-size: 20px;
     cursor: pointer;
+    color: #6F6F6F;
+}
+
+.table-hover > tbody>tr:hover {
+    background-color: #008cba;
+    color: white;
+    cursor: pointer;
 }
 
 .salesSearch {
