@@ -58,7 +58,7 @@
         <!-- if reverse is false ascending if true is decending  -->
         <tbody>
             <tr ng-repeat="territory in TerritoryCtrl.territories | filter: searchTerm | orderBy: predicate:reverse" ng-click="showTerritory(territory)" data-toggle="modal" data-target="#myModal">
-                <!-- we are repeating a table row for every product in our controller instance variable products -->
+                <!-- we are repeating a table row for every territory in our controller instance variable territories -->
                 <td>{{territory.territoryId}}</td>
                 <td>{{territory.name}}</td>
                 <td>{{territory.salesYTD | currency}}</td>
@@ -76,14 +76,15 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                   
+                    <!-- territory is a scope variable set when the user clicks a territory -->
                     <h2 class="modal-title" id="myModalLabel">{{territory.name}}</h2>
                 </div>
                 <div class="modal-body">
+                    <!-- terrSalesPeople is set when the user clicks a territory and contains a list of all sales people assigned to clicked territory -->
                     <div class="row" ng-repeat="person in terrSalesPeople">
-                        <!--<p ng-repeat="(key,value) in person">{{key}} : {{value}}</p>-->
                         <div class="col-md-12">
                             <ul class="list-unstyled">
+                                <!-- we are repeating on every key value pair in the person object to fill out the list -->
                                 <li ng-repeat="(key,value) in person">
                                     <strong>{{key}}</strong> : {{value}}
                                 </li>

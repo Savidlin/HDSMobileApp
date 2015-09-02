@@ -79,6 +79,22 @@ var Data;
         return retMe;
     }
     Data.getSalesPeopleByTerritoryId = getSalesPeopleByTerritoryId;
+    //couldn't use newley created model Models.SalesPeopleEmployee[] as return type
+    //another jquery extend issue
+    function joinEmployeeSalesPeople(territoryId) {
+        var salesPeople = Data.getSalesPeopleByTerritoryId(territoryId);
+        var employees = DataCache.employeeData;
+        var temp = new Object();
+        for (var i = 0; i < salesPeople.length; i++) {
+            for (var j = 0; j < employees.length; j++) {
+                if (salesPeople[i].businessEntityId == employees[j].businessEntityId) {
+                    jQuery.extend(salesPeople[i], employees[j]);
+                }
+            }
+        }
+        return salesPeople;
+    }
+    Data.joinEmployeeSalesPeople = joinEmployeeSalesPeople;
     function getSalesPersons() {
         return DataCache.salesPersonData;
     }

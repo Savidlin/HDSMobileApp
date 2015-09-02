@@ -150,6 +150,36 @@ declare module Models {
         salesOrderDetails: SalesOrderDetail[];
     }
 
+    interface SalesPeopleEmployee {
+        businessEntityId: number;
+        nationalIdNumber: number;
+        loginId: string;
+        organizationLevel: number;
+        jobTitle: string;
+        birthDate: string;
+        maritalStatus: string;
+        gender: string;
+        hireDate: string;
+        salariedFlag: string;
+        vacationHours: number;
+        sickLeaveHours: number;
+        currentFlag: string;
+        personType: string;
+        nameStyle: string;
+        title: string;
+        firstName: string;
+        middleName: string;
+        lastName: string;
+        suffix: string;
+        emailPromotion: number;
+        territoryId: number;
+        salesQuota: number;
+        bonus: number;
+        commissionPct: number;
+        salesYTD: number;
+        salesLastYear: number;
+    }
+
 
     // left over test code
     export interface UserMasterOptional {

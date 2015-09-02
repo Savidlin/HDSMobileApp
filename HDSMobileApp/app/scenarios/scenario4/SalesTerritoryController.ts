@@ -12,7 +12,7 @@ class ProductLookupController implements WidgetView<any> {
 
     public setupProductLookupDirective(ngApp: ng.IModule) {
 
-        // define a directive and now we can use products in the html
+        // define a directive
         ngApp.directive("territoryTable", function () {
             return {
                 // E is for element we are defining our own element
@@ -47,26 +47,18 @@ class ProductLookupController implements WidgetView<any> {
                     };
 
                     //this function is called when a user clicks on a table row
-                    //the product the user clicked on is passed in as product
+                    //the product the user clicked on is passed in as territory
                     $scope.showTerritory = function (territory) {
-                        //var tempObj = {};
-                        //jQuery.extend(tempObj, territory);
-                        //jQuery.extend(tempObj, Data.getSalesPeopleByTerritoryId(territory.territoryId));
-                        //jQuery.extend(tempObj, tempObj.businessEntityId);
+
+                        //getSalesPeopleByTerritoryId is a custom function in Data by James that returns an array of sales people
+                        //that match a given territory ID
                         var salesPeople = Data.getSalesPeopleByTerritoryId(territory.territoryId);
-                        var employees = Data.getEmployees();
 
-                        for (var i = 0; i < salesPeople.length; i++) {
+                        //joinEmployeeSalesPeople is a custom function by james in Data that will  join salespeople and employees based on territory ID
+                        var employeeSalesPeople = Data.joinEmployeeSalesPeople(territory.territoryId);
 
-                            for (var j = 0; j < employees.length; j++) {
-
-                                if (salesPeople[i].businessEntityId == employees[j].businessEntityId) {
-                                    jQuery.extend(salesPeople[i], employees[j]);
-                                }
-                            }
-                        }
-                        console.log(salesPeople);
-                        $scope.terrSalesPeople = salesPeople;
+                        //set scope variables
+                        $scope.terrSalesPeople = employeeSalesPeople;
                         $scope.territory = territory;
                     };
                 }],
