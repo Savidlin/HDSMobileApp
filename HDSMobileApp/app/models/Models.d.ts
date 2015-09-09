@@ -150,6 +150,9 @@ declare module Models {
         salesOrderDetails: SalesOrderDetail[];
     }
 
+    interface SalesPeopleEmployee extends SalesPerson, Employee {
+    }
+
 
     // left over test code
     export interface UserMasterOptional {
