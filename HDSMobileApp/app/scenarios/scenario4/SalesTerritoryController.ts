@@ -2,7 +2,7 @@
 import Services = require("../../services/Services");
 import Data = require("../../modules/Data");
 
-class ProductLookupController implements WidgetView<any> {
+class SalesTerritoryController implements WidgetView<any> {
 
     public initView(appTools: Main, ngApp: ng.IModule) {
         // NOTE: DO NOT 'angular.module(...)', use the 'ngApp' parameter above
@@ -68,10 +68,10 @@ class ProductLookupController implements WidgetView<any> {
         });
     }
 
-    public deregister(appTools: Main, view: ProductLookupController) {
+    public deregister(appTools: Main, view: SalesTerritoryController) {
 
     }
 
 }
 
-export = ProductLookupController;
+export = SalesTerritoryController;

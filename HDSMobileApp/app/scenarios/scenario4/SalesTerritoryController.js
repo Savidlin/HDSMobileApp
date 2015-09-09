@@ -1,13 +1,13 @@
 "use strict";
 var Data = require("../../modules/Data");
-var ProductLookupController = (function () {
-    function ProductLookupController() {
+var SalesTerritoryController = (function () {
+    function SalesTerritoryController() {
     }
-    ProductLookupController.prototype.initView = function (appTools, ngApp) {
+    SalesTerritoryController.prototype.initView = function (appTools, ngApp) {
         // NOTE: DO NOT 'angular.module(...)', use the 'ngApp' parameter above
         this.setupProductLookupDirective(ngApp);
     };
-    ProductLookupController.prototype.setupProductLookupDirective = function (ngApp) {
+    SalesTerritoryController.prototype.setupProductLookupDirective = function (ngApp) {
         // define a directive
         ngApp.directive("territoryTable", function () {
             return {
@@ -55,8 +55,8 @@ var ProductLookupController = (function () {
             };
         });
     };
-    ProductLookupController.prototype.deregister = function (appTools, view) {
+    SalesTerritoryController.prototype.deregister = function (appTools, view) {
     };
-    return ProductLookupController;
+    return SalesTerritoryController;
 })();
-module.exports = ProductLookupController;
+module.exports = SalesTerritoryController;
