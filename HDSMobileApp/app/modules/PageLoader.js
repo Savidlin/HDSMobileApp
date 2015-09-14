@@ -4,6 +4,7 @@ var FunctionUtil = require("../utils/FunctionUtil");
 var DemoSalesPersonsController = require("../scenarios/demo/DemoSalesPersonsController");
 var GlobalDirectivesController = require("../scenarios/global/controllers/GlobalDirectivesController");
 var ProductLookupController = require("../scenarios/scenario5/ProductLookupController");
+var VacationController = require("../scenarios/scenario3/VacationController");
 var SalesTerritoryController = require("../scenarios/scenario4/SalesTerritoryController");
 var Ps = require("./main");
 var DataCache = require("./DataCache");
@@ -18,6 +19,7 @@ var PageLoader = (function () {
             DemoSalesPersonsController: new DemoSalesPersonsController(),
             GlobalDirectivesController: new GlobalDirectivesController(),
             ProductLookupController: new ProductLookupController(),
+            VacationController: new VacationController(),
             SalesTerritoryController: new SalesTerritoryController()
         }); });
         // add references to app bootstrappers here

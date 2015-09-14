@@ -7,10 +7,12 @@
     <link rel="stylesheet" type="text/css" href="/app/css/bootstrap.min.css" />
     <link rel="stylesheet" type="text/css" href="/app/css/screen.css" />
     <link rel="stylesheet" type="text/css" href="custom.css" />
+    <script type="text/javascript" src="/app/dist/loading.js"></script>
     <script type="text/javascript" src="/node_modules/angular/angular.min.js"></script>
     <script type="text/javascript" src="/app/dist/vendor.js"></script>
     <script type="text/javascript" src="/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="/app/dist/loading.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
 </head>
 
 <body class="app">
@@ -18,10 +20,17 @@
     <div id="content">
         <navbar></navbar>
         <div class="container">
+                <div class="alert alert-success" role="alert" ng-show="vacationChange">
+                    Success! {{employee.firstName + " " + employee.lastName}} vacation hours changed to : {{employee.vacationHours}}
+                    <span class="fa fa-times-circle-o dismissMsg" ng-click="dismissAlert()" ng-show="vacationChange"></span>
+                </div>
             <div class="row">
-                <h2>Scenario #3</h2>
-                <p>This is a scenario.</p>
+                <h2>Send an Employee on Vacation</h2>
+                <p>Employees are sortable and searchable by all attributes. Clicking one will result in a dialog box where vacation time can be changed.</p>
             </div>
+
+            <vacation-Table></vacation-Table>
+
         </div>
 
         <footer></footer>
@@ -31,7 +40,7 @@
     <script type="text/javascript">
         appGlobals.PageLoader.defaultPageLoader.loadPage({
             ngAppName: "hds-mobile-app-test",
-            controllerNames: ["GlobalDirectivesController"]
+            controllerNames: ["VacationController", "GlobalDirectivesController"]
         });
     </script>
 

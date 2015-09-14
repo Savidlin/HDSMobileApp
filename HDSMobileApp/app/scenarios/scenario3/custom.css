@@ -1,3 +1,5 @@
-﻿body {
-
+﻿.dismissMsg {
+    float: right;
+    font-size: 20px !important;
+    cursor: pointer;
 }

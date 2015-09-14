@@ -113,12 +113,12 @@
     <Content Include="app\scenarios\scenario2\instructions.txt" />
     <Content Include="app\scenarios\scenario3\custom.css" />
     <Content Include="app\scenarios\scenario3\instructions.txt" />
-    <Content Include="app\scenarios\scenario3\scenario3.html" />
+    <Content Include="app\scenarios\scenario3\vacation-table.html" />
     <Content Include="app\scenarios\scenario2\custom.css" />
     <Content Include="app\scenarios\scenario2\scenario2.html" />
+    <Content Include="app\scenarios\scenario3\scenario3.html" />
     <Content Include="app\scenarios\scenario4\custom.css" />
     <Content Include="app\scenarios\scenario4\instructions.txt" />
-    <Content Include="app\scenarios\scenario4\territory-table.html" />
     <Content Include="app\scenarios\scenario4\scenario4.html" />
     <Content Include="app\scenarios\scenario5\custom.css" />
     <Content Include="app\scenarios\scenario5\instructions.txt" />
@@ -250,7 +250,7 @@
     <TypeScriptCompile Include="app\modules\psLog.ts" />
     <TypeScriptCompile Include="app\modules\ProcessLogs.ts" />
     <TypeScriptCompile Include="app\modules\psInstance.ts" />
-    <TypeScriptCompile Include="app\scenarios\scenario4\SalesTerritoryController.ts" />
+    <TypeScriptCompile Include="app\scenarios\scenario3\VacationController.ts" />
     <TypeScriptCompile Include="app\scenarios\scenario5\ProductLookupController.ts" />
     <TypeScriptCompile Include="app\utils\Dialogs.ts" />
     <TypeScriptCompile Include="app\utils\ArrayUtil.ts" />

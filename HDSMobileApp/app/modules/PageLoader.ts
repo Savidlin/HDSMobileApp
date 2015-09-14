@@ -4,6 +4,7 @@ import FunctionUtil = require("../utils/FunctionUtil");
 import DemoSalesPersonsController = require("../scenarios/demo/DemoSalesPersonsController");
 import GlobalDirectivesController = require("../scenarios/global/controllers/GlobalDirectivesController");
 import ProductLookupController = require("../scenarios/scenario5/ProductLookupController");
+import VacationController = require("../scenarios/scenario3/VacationController");
 import SalesTerritoryController = require("../scenarios/scenario4/SalesTerritoryController");
 import Ps = require("./main");
 import DataCache = require("./DataCache");
@@ -84,6 +85,7 @@ class PageLoader {
         DemoSalesPersonsController: new DemoSalesPersonsController(),
         GlobalDirectivesController: new GlobalDirectivesController(),
         ProductLookupController: new ProductLookupController(),
+        VacationController: new VacationController(),
         SalesTerritoryController: new SalesTerritoryController()
     }));
 
