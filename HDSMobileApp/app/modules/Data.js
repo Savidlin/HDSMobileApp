@@ -67,6 +67,34 @@ var Data;
         return ArrayUtil.findPropValue(getSalesPersons(), "businessEntityId", businessEntityId);
     }
     Data.getSalesPersonById = getSalesPersonById;
+    function getSalesPeopleByTerritoryId(territoryId) {
+        //return ArrayUtil.findPropValue(getSalesPersons(), "territoryId", territoryId);
+        var salesPpl = DataCache.salesPersonData;
+        var retMe = [];
+        for (var i = 0; i < salesPpl.length; i++) {
+            if (salesPpl[i].territoryId == territoryId) {
+                retMe.push(salesPpl[i]);
+            }
+        }
+        return retMe;
+    }
+    Data.getSalesPeopleByTerritoryId = getSalesPeopleByTerritoryId;
+    //couldn't use newley created model Models.SalesPeopleEmployee[] as return type
+    //another jquery extend issue
+    function joinEmployeeSalesPeople(territoryId) {
+        var salesPeople = Data.getSalesPeopleByTerritoryId(territoryId);
+        var employees = DataCache.employeeData;
+        var temp = new Object();
+        for (var i = 0; i < salesPeople.length; i++) {
+            for (var j = 0; j < employees.length; j++) {
+                if (salesPeople[i].businessEntityId == employees[j].businessEntityId) {
+                    jQuery.extend(salesPeople[i], employees[j]);
+                }
+            }
+        }
+        return salesPeople;
+    }
+    Data.joinEmployeeSalesPeople = joinEmployeeSalesPeople;
     function getSalesPersons() {
         return DataCache.salesPersonData;
     }

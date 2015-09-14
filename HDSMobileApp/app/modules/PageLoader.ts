@@ -5,6 +5,7 @@ import DemoSalesPersonsController = require("../scenarios/demo/DemoSalesPersonsC
 import GlobalDirectivesController = require("../scenarios/global/controllers/GlobalDirectivesController");
 import ProductLookupController = require("../scenarios/scenario5/ProductLookupController");
 import VacationController = require("../scenarios/scenario3/VacationController");
+import SalesTerritoryController = require("../scenarios/scenario4/SalesTerritoryController");
 import Ps = require("./main");
 import DataCache = require("./DataCache");
 import Data = require("./Data");
@@ -84,7 +85,8 @@ class PageLoader {
         DemoSalesPersonsController: new DemoSalesPersonsController(),
         GlobalDirectivesController: new GlobalDirectivesController(),
         ProductLookupController: new ProductLookupController(),
-        VacationController: new VacationController()
+        VacationController: new VacationController(),
+        SalesTerritoryController: new SalesTerritoryController()
     }));
 
 

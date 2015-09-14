@@ -75,6 +75,41 @@ module Data {
         return ArrayUtil.findPropValue(getSalesPersons(), "businessEntityId", businessEntityId);
     }
 
+    export function getSalesPeopleByTerritoryId(territoryId: number): Models.SalesPerson[]{
+
+        //return ArrayUtil.findPropValue(getSalesPersons(), "territoryId", territoryId);
+        var salesPpl = DataCache.salesPersonData;
+        var retMe = [];
+
+        for (var i = 0; i < salesPpl.length; i++) {
+
+            if (salesPpl[i].territoryId == territoryId) {
+                retMe.push(salesPpl[i]);
+            }
+        }
+
+        return retMe;
+    }
+
+    //couldn't use newley created model Models.SalesPeopleEmployee[] as return type
+    //another jquery extend issue
+    export function joinEmployeeSalesPeople(territoryId: number): Models.SalesPeopleEmployee[] {
+        var salesPeople = Data.getSalesPeopleByTerritoryId(territoryId);
+        var employees = DataCache.employeeData;
+        var temp = new Object();
+
+        for (var i = 0; i < salesPeople.length; i++) {
+
+            for (var j = 0; j < employees.length; j++) {
+
+                if (salesPeople[i].businessEntityId == employees[j].businessEntityId) {
+                    jQuery.extend(salesPeople[i], employees[j]);
+                }
+            }
+        }
+        return <Models.SalesPeopleEmployee[]>salesPeople;
+    }
+
     export function getSalesPersons(): Models.SalesPerson[] {
         return DataCache.salesPersonData;
     }

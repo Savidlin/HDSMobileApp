@@ -7,10 +7,12 @@
     <link rel="stylesheet" type="text/css" href="/app/css/bootstrap.min.css" />
     <link rel="stylesheet" type="text/css" href="/app/css/screen.css" />
     <link rel="stylesheet" type="text/css" href="custom.css" />
+    <script type="text/javascript" src="/app/dist/loading.js"></script>
     <script type="text/javascript" src="/node_modules/angular/angular.min.js"></script>
     <script type="text/javascript" src="/app/dist/vendor.js"></script>
     <script type="text/javascript" src="/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="/app/dist/loading.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
 </head>
 
 <body class="app">
@@ -19,21 +21,24 @@
         <navbar></navbar>
         <div class="container">
             <div class="row">
-                <h2>Scenerio #4</h2>
-                <p>This is a scenario.</p>
+                <h2>Territory Lookup</h2>
+                <p>territories are sortable and searchable by all attributes. clicking on a territory will display all sales people in association with the territory</p>
             </div>
+
+            <territory-table></territory-table>
+
         </div>
 
         <footer></footer>
     </div>
 
-        <script type="text/javascript" src="/app/dist/app.js"></script>
-        <script type="text/javascript">
-            appGlobals.PageLoader.defaultPageLoader.loadPage({
-                ngAppName: "hds-mobile-app-test",
-                controllerNames: ["GlobalDirectivesController"]
-            });
-        </script>
+    <script type="text/javascript" src="/app/dist/app.js"></script>
+    <script type="text/javascript">
+        appGlobals.PageLoader.defaultPageLoader.loadPage({
+            ngAppName: "hds-mobile-app-test",
+            controllerNames: ["SalesTerritoryController", "GlobalDirectivesController"]
+        });
+    </script>
 
-    </body>
+</body>
 </html>
