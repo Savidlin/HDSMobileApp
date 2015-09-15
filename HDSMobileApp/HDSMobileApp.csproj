@@ -1,351 +1,3 @@
-<<<<<<< HEAD
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
-  <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>
-    </ProductVersion>
-    <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{A505390D-C353-41D1-9BBF-D9C897566913}</ProjectGuid>
-    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
-    <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>HDSMobileApp</RootNamespace>
-    <AssemblyName>HDSMobileApp</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
-    <UseIISExpress>true</UseIISExpress>
-    <IISExpressSSLPort />
-    <IISExpressAnonymousAuthentication>enabled</IISExpressAnonymousAuthentication>
-    <IISExpressWindowsAuthentication>enabled</IISExpressWindowsAuthentication>
-    <IISExpressUseClassicPipelineMode>false</IISExpressUseClassicPipelineMode>
-    <UseGlobalApplicationHostFile />
-    <UseGlobalApplicationHostFile />
-    <NuGetPackageImportStamp>
-    </NuGetPackageImportStamp>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
-  <ItemGroup>
-    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\packages\EntityFramework.6.0.0\lib\net45\EntityFramework.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\packages\EntityFramework.6.0.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="IKVM.OpenJDK.Core">
-      <HintPath>..\Lib\IKVM.OpenJDK.Core.dll</HintPath>
-    </Reference>
-    <Reference Include="IKVM.OpenJDK.Util">
-      <HintPath>..\Lib\IKVM.OpenJDK.Util.dll</HintPath>
-    </Reference>
-    <Reference Include="IKVM.Runtime">
-      <HintPath>..\Lib\IKVM.Runtime.dll</HintPath>
-    </Reference>
-    <Reference Include="log4net">
-      <HintPath>..\Lib\log4net.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.CSharp" />
-    <!-- <Reference Include="Microsoft.ReportViewer.WebForms, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL" /> -->
-    <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Lib\Newtonsoft.Json.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Data.SQLite, Version=1.0.97.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Data.SQLite.Core.1.0.97.0\lib\net45\System.Data.SQLite.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="System.Data.SQLite.EF6, Version=1.0.97.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Data.SQLite.EF6.1.0.97.0\lib\net45\System.Data.SQLite.EF6.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="System.Data.SQLite.Linq, Version=1.0.97.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Data.SQLite.Linq.1.0.97.0\lib\net45\System.Data.SQLite.Linq.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="System.Net.Http" />
-    <Reference Include="System.Runtime.Caching" />
-    <Reference Include="System.Runtime.Serialization" />
-    <Reference Include="System.ServiceModel" />
-    <Reference Include="System.ServiceModel.Web" />
-    <Reference Include="System.Transactions" />
-    <Reference Include="System.Web.DynamicData" />
-    <Reference Include="System.Web.Entity" />
-    <Reference Include="System.Web.ApplicationServices" />
-    <Reference Include="System.ComponentModel.DataAnnotations" />
-    <Reference Include="System" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="System.Web.Extensions" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Web" />
-    <Reference Include="System.Xml" />
-    <Reference Include="System.Configuration" />
-    <Reference Include="System.Web.Services" />
-    <Reference Include="System.EnterpriseServices" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="app\dist\loading.js" />
-    <Content Include="app\lib\jquery-2.0.3.min.js" />
-    <Content Include="app\lib\jquery-ui-1.10.3.custom.js" />
-    <Content Include="app\scenarios\global\partials\footer.html" />
-    <Content Include="app\scenarios\global\partials\navbar.html" />
-    <Content Include="app\scenarios\scenario1\custom.css" />
-    <Content Include="app\scenarios\scenario1\instructions.txt" />
-    <Content Include="app\scenarios\scenario2\customer-table.html" />
-    <Content Include="app\scenarios\scenario2\instructions.txt" />
-    <Content Include="app\scenarios\scenario3\custom.css" />
-    <Content Include="app\scenarios\scenario3\instructions.txt" />
-    <Content Include="app\scenarios\scenario3\vacation-table.html" />
-    <Content Include="app\scenarios\scenario2\custom.css" />
-    <Content Include="app\scenarios\scenario2\scenario2.html" />
-    <Content Include="app\scenarios\scenario3\scenario3.html" />
-    <Content Include="app\scenarios\scenario4\custom.css" />
-    <Content Include="app\scenarios\scenario4\instructions.txt" />
-    <Content Include="app\scenarios\scenario4\scenario4.html" />
-    <Content Include="app\scenarios\scenario5\custom.css" />
-    <Content Include="app\scenarios\scenario5\instructions.txt" />
-    <Content Include="app\scenarios\scenario5\product-table.html" />
-    <Content Include="app\scenarios\scenario5\scenario5.html" />
-    <Content Include="app\scenarios\demo\sales-table.html" />
-    <Content Include="app\scenarios\demo\DemoSalesPersonsPage.html" />
-    <Content Include="app\scenarios\scenario1\scenario1.html" />
-    <Content Include="app\tsDefinitions\lib\angularjs\README.md" />
-    <Content Include="app\lib\log4javascript.min.js" />
-    <Content Include="index.html" />
-    <Content Include="favicon.ico" />
-    <Content Include="Global.asax" />
-    <Content Include="app\css\jquery-ui-1.10.3.custom.css" />
-    <Content Include="app\css\jquery-ui-progressbar.css" />
-    <Content Include="app\css\screen.css" />
-    <Content Include="app\dist\app.js" />
-    <Content Include="app\dist\vendor.js" />
-    <Content Include="app\lib\jquery.scrollTableBody-1.0.0.js" />
-    <Content Include="app\lib\jquery.cookie.js" />
-    <Content Include="app\lib\jquery.mobile-1.3.2.custom.min.js" />
-    <Content Include="Web.config">
-      <SubType>Designer</SubType>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="server\Entities\Base\Searching\Searchable.cs" />
-    <Compile Include="server\Entities\Base\SyncableIdentifiableEntity.cs" />
-    <Compile Include="server\Entities\Base\SyncableEntity.cs" />
-    <Compile Include="server\Entities\Base\AuditableEntity.cs" />
-    <Compile Include="server\Entities\Customer.cs" />
-    <Compile Include="server\Entities\Employee.cs" />
-    <Compile Include="server\Entities\Base\Searching\SearchCriteria.cs" />
-    <Compile Include="server\Entities\Base\Searching\SearchResult.cs" />
-    <Compile Include="server\Entities\Base\Searching\SortOrder.cs" />
-    <Compile Include="server\Entities\Base\Searching\UserCustomizableEntitySearchCriteria.cs" />
-    <Compile Include="server\Entities\EmployeePayHistory.cs" />
-    <Compile Include="server\Entities\Person.cs" />
-    <Compile Include="server\Entities\Product.cs" />
-    <Compile Include="server\Entities\SalesOrderDetail.cs" />
-    <Compile Include="server\Entities\SalesOrderHeader.cs" />
-    <Compile Include="server\Entities\SalesPerson.cs" />
-    <Compile Include="server\Entities\SalesTerritory.cs" />
-    <Compile Include="server\Entities\Searching\CustomerSearcher.cs" />
-    <Compile Include="server\Entities\Searching\EmployeePayHistorySearcher.cs" />
-    <Compile Include="server\Entities\Searching\EmployeeSearcher.cs" />
-    <Compile Include="server\Entities\Searching\PersonSearcher.cs" />
-    <Compile Include="server\Entities\Searching\ProductSearcher.cs" />
-    <Compile Include="server\Entities\Searching\SalesOrderDetailSearcher.cs" />
-    <Compile Include="server\Entities\Searching\SalesOrderHeaderSearcher.cs" />
-    <Compile Include="server\Entities\Searching\SalesPersonSearcher.cs" />
-    <Compile Include="server\Entities\Searching\SalesTerritorySearcher.cs" />
-    <Compile Include="server\Entities\Searching\StoreSearcher.cs" />
-    <Compile Include="server\Entities\Searching\UserMasterSearcher.cs" />
-    <Compile Include="server\Entities\Base\UserCustomizableEntity.cs" />
-    <Compile Include="server\Entities\Store.cs" />
-    <Compile Include="server\Entities\UserMaster.cs" />
-    <Compile Include="server\Helpers\HttpMultipartParser.cs" />
-    <Compile Include="server\Helpers\HttpUtils.cs" />
-    <Compile Include="server\Helpers\Misc.cs" />
-    <Compile Include="server\Helpers\TimedCache.cs" />
-    <Compile Include="server\Entities\Base\IdentifiableEntity.cs" />
-    <Compile Include="Global.asax.cs">
-      <DependentUpon>Global.asax</DependentUpon>
-    </Compile>
-    <Compile Include="server\Helpers\Helper.cs" />
-    <Compile Include="server\Helpers\QueryHelper.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="server\Services\ICustomerSvc.cs" />
-    <Compile Include="server\Services\IEmployeePayHistorySvc.cs" />
-    <Compile Include="server\Services\Impl\CustomerSvc.cs" />
-    <Compile Include="server\Services\IEmployeeSvc.cs" />
-    <Compile Include="server\Services\Impl\EmployeePayHistorySvc.cs" />
-    <Compile Include="server\Services\Impl\EmployeeSvc.cs" />
-    <Compile Include="server\Services\Impl\PersonSvc.cs" />
-    <Compile Include="server\Services\Impl\ProductSvc.cs" />
-    <Compile Include="server\Services\Impl\SalesOrderDetailSvc.cs" />
-    <Compile Include="server\Services\Impl\SalesOrderHeaderSvc.cs" />
-    <Compile Include="server\Services\Impl\SalesPersonSvc.cs" />
-    <Compile Include="server\Services\Impl\SalesTerritorySvc.cs" />
-    <Compile Include="server\Services\Impl\StoreSvc.cs" />
-    <Compile Include="server\Services\Impl\UserMasterService.cs" />
-    <Compile Include="server\Services\IPersonSvc.cs" />
-    <Compile Include="server\Services\IProductSvc.cs" />
-    <Compile Include="server\Services\ISalesOrderDetailSvc.cs" />
-    <Compile Include="server\Services\ISalesOrderHeaderSvc.cs" />
-    <Compile Include="server\Services\ISalesPersonSvc.cs" />
-    <Compile Include="server\Services\ISalesTerritorySvc.cs" />
-    <Compile Include="server\Services\IStoreSvc.cs" />
-    <Compile Include="server\Services\IUserMasterService.cs" />
-    <Compile Include="server\Services\Impl\HDSMobileAppDbContext.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="package.json" />
-    <Content Include="packages.config" />
-    <Content Include="database\adventure_works-v2.sqlite">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="database\adventure_works.sqlite">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <None Include="Properties\PublishProfiles\local.pubxml" />
-    <None Include="Properties\PublishProfiles\portlet.pubxml" />
-    <None Include="Properties\PublishProfiles\PowerScope.pubxml" />
-    <None Include="Web.Debug.config">
-      <DependentUpon>Web.config</DependentUpon>
-    </None>
-    <None Include="Web.Release.config">
-      <DependentUpon>Web.config</DependentUpon>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
-    <TypeScriptCompile Include="app\scenarios\global\controllers\GlobalDirectivesController.ts" />
-    <TypeScriptCompile Include="app\scenarios\demo\DemoSalesPersonsController.ts" />
-    <TypeScriptCompile Include="app\models\Models.d.ts" />
-    <TypeScriptCompile Include="app\models\ModelsImpl.ts" />
-    <TypeScriptCompile Include="app\modules\Cookies.ts" />
-    <TypeScriptCompile Include="app\modules\Data.ts" />
-    <TypeScriptCompile Include="app\modules\DataCache.ts" />
-    <TypeScriptCompile Include="app\modules\DateConverter.ts" />
-    <TypeScriptCompile Include="app\modules\Defer.ts" />
-    <TypeScriptCompile Include="app\modules\Filter.ts" />
-    <TypeScriptCompile Include="app\modules\Join.ts" />
-    <TypeScriptCompile Include="app\modules\LocalStore.ts" />
-    <TypeScriptCompile Include="app\modules\LocalStoreByDate.ts" />
-    <TypeScriptCompile Include="app\modules\main.ts" />
-    <TypeScriptCompile Include="app\modules\PageLoader.ts" />
-    <TypeScriptCompile Include="app\modules\psLog.ts" />
-    <TypeScriptCompile Include="app\modules\ProcessLogs.ts" />
-    <TypeScriptCompile Include="app\modules\psInstance.ts" />
-    <TypeScriptCompile Include="app\scenarios\scenario2\CustomerPurchaseController.ts" />
-    <TypeScriptCompile Include="app\scenarios\scenario3\VacationController.ts" />
-    <TypeScriptCompile Include="app\scenarios\scenario5\ProductLookupController.ts" />
-    <TypeScriptCompile Include="app\utils\Dialogs.ts" />
-    <TypeScriptCompile Include="app\utils\ArrayUtil.ts" />
-    <TypeScriptCompile Include="app\utils\EnumUtil.ts" />
-    <TypeScriptCompile Include="app\utils\ErrorUtil.ts" />
-    <TypeScriptCompile Include="app\utils\FunctionUtil.ts" />
-    <TypeScriptCompile Include="app\utils\NumberUtil.ts" />
-    <TypeScriptCompile Include="app\utils\ObjectUtil.ts" />
-    <TypeScriptCompile Include="app\utils\StringUtil.ts" />
-    <TypeScriptCompile Include="app\services\Services.ts" />
-    <TypeScriptCompile Include="app\services\ServiceData.ts" />
-    <TypeScriptCompile Include="app\tsDefinitions\mobileapp.d.ts" />
-    <TypeScriptCompile Include="app\tsDefinitions\lib\angularjs\angular-amd-tests.ts" />
-    <TypeScriptCompile Include="app\tsDefinitions\lib\angularjs\angular-animate.d.ts" />
-    <TypeScriptCompile Include="app\tsDefinitions\lib\angularjs\angular-cookies.d.ts" />
-    <TypeScriptCompile Include="app\tsDefinitions\lib\angularjs\angular-mocks-tests.ts" />
-    <TypeScriptCompile Include="app\tsDefinitions\lib\angularjs\angular-mocks.d.ts" />
-    <TypeScriptCompile Include="app\tsDefinitions\lib\angularjs\angular-resource-tests.ts" />
-    <TypeScriptCompile Include="app\tsDefinitions\lib\angularjs\angular-resource.d.ts" />
-    <TypeScriptCompile Include="app\tsDefinitions\lib\angularjs\angular-route-tests.ts" />
-    <TypeScriptCompile Include="app\tsDefinitions\lib\angularjs\angular-route.d.ts" />
-    <TypeScriptCompile Include="app\tsDefinitions\lib\angularjs\angular-sanitize-tests.ts" />
-    <TypeScriptCompile Include="app\tsDefinitions\lib\angularjs\angular-sanitize.d.ts" />
-    <TypeScriptCompile Include="app\tsDefinitions\lib\angularjs\angular-tests.ts" />
-    <TypeScriptCompile Include="app\tsDefinitions\lib\angularjs\angular.d.ts" />
-    <TypeScriptCompile Include="app\tsDefinitions\lib\handlebars.d.ts" />
-    <TypeScriptCompile Include="app\tsDefinitions\lib\jquery\jquery.d.ts" />
-    <TypeScriptCompile Include="app\tsDefinitions\lib\jquery\jqueryui.d.ts" />
-    <TypeScriptCompile Include="app\tsDefinitions\lib\lodash.d.ts" />
-    <TypeScriptCompile Include="app\tsDefinitions\lib\log4javascript.d.ts" />
-    <TypeScriptCompile Include="app\tsDefinitions\lib\lokijs.d.ts" />
-    <TypeScriptCompile Include="app\tsDefinitions\lib\money.d.ts" />
-    <TypeScriptCompile Include="app\tsDefinitions\lib\numeral.d.ts" />
-    <TypeScriptCompile Include="app\tsDefinitions\lib\Q.d.ts" />
-    <TypeScriptCompile Include="gulpfile.ts" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="app\images\" />
-  </ItemGroup>
-  <PropertyGroup>
-    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
-    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
-  </PropertyGroup>
-  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
-  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
-  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
-  <ProjectExtensions>
-    <VisualStudio>
-      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
-        <WebProjectProperties>
-          <UseIIS>True</UseIIS>
-          <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>28183</DevelopmentServerPort>
-          <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:28183/</IISUrl>
-          <NTLMAuthentication>False</NTLMAuthentication>
-          <UseCustomServer>False</UseCustomServer>
-          <CustomServerUrl>
-          </CustomServerUrl>
-          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
-        </WebProjectProperties>
-      </FlavorProperties>
-    </VisualStudio>
-  </ProjectExtensions>
-  <PropertyGroup Condition="'$(Configuration)' == 'Debug'">
-    <TypeScriptTarget>ES5</TypeScriptTarget>
-    <TypeScriptRemoveComments>false</TypeScriptRemoveComments>
-    <TypeScriptSourceMap>false</TypeScriptSourceMap>
-    <TypeScriptModuleKind>CommonJS</TypeScriptModuleKind>
-    <TypeScriptCompileOnSaveEnabled>True</TypeScriptCompileOnSaveEnabled>
-    <TypeScriptNoImplicitAny>False</TypeScriptNoImplicitAny>
-    <TypeScriptOutFile />
-    <TypeScriptOutDir />
-    <TypeScriptGeneratesDeclarations>False</TypeScriptGeneratesDeclarations>
-    <TypeScriptNoEmitOnError>True</TypeScriptNoEmitOnError>
-    <TypeScriptMapRoot />
-    <TypeScriptSourceRoot />
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)' == 'Release'">
-    <TypeScriptTarget>ES5</TypeScriptTarget>
-    <TypeScriptRemoveComments>true</TypeScriptRemoveComments>
-    <TypeScriptSourceMap>false</TypeScriptSourceMap>
-    <TypeScriptModuleKind>CommonJS</TypeScriptModuleKind>
-  </PropertyGroup>
-  <Import Project="$(VSToolsPath)\TypeScript\Microsoft.TypeScript.targets" />
-  <Import Project="..\packages\System.Data.SQLite.Core.1.0.97.0\build\net45\System.Data.SQLite.Core.targets" Condition="Exists('..\packages\System.Data.SQLite.Core.1.0.97.0\build\net45\System.Data.SQLite.Core.targets')" />
-  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
-    <PropertyGroup>
-      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
-    </PropertyGroup>
-    <Error Condition="!Exists('..\packages\System.Data.SQLite.Core.1.0.97.0\build\net45\System.Data.SQLite.Core.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\System.Data.SQLite.Core.1.0.97.0\build\net45\System.Data.SQLite.Core.targets'))" />
-  </Target>
-=======
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
@@ -459,21 +111,25 @@
     <Content Include="app\scenarios\scenario1\custom.css" />
     <Content Include="app\scenarios\scenario1\instructions.txt" />
     <Content Include="app\scenarios\scenario1\salesperson-table.html" />
+    <Content Include="app\scenarios\scenario2\customer-table.html" />
     <Content Include="app\scenarios\scenario2\instructions.txt" />
     <Content Include="app\scenarios\scenario3\custom.css" />
     <Content Include="app\scenarios\scenario3\instructions.txt" />
-    <Content Include="app\scenarios\scenario3\scenario3.html" />
+    <Content Include="app\scenarios\scenario3\vacation-table.html" />
     <Content Include="app\scenarios\scenario2\custom.css" />
     <Content Include="app\scenarios\scenario2\scenario2.html" />
+    <Content Include="app\scenarios\scenario3\scenario3.html" />
     <Content Include="app\scenarios\scenario4\custom.css" />
     <Content Include="app\scenarios\scenario4\instructions.txt" />
     <Content Include="app\scenarios\scenario4\scenario4.html" />
+    <Content Include="app\scenarios\scenario4\territory-table.html" />
     <Content Include="app\scenarios\scenario5\custom.css" />
     <Content Include="app\scenarios\scenario5\instructions.txt" />
-    <Content Include="app\scenarios\scenario5\scenario5.html" />
+    <Content Include="app\scenarios\scenario5\product-table.html" />
     <Content Include="app\scenarios\demo\sales-table.html" />
     <Content Include="app\scenarios\demo\DemoSalesPersonsPage.html" />
     <Content Include="app\scenarios\scenario1\scenario1.html" />
+    <Content Include="app\scenarios\scenario5\scenario5.html" />
     <Content Include="app\tsDefinitions\lib\angularjs\README.md" />
     <Content Include="app\lib\log4javascript.min.js" />
     <Content Include="index.html" />
@@ -597,6 +253,10 @@
     <TypeScriptCompile Include="app\modules\ProcessLogs.ts" />
     <TypeScriptCompile Include="app\modules\psInstance.ts" />
     <TypeScriptCompile Include="app\scenarios\scenario1\SalesPersonController.ts" />
+    <TypeScriptCompile Include="app\scenarios\scenario2\CustomerPurchaseController.ts" />
+    <TypeScriptCompile Include="app\scenarios\scenario3\VacationController.ts" />
+    <TypeScriptCompile Include="app\scenarios\scenario4\SalesTerritoryController.ts" />
+    <TypeScriptCompile Include="app\scenarios\scenario5\ProductLookupController.ts" />
     <TypeScriptCompile Include="app\utils\Dialogs.ts" />
     <TypeScriptCompile Include="app\utils\ArrayUtil.ts" />
     <TypeScriptCompile Include="app\utils\EnumUtil.ts" />
@@ -688,7 +348,6 @@
     </PropertyGroup>
     <Error Condition="!Exists('..\packages\System.Data.SQLite.Core.1.0.97.0\build\net45\System.Data.SQLite.Core.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\System.Data.SQLite.Core.1.0.97.0\build\net45\System.Data.SQLite.Core.targets'))" />
   </Target>
->>>>>>> e541f40e0ef547523660b725a2802adb1bd79edf
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
