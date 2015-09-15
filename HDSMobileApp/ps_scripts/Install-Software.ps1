@@ -1,9 +1,3 @@
-. "C:\inetpub\wwwroot\HDSTeamBuilding\HDSMobileApp\ps_scripts\Include.ps1"
-
-$areyousure = read-host "Do you want to Install Visual STudio, GitHub, and NodeJS? (y/n)"
-
-If ($areyousure -like "y") {
-
 # Determine if path is created and then create it and start software installation
     echo "Creating C:\ITLS_Software Directory to store files..."
     C:
@@ -51,11 +45,3 @@ If ($areyousure -like "y") {
     Start-Sleep -s 5
 
     Restart-Computer
-
-    }
-ElseIf ($areyousure -like "n") {
-    cls
-    write-host -ForegroundColor red "Back to main menu..."
-    mainmenu
-    }
-Else {cls; write-host -ForegroundColor red "Invalid Selection"; mainmenu}

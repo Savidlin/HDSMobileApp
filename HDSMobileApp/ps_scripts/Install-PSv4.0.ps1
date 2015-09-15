@@ -1,9 +1,4 @@
-﻿. "C:\inetpub\wwwroot\HDSTeamBuilding\HDSMobileApp\ps_scripts\Include.ps1"
-
-$areyousure = read-host "Are you sure you want install Powershell v4.0? (y/n)"
-
-If ($areyousure -like "y") {
-# Determine if path is created and then create it and start software installation
+﻿# Determine if path is created and then create it and start software installation
 echo "Creating C:\ITLS_Software Directory to store files..."
 C:
 If (Test-Path C:\ITLS_Software) {
@@ -44,12 +39,5 @@ for ($i=0; $i -lt $path.length; $i++) {
 }
 
 Restart-Computer
-}
 
-Elseif($areyousure -like "n") {
-    cls
-    write-host -ForegroundColor red "Back to main menu..."
-    mainmenu
-}
-Else {cls; write-host -ForegroundColor red "Invalid Selection"; mainmenu}
 

@@ -1,9 +1,4 @@
-﻿. "C:\inetpub\wwwroot\HDSTeamBuilding\HDSMobileApp\ps_scripts\Include.ps1"
-
-$areyousure = read-host "Are you sure you want to reset your scenario back to default? (y/n)"
-
-if($areyousure -like "y") {
-    "Navigating to our site directory.."
+﻿   "Navigating to our site directory.."
     C:
     cd C:\inetpub\wwwroot\HDSTeamBuilding
 
@@ -58,11 +53,4 @@ if($areyousure -like "y") {
             else {"Please enter a session between 1 and 3!"}
     }
         Until (($session -le 3 -and $session -ge 1) -and ($scenario -le 5 -and $scenario -ge 1) -or ($scenario -eq 6))
-}
-ElseIf($areyousure -like "n") {
-    cls
-    write-host -ForegroundColor red "Back to main menu..."
-    mainmenu
-}
-Else {cls; write-host -ForegroundColor red "Invalid Selection"; mainmenu}
 

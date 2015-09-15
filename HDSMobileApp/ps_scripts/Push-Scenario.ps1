@@ -1,13 +1,14 @@
-. "C:\inetpub\wwwroot\HDSTeamBuilding\HDSMobileApp\ps_scripts\Include.ps1"
-
 "Navigating to our site directory.."
 cd C:\inetpub\wwwroot\HDSTeamBuilding
 
-$areyousure = read-host "Do you want to commit all of your changes and upload them to github? (y/n)"
-
-If ($areyousure -like "y") {
     git add -A
     git commit -m "finished scenario"
+
+    $name = Read-Host "What is your github username?"
+    $email = Read-Host "What is your github email?"
+
+    git config user.email $email
+    git config user.name $name
 
     Do {
     $session = Read-Host "Which session are you?" 
@@ -56,13 +57,6 @@ If ($areyousure -like "y") {
     }
         Until (($session -le 3 -and $session -ge 1) -and ($scenario -le 5 -and $scenario -ge 1) -or $scenario -eq 6)
 
-}
-Elseif ($areyousure -like "n") {
-    cls
-    write-host -ForegroundColor red "Back to main menu..."
-    mainmenu
-}
-Else {cls; write-host -ForegroundColor red "Invalid Selection"; mainmenu}
 
 
 
