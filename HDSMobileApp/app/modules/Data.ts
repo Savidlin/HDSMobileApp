@@ -12,6 +12,21 @@ module Data {
         return DataCache.customerData;
     }
 
+    export function getCustomersByCustomerId(customerId: number): Models.Customer[] {
+
+        //return ArrayUtil.findPropValue(getSalesPersons(), "territoryId", territoryId);
+        var saleHeader = DataCache.salesOrderHeaderData;
+        var retMe = [];
+
+        for (var i = 0; i < saleHeader.length; i++) {
+
+            if (saleHeader[i].customerId == customerId) {
+                retMe.push(saleHeader[i]);
+            }
+        }
+
+        return retMe;
+    }
 
     export function getEmployeeById(businessEntityId: number): Models.Employee {
         return ArrayUtil.findPropValue(getEmployees(), "businessEntityId", businessEntityId);

@@ -1,2 +1,12 @@
-﻿
-
+﻿.modal-footer {
+    border-top: 0;
+    padding-top: 0;
+}
+hr {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+/*.modal {
+/*solve large modal scrolling issue
+    position: absolute;
+}*/

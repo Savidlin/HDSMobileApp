@@ -11,6 +11,18 @@ var Data;
         return DataCache.customerData;
     }
     Data.getCustomers = getCustomers;
+    function getCustomersByCustomerId(customerId) {
+        //return ArrayUtil.findPropValue(getSalesPersons(), "territoryId", territoryId);
+        var saleHeader = DataCache.salesOrderHeaderData;
+        var retMe = [];
+        for (var i = 0; i < saleHeader.length; i++) {
+            if (saleHeader[i].customerId == customerId) {
+                retMe.push(saleHeader[i]);
+            }
+        }
+        return retMe;
+    }
+    Data.getCustomersByCustomerId = getCustomersByCustomerId;
     function getEmployeeById(businessEntityId) {
         return ArrayUtil.findPropValue(getEmployees(), "businessEntityId", businessEntityId);
     }

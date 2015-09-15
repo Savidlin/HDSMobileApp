@@ -19,20 +19,21 @@
 
     <div id="content">
         <navbar></navbar>
-        <div class="container">
+        <div class="container-fluid">
+            <div class="jumbotron">
                 <div class="alert alert-success" role="alert" ng-show="vacationChange">
                     Success! {{employee.firstName + " " + employee.lastName}} vacation hours changed to : {{employee.vacationHours}}
                     <span class="fa fa-times-circle-o dismissMsg" ng-click="dismissAlert()" ng-show="vacationChange"></span>
                 </div>
-            <div class="row">
-                <h2>Send an Employee on Vacation</h2>
-                <p>Employees are sortable and searchable by all attributes. Clicking one will result in a dialog box where vacation time can be changed.</p>
+                <div class="row">
+                    <h2>Send an Employee on Vacation</h2>
+                    <p>Employees are sortable and searchable by all attributes. Clicking one will result in a dialog box where vacation time can be changed.</p>
+                </div>
             </div>
-
-            <vacation-Table></vacation-Table>
-
         </div>
-
+        <div class="container">
+            <vacation-Table></vacation-Table>
+        </div>
         <footer></footer>
     </div>
 

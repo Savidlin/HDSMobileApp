@@ -3,9 +3,10 @@
 import FunctionUtil = require("../utils/FunctionUtil");
 import DemoSalesPersonsController = require("../scenarios/demo/DemoSalesPersonsController");
 import GlobalDirectivesController = require("../scenarios/global/controllers/GlobalDirectivesController");
-import ProductLookupController = require("../scenarios/scenario5/ProductLookupController");
+import CustomerPurchaseController = require("../scenarios/scenario2/CustomerPurchaseController");
 import VacationController = require("../scenarios/scenario3/VacationController");
 import SalesTerritoryController = require("../scenarios/scenario4/SalesTerritoryController");
+import ProductLookupController = require("../scenarios/scenario5/ProductLookupController");
 import Ps = require("./main");
 import DataCache = require("./DataCache");
 import Data = require("./Data");
@@ -86,7 +87,8 @@ class PageLoader {
         GlobalDirectivesController: new GlobalDirectivesController(),
         ProductLookupController: new ProductLookupController(),
         VacationController: new VacationController(),
-        SalesTerritoryController: new SalesTerritoryController()
+        SalesTerritoryController: new SalesTerritoryController(),
+        CustomerPurchaseController: new CustomerPurchaseController()
     }));
 
 
