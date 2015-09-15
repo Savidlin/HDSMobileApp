@@ -32,7 +32,7 @@
                 Else {write-host -ForegroundColor red "Invalid Selection"; mainmenu}
                 }
             4 {
-                $areyousure = read-host "Are you sure you want to Install Visual Studio, GitHub, and NodeJS? (y/n)"
+                $areyousure = read-host "Are you sure you want to reset your scenario to default? (y/n)"
                 if($areyousure -like "y") {& "C:\inetpub\wwwroot\HDSTeamBuilding\HDSMobileApp\ps_scripts\Setup-Reset-Scenario.ps1"}
                 Elseif($areyousure -like "n") {cls; write-host -ForegroundColor red "Back to main menu..."; mainmenu}
                 Else {write-host -ForegroundColor red "Invalid Selection"; mainmenu}
@@ -44,7 +44,7 @@
                 Else {write-host -ForegroundColor red "Invalid Selection"; mainmenu}
                 }
             6 {
-                $areyousure = read-host "Are you sure you want to Install Visual Studio, GitHub, and NodeJS? (y/n)"
+                $areyousure = read-host "Are you sure you want run nodejs? (y/n)"
                 if($areyousure -like "y") {& "C:\inetpub\wwwroot\HDSTeamBuilding\HDSMobileApp\ps_scripts\nodejs.ps1"}
                 Elseif($areyousure -like "n") {cls; write-host -ForegroundColor red "Back to main menu..."; mainmenu}
                 Else {write-host -ForegroundColor red "Invalid Selection"; mainmenu}

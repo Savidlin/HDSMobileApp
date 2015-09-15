@@ -2,6 +2,13 @@
     C:
     cd C:\inetpub\wwwroot\HDSTeamBuilding
 
+    $name = Read-Host "What is your github username?"
+    $email = Read-Host "What is your github email?"
+
+    git config user.email $email
+    git config user.name $name
+    
+
     "Lets make sure we are in master!"
     "Comitting any changes..."
     git commit -a -m "Adding all changes to reset scenario for next session"

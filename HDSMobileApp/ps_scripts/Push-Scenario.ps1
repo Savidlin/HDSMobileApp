@@ -1,14 +1,14 @@
 "Navigating to our site directory.."
 cd C:\inetpub\wwwroot\HDSTeamBuilding
 
-    git add -A
-    git commit -m "finished scenario"
-
     $name = Read-Host "What is your github username?"
     $email = Read-Host "What is your github email?"
 
     git config user.email $email
     git config user.name $name
+    
+    git add -A
+    git commit -m "finished scenario"
 
     Do {
     $session = Read-Host "Which session are you?" 
