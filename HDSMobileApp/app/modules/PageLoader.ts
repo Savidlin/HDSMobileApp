@@ -7,6 +7,7 @@ import CustomerPurchaseController = require("../scenarios/scenario2/CustomerPurc
 import VacationController = require("../scenarios/scenario3/VacationController");
 import SalesTerritoryController = require("../scenarios/scenario4/SalesTerritoryController");
 import ProductLookupController = require("../scenarios/scenario5/ProductLookupController");
+import SalesPersonController = require("../scenarios/scenario1/SalesPersonController");
 import Ps = require("./main");
 import DataCache = require("./DataCache");
 import Data = require("./Data");
@@ -88,7 +89,8 @@ class PageLoader {
         ProductLookupController: new ProductLookupController(),
         VacationController: new VacationController(),
         SalesTerritoryController: new SalesTerritoryController(),
-        CustomerPurchaseController: new CustomerPurchaseController()
+        CustomerPurchaseController: new CustomerPurchaseController(),
+        SalesPersonController: new SalesPersonController()
     }));
 
 

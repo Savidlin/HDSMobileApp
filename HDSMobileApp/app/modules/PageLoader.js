@@ -7,6 +7,7 @@ var CustomerPurchaseController = require("../scenarios/scenario2/CustomerPurchas
 var VacationController = require("../scenarios/scenario3/VacationController");
 var SalesTerritoryController = require("../scenarios/scenario4/SalesTerritoryController");
 var ProductLookupController = require("../scenarios/scenario5/ProductLookupController");
+var SalesPersonController = require("../scenarios/scenario1/SalesPersonController");
 var Ps = require("./main");
 var DataCache = require("./DataCache");
 var Data = require("./Data");
@@ -22,7 +23,8 @@ var PageLoader = (function () {
             ProductLookupController: new ProductLookupController(),
             VacationController: new VacationController(),
             SalesTerritoryController: new SalesTerritoryController(),
-            CustomerPurchaseController: new CustomerPurchaseController()
+            CustomerPurchaseController: new CustomerPurchaseController(),
+            SalesPersonController: new SalesPersonController()
         }); });
         // add references to app bootstrappers here
         this.getAppBootstrappers = FunctionUtil.createLazyInitializedField(function () { return ({}); });

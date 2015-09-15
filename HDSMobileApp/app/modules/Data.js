@@ -67,6 +67,10 @@ var Data;
         return DataCache.salesOrderDetailData;
     }
     Data.getSalesOrderDetails = getSalesOrderDetails;
+    function getSalesOrderHeaderBySalesPersonId(salesPersonId) {
+        return ArrayUtil.findAllPropValue(Data.getSalesOrderHeaders(), "salesPersonId", salesPersonId);
+    }
+    Data.getSalesOrderHeaderBySalesPersonId = getSalesOrderHeaderBySalesPersonId;
     function getSalesOrderHeaderById(salesOrderId) {
         return ArrayUtil.findPropValue(getSalesOrderHeaders(), "salesOrderId", salesOrderId);
     }

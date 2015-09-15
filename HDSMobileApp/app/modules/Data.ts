@@ -76,6 +76,9 @@ module Data {
         return DataCache.salesOrderDetailData;
     }
 
+    export function getSalesOrderHeaderBySalesPersonId(salesPersonId: number): Models.SalesOrderHeader[] {
+        return ArrayUtil.findAllPropValue(Data.getSalesOrderHeaders(), "salesPersonId", salesPersonId);
+    }
 
     export function getSalesOrderHeaderById(salesOrderId: number): Models.SalesOrderHeader {
         return ArrayUtil.findPropValue(getSalesOrderHeaders(), "salesOrderId", salesOrderId);
