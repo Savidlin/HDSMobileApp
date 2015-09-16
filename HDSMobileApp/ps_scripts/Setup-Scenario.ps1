@@ -2,11 +2,8 @@
     C:
     cd C:\inetpub\wwwroot\HDSTeamBuilding
 
-    $name = Read-Host "What is your github username?"
-    $email = Read-Host "What is your github email?"
-
-    git config user.email $email
-    git config user.name $name
+    echo "Making sure we are using the correct user to push to github..."
+    git remote set-url origin https://joedoestech@github.com/SaumyaS/HDSTeamBuilding.git
     
     "Lets make sure we are in master!"
     "Comitting any changes..."
