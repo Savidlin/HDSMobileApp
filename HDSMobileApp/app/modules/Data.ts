@@ -32,7 +32,7 @@ module Data {
         return retMe;
     }
 
-    export function joinSalesData(salesPersons: Models.SalesPerson[]): Models.SalesPerson[] {
+    export function joinSalesPersonWithEmpAndPerson(salesPersons: Models.SalesPerson[]): Models.SalesPerson[] {
         // loop through all sales people
         for (var i = 0; i < salesPersons.length; i++) {
             // loop through all employees to find a record that matches for the current sales person in loop
