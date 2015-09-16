@@ -55,7 +55,7 @@ class SalesPersonController implements WidgetView<any>{
 
                     //this function is called when a user clicks on a table row
                     //the Person the user clicked on is passed in as Person
-                    $scope.display = function (salesPerson) {
+                    $scope.display = function (salesPerson: Models.SalesPerson) {
 
                         var salesHeaderPerson = Data.getSalesOrderHeaderBySalesPersonId(salesPerson.businessEntityId);
 
