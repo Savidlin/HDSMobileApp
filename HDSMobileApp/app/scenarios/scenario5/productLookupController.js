@@ -31,6 +31,7 @@ var ProductLookupController = (function () {
                             $scope.reverse = ($scope.predicate === predicate) ? !$scope.reverse : false;
                             $scope.predicate = predicate;
                         };
+                        //test commit
                         //reset the searchTerm and refocus to the search box
                         $scope.inputClear = function () {
                             $scope.searchTerm = "";
