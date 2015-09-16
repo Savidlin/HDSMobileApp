@@ -22,7 +22,7 @@ class SalesPersonController implements WidgetView<any>{
                     salesPersons = Data.getSalesPersons();
 
                     // Get Sales Person data joined with Employee and Person
-                    this.salesPersonFull = SalesPersonController.joinSalesData(salesPersons);
+                    this.salesPersonFull = Data.joinSalesData(salesPersons);
 
                     // set an initial value to sort by
                     $scope.predicate = 'businessEntityId';
@@ -55,7 +55,7 @@ class SalesPersonController implements WidgetView<any>{
 
                     //this function is called when a user clicks on a table row
                     //the Person the user clicked on is passed in as Person
-                    $scope.display = function (salesPerson) {
+                    $scope.display = function (salesPerson: Models.SalesPerson) {
 
                         var salesHeaderPerson = Data.getSalesOrderHeaderBySalesPersonId(salesPerson.businessEntityId);
 
@@ -63,28 +63,10 @@ class SalesPersonController implements WidgetView<any>{
                         $scope.person = salesPerson;
                         $scope.salesHeaders = salesHeaderPerson; 
                     };
-
-                  
-                    //commit
                 }],
                 controllerAs: "salesPersonCtrl"               
             };
         });
-    }
-
-    public static joinSalesData(salesPersons: Models.SalesPerson[]): Models.SalesPerson[] {
-        // loop through all sales people
-        for (var i = 0; i < salesPersons.length; i++) {
-            // loop through all employees to find a record that matches for the current sales person in loop
-            var employee = Data.getEmployeeById(salesPersons[i].businessEntityId);
-            jQuery.extend(salesPersons[i], employee);
-
-            // loop through all person records for a matching sales person
-            var person = Data.getPersonById(salesPersons[i].businessEntityId);
-            jQuery.extend(salesPersons[i], person);
-        }
-
-        return salesPersons;
     }
 
     public deregister(appTools: Main, view: SalesPersonController) {
