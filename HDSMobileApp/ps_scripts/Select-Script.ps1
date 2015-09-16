@@ -51,15 +51,9 @@
                 }
             7 {
                 $areyousure = read-host "Are you sure you want to exit? (y/n)"
-                if($areyousure -like "y"){
-                "Exiting..."; Start-Sleep -s 2; Exit;
-            }
-            Elseif($areyousure -like "n") {
-                cls
-                write-host -ForegroundColor red "Back to main menu..."
-                mainmenu
-            }
-            Else {write-host -ForegroundColor red "Invalid Selection"; mainmenu}
+                if($areyousure -like "y"){"Exiting..."; Start-Sleep -s 2; Exit;}
+                Elseif($areyousure -like "n") {cls; write-host -ForegroundColor red "Back to main menu..."; mainmenu }
+                Else {write-host -ForegroundColor red "Invalid Selection"; mainmenu}
             }
         }
 }
