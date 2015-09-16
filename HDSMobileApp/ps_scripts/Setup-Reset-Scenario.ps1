@@ -60,3 +60,4 @@
     }
         Until (($session -le 3 -and $session -ge 1) -and ($scenario -le 5 -and $scenario -ge 1) -or ($scenario -eq 6))
 
+ Write-Host "Press any key to cancel..."

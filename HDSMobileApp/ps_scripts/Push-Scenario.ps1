@@ -1,11 +1,8 @@
 "Navigating to our site directory.."
 cd C:\inetpub\wwwroot\HDSTeamBuilding
-
-    $name = Read-Host "What is your github username?"
-    $email = Read-Host "What is your github email?"
-
-    git config user.email $email
-    git config user.name $name
+    
+    echo "Making sure we are using the correct user to push to github..."
+    git remote set-url https://joedoestech@github.com/SaumyaS/HDSTeamBuilding.git
     
     git add -A
     git commit -m "finished scenario"
@@ -19,11 +16,11 @@ cd C:\inetpub\wwwroot\HDSTeamBuilding
             If ($session -eq 1) {
                 echo $scenario
                 switch ($scenario) {
-                        1 {git checkout session1scenario1; git push origin session1;}
-                        2 {git checkout session1scenario2; git push origin session1;}
-                        3 {git checkout session1scenario3; git push origin session1;}
-                        4 {git checkout session1scenario4; git push origin session1;}
-                        5 {git checkout session1scenario5; git push origin session1;}
+                        1 {git checkout session1scenario1; git push origin session1scenario1:session1;}
+                        2 {git checkout session1scenario2; git push origin session1scenario2:session1;}
+                        3 {git checkout session1scenario3; git push origin session1scenario3:session1;}
+                        4 {git checkout session1scenario4; git push origin session1scenario4:session1;}
+                        5 {git checkout session1scenario5; git push origin session1scenario5:session1;}
                         6 {cls; write-host -Foregroundcolor red "Back to main menu..."; mainmenu}
                     }
             }
@@ -31,11 +28,11 @@ cd C:\inetpub\wwwroot\HDSTeamBuilding
             elseif ($session -eq 2) {
                 echo $scenario
                 switch ($scenario) {
-                        1 {git checkout session2scenario1; git push origin session2;}
-                        2 {git checkout session2scenario2; git push origin session2;}
-                        3 {git checkout session2scenario3; git push origin session2;}
-                        4 {git checkout session2scenario4; git push origin session2;}
-                        5 {git checkout session2scenario5; git push origin session2;}
+                        1 {git checkout session2scenario1; git push origin session2scenario1:session2;}
+                        2 {git checkout session2scenario2; git push origin session2scenario2:session2;}
+                        3 {git checkout session2scenario3; git push origin session2scenario3:session2;}
+                        4 {git checkout session2scenario4; git push origin session2scenario4:session2;}
+                        5 {git checkout session2scenario5; git push origin session2scenario5:session2;}
                         6 {cls; write-host -Foregroundcolor red "Back to main menu..."; mainmenu}
                         default {"Please choose a scenario between 1 and 5"}
                     }
@@ -44,11 +41,11 @@ cd C:\inetpub\wwwroot\HDSTeamBuilding
             elseif ($session -eq 3) {
                 echo $scenario
                 switch ($scenario) {
-                        1 {git checkout session3scenario1; git push origin session3;}
-                        2 {git checkout session3scenario2; git push origin session3;}
-                        3 {git checkout session3scenario3; git push origin session3;}
-                        4 {git checkout session3scenario4; git push origin session3;}
-                        5 {git checkout session3scenario5; git push origin session3;}
+                        1 {git checkout session3scenario1; git push origin session3scenario1:session3;}
+                        2 {git checkout session3scenario2; git push origin session3scenario2:session3;}
+                        3 {git checkout session3scenario3; git push origin session3scenario3:session3;}
+                        4 {git checkout session3scenario4; git push origin session3scenario4:session3;}
+                        5 {git checkout session3scenario5; git push origin session3scenario5:session3;}
                         6 {cls; write-host -Foregroundcolor red "Back to main menu..."; mainmenu}
                         default {"Please choose a scenario between 1 and 5"}
                     }
@@ -58,7 +55,7 @@ cd C:\inetpub\wwwroot\HDSTeamBuilding
         Until (($session -le 3 -and $session -ge 1) -and ($scenario -le 5 -and $scenario -ge 1) -or $scenario -eq 6)
 
 
-
+Write-Host "Press any key to cancel..."
 
 
 
