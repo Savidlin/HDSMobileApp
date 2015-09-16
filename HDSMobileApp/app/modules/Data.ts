@@ -16,6 +16,22 @@ module Data {
         return DataCache.customerData;
     }
 
+    /** Get all sales orders from a specific customer ID
+     */
+    export function getSalesOrderHeadersByCustomerId(customerId: number): Models.SalesOrderHeader[] {
+        //return ArrayUtil.findPropValue(getSalesPersons(), "territoryId", territoryId);
+        var saleHeaders = DataCache.salesOrderHeaderData;
+        var retMe: Models.SalesOrderHeader[] = [];
+
+        for (var i = 0; i < saleHeaders.length; i++) {
+            if (saleHeaders[i].customerId == customerId) {
+                retMe.push(saleHeaders[i]);
+            }
+        }
+
+        return retMe;
+    }
+
 
     /** Get a single employee matching the specified primary key
      */
@@ -87,6 +103,11 @@ module Data {
         return DataCache.salesOrderDetailData;
     }
 
+    /** Get all sales orders made by a specific sales person ID
+     */
+    export function getSalesOrderHeaderBySalesPersonId(salesPersonId: number): Models.SalesOrderHeader[] {
+        return ArrayUtil.findAllPropValue(Data.getSalesOrderHeaders(), "salesPersonId", salesPersonId);
+    }
 
     /** Get a single sales order header matching the specified primary key
      */
