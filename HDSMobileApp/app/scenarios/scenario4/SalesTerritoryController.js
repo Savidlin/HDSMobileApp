@@ -1,5 +1,4 @@
 "use strict";
-var Data = require("../../modules/Data");
 var SalesTerritoryController = (function () {
     function SalesTerritoryController() {
     }
@@ -36,11 +35,14 @@ var SalesTerritoryController = (function () {
                         //this function is called when a user clicks on a table row
                         //the product the user clicked on is passed in as territory
                         $scope.showTerritory = function (territory) {
-                            //getSalesPeopleByTerritoryId is a custom function in Data by James that returns an array of sales people
-                            //that match a given territory ID
-                            var salesPeople = Data.getSalesPeopleByTerritoryId(territory.territoryId);
-                            //joinEmployeeSalesPeople is a custom function by james in Data that will  join salespeople and employees based on territory ID
-                            var employeeSalesPeople = Data.joinEmployeeSalesPeople(territory.territoryId);
+                            //TODO: assign the salesPeople variable to all the sales people that have a shared territory ID
+                            //Remeber that a territory object has been based into this function that contains all territory attributes
+                            //Remeber we only want to show sales people that are in the same territory that the user clicked on
+                            //Remeber Data has methods for getting data and joining data
+                            var salesPeople = null;
+                            //TODO: assign the employeeSalesPeople variable to the joined data of salespeople and employee based on their shared territoryId
+                            //Remeber Data has methods for getting data and joining data
+                            var employeeSalesPeople = null;
                             //set scope variables
                             $scope.terrSalesPeople = employeeSalesPeople;
                             $scope.territory = territory;
