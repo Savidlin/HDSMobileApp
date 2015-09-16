@@ -32,6 +32,21 @@ module Data {
         return retMe;
     }
 
+    export function joinSalesData(salesPersons: Models.SalesPerson[]): Models.SalesPerson[] {
+        // loop through all sales people
+        for (var i = 0; i < salesPersons.length; i++) {
+            // loop through all employees to find a record that matches for the current sales person in loop
+            var employee = Data.getEmployeeById(salesPersons[i].businessEntityId);
+            jQuery.extend(salesPersons[i], employee);
+
+            // loop through all person records for a matching sales person
+            var person = Data.getPersonById(salesPersons[i].businessEntityId);
+            jQuery.extend(salesPersons[i], person);
+        }
+
+        return salesPersons;
+    }
+
 
     /** Get a single employee matching the specified primary key
      */
