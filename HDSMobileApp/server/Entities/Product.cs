@@ -47,7 +47,6 @@ namespace HDSMobileApp.Entities {
         [Column("ProductLine")]
         public string productLine { get; set; }
 
-        // TODO customized data member not yet added to generator
         [DataMember(Name = "class")]
         [Column("Class")]
         public string Class { get; set; }

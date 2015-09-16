@@ -6,7 +6,6 @@ var Ps = require("../modules/main");
  * for managing, showing, and closing UI dialog boxes
  * @since 2015-1-9
  */
-// TODO needs refactoring for unified dialog handling
 var Dialogs = (function () {
     function Dialogs() {
     }
@@ -17,7 +16,6 @@ var Dialogs = (function () {
     Dialogs.closeDbSaveDialog = function (dlg) {
         Dialogs.closeDialogNoCloseNoOK();
     };
-    // TODO partially replaces openDialog() and openDialogWithTitle()
     Dialogs.openDialogOk = function (title, message, callback) {
         var dlg = Dialogs.openDialog(message, callback);
         dlg.dialog("option", "title", title || "");
@@ -203,7 +201,6 @@ var Dialogs = (function () {
         dlg.dialog("close");
     };
     /** close the default dialog box
-     * TODO remove/refactor, left 2015-2-9 for backward compatibility
      */
     Dialogs.closeDialogNoCloseNoOK = function () {
         Ps.getJQueryContext().find("#dialog").dialog("close");

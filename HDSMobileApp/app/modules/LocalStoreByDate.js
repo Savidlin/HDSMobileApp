@@ -33,7 +33,6 @@ var LocalStoreByDate = (function () {
             var removeCount = LocalStoreByDate.removeOldItems(this.localStoreInst, this.removeRatio);
             this.removalAttemptCount++;
             var end = window.performance.now();
-            // TODO poor solution, log this manually, since psLog imports this class and we don't want a circular dependency
             this.localStoreInst.setItem(LocalStoreByDate.uniqueTimestamp() + "", "removed " + removeCount + " local store entries in " + Math.round(end - start) + " ms, because local store threw error: '" + err.message + "': " + JSON.stringify(err.stack));
         }
         return key;

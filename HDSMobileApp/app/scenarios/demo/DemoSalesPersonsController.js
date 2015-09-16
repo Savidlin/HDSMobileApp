@@ -19,7 +19,6 @@ var DemoSalesPersonsController = (function () {
                 //add in a controller
                 controller: ["$scope", "$http", function ($scope, $http) {
                         var sales = this;
-                        // TODO debugging
                         console.log("starting controller DemoSalesPersonsController, Data=", Data.getCustomers());
                         var salesPersons = Data.getSalesPersons();
                         sales.salesPeopleFull = DemoSalesPersonsController.joinSalesData(salesPersons);

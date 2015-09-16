@@ -713,7 +713,6 @@ declare module angular {
 
     ///////////////////////////////////////////////////////////////////////////
     // BrowserService
-    // TODO undocumented, so we need to get it from the source code
     ///////////////////////////////////////////////////////////////////////////
     interface IBrowserService {
         defer: angular.ITimeoutService;
@@ -1641,7 +1640,6 @@ declare module angular {
     }
 
     interface IAugmentedJQuery extends JQuery {
-        // TODO: events, how to define?
         //$destroy
 
         find(selector: string): IAugmentedJQuery;

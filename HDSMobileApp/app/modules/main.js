@@ -24,7 +24,7 @@ var UiUtil = (function () {
 var Ps = (function () {
     function Ps() {
     }
-    Ps.resetAppNewPage = function (psInst /*TODO : psInstance*/, svcs /*TODO : Services*/, wnd, pageDocument, url) {
+    Ps.resetAppNewPage = function (psInst, svcs, wnd, pageDocument, url) {
         if (pageDocument === void 0) { pageDocument = wnd.document; }
         if (url === void 0) { url = pageDocument.location.href; }
         Ps.resetAppState(psInst);
@@ -37,7 +37,7 @@ var Ps = (function () {
     /**
      * @param psInst the current app's {@link psInstance} to reset
      */
-    Ps.resetAppState = function (psInst /*TODO : psInstance*/) {
+    Ps.resetAppState = function (psInst) {
         if (psInst) {
             psInst.currentBid.reset();
         }
@@ -46,7 +46,7 @@ var Ps = (function () {
      * @param svcs the {@link Services} instance to apply this change to
      * @param url optional new page URL being navigated to
      */
-    Ps.urlLoaded = function (svcs /*TODO : Services*/, url) {
+    Ps.urlLoaded = function (svcs, url) {
         if (svcs) {
             svcs.navigated(url);
         }

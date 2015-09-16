@@ -79,7 +79,7 @@ class PsLog {
  * @since 2015-2-16
  */
 class LocalStoreAppender /*extends log4javascript.Appender */{
-    // TODO poor workaround for 'extends' not working correctly
+    
     static tmp = (function () {
         LocalStoreAppender.prototype = <any>new log4javascript.Appender();
         LocalStoreAppender.prototype["appender"] = new log4javascript.Appender();

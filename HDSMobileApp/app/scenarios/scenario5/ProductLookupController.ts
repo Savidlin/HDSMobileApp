@@ -15,16 +15,15 @@ class ProductLookupController implements WidgetView<any> {
         // define a directive and now we can use products in the html
         ngApp.directive("productTable", function () {
             return {
-                // E is for element we are defining our own element
-                // A is for attribute if you were to use directive as an attribute
-                restrict: "E",
-                //point to html file
-                templateUrl: "/app/scenarios/scenario5/product-table.html",
+                //TODO: ensure that the productTable directive is an element
+                 
+                //TODO: define a template HTML file for this directive
+
                 //add in a controller
                 controller: ["$scope", "$http", function ($scope, $http) {
 
-                    //get all the products and set them as an instance variable for the controller
-                    this.products = Data.getProducts();
+                    //TODO: assign the this.products variable by using a services call instead of a null value
+                    this.products = null;
 
                     // set an initial value to sort by
                     $scope.predicate = 'productId';
