@@ -18,11 +18,11 @@
             If ($session -eq 1) {
                 echo $scenario
                 switch ($scenario) {
-                        1 {git branch -d session1scenario1; git checkout -b session1scenario1;}
-                        2 {git branch -d session1scenario2; git checkout -b session1scenario2;}
-                        3 {git branch -d session1scenario3; git checkout -b session1scenario3;}
-                        4 {git branch -d session1scenario4; git checkout -b session1scenario4;}
-                        5 {git branch -d session1scenario5; git checkout -b session1scenario5;}
+                        1 {git branch -D session1scenario1; git checkout -b session1scenario1;}
+                        2 {git branch -D session1scenario2; git checkout -b session1scenario2;}
+                        3 {git branch -D session1scenario3; git checkout -b session1scenario3;}
+                        4 {git branch -D session1scenario4; git checkout -b session1scenario4;}
+                        5 {git branch -D session1scenario5; git checkout -b session1scenario5;}
                         6 {cls; write-host -Foregroundcolor red "Back to main menu..."; mainmenu}
                         default {"Please choose a scenario between 1 and 5"}
                     }
@@ -31,11 +31,11 @@
             elseif ($session -eq 2) {
                 echo $scenario
                 switch ($scenario) {
-                        1 {git branch -d session2scenario1; git checkout -b session2scenario1;}
-                        2 {git branch -d session2scenario2; git checkout -b session2scenario2;}
-                        3 {git branch -d session2scenario3; git checkout -b session2scenario3;}
-                        4 {git branch -d session2scenario4; git checkout -b session2scenario4;}
-                        5 {git branch -d session2scenario5; git checkout -b session2scenario5;}
+                        1 {git branch -D session2scenario1; git checkout -b session2scenario1;}
+                        2 {git branch -D session2scenario2; git checkout -b session2scenario2;}
+                        3 {git branch -D session2scenario3; git checkout -b session2scenario3;}
+                        4 {git branch -D session2scenario4; git checkout -b session2scenario4;}
+                        5 {git branch -D session2scenario5; git checkout -b session2scenario5;}
                         6 {cls; write-host -Foregroundcolor red "Back to main menu..."; mainmenu}
                         default {"Please choose a scenario between 1 and 5"}
                     }
@@ -44,11 +44,11 @@
             elseif ($session -eq 3) {
                 echo $scenario
                 switch ($scenario) {
-                        1 {git branch -d session3scenario1; git checkout -b session3scenario1;}
-                        2 {git branch -d session3scenario2; git checkout -b session3scenario2;}
-                        3 {git branch -d session3scenario3; git checkout -b session3scenario3;}
-                        4 {git branch -d session3scenario4; git checkout -b session3scenario4;}
-                        5 {git branch -d session3scenario5; git checkout -b session3scenario5;}
+                        1 {git branch -D session3scenario1; git checkout -b session3scenario1;}
+                        2 {git branch -D session3scenario2; git checkout -b session3scenario2;}
+                        3 {git branch -D session3scenario3; git checkout -b session3scenario3;}
+                        4 {git branch -D session3scenario4; git checkout -b session3scenario4;}
+                        5 {git branch -D session3scenario5; git checkout -b session3scenario5;}
                         6 {cls; write-host -Foregroundcolor red "Back to main menu..."; mainmenu}
                         default {"Please choose a scenario between 1 and 5"}
                     }
