@@ -1,11 +1,11 @@
 "Navigating to our site directory.."
 cd C:\inetpub\wwwroot\HDSTeamBuilding
 
-    $name = Read-Host "What is your github username?"
-    $email = Read-Host "What is your github email?"
+    #name = Read-Host "What is your github username?"
+    #$email = Read-Host "What is your github email?"
 
-    git config user.email $email
-    git config user.name $name
+    #git config user.email $email
+    #git config user.name $name
     
     git add -A
     git commit -m "finished scenario"
@@ -20,7 +20,7 @@ cd C:\inetpub\wwwroot\HDSTeamBuilding
                 echo $scenario
                 switch ($scenario) {
                         1 {git checkout session1scenario1; git push origin session1;}
-                        2 {git checkout session1scenario2; git push origin session1;}
+                        2 {git checkout session1scenario2; git push --repo https://joedoestech:HD$upp1y@github.com/SaumyaS/HDSTeamBuilding.git;}
                         3 {git checkout session1scenario3; git push origin session1;}
                         4 {git checkout session1scenario4; git push origin session1;}
                         5 {git checkout session1scenario5; git push origin session1;}
