@@ -105,7 +105,6 @@ var LocalStoreAppender /*extends log4javascript.Appender */ = (function () {
     LocalStoreAppender /*extends log4javascript.Appender */.prototype.toString = function () {
         return "LocalStoreAppender";
     };
-    // TODO poor workaround for 'extends' not working correctly
     LocalStoreAppender /*extends log4javascript.Appender */.tmp = (function () {
         LocalStoreAppender.prototype = new log4javascript.Appender();
         LocalStoreAppender.prototype["appender"] = new log4javascript.Appender();

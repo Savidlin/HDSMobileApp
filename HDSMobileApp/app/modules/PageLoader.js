@@ -32,7 +32,6 @@ var PageLoader = (function () {
     PageLoader.prototype.loadPage = function (pageLoadInfo) {
         var that = this;
         Ps.resetAppNewPage(null, null, window);
-        // TODO debugging
         console.log("init loading data...");
         DataCache.loadData(undefined, false).done(function () {
             var ngAppName = null;
@@ -40,7 +39,6 @@ var PageLoader = (function () {
             if (pageLoadInfo.appLoaderName == null) {
                 var names = pageLoadInfo.controllerNames;
                 ngAppName = pageLoadInfo.ngAppName;
-                // TODO debugging
                 console.log("done loading data...");
                 console.log("loading app: ", ngAppName, "using controllers: ", names);
                 var ngAppModule = angular.module(ngAppName, []);
@@ -57,7 +55,6 @@ var PageLoader = (function () {
                 }
             }
             else {
-                // TODO debugging
                 console.log("loading app: ", pageLoadInfo.ngAppName, "using custom bootstrapper: ", pageLoadInfo.appLoaderName);
                 var appObj = that.getAppBootstrappers()[pageLoadInfo.appLoaderName].initNgApp(Ps, pageLoadInfo.ngAppName);
                 ngAppName = appObj.ngAppModule.name;

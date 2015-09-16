@@ -48,7 +48,6 @@ var SalesPersonController = (function () {
                             $scope.person = salesPerson;
                             $scope.salesHeaders = salesHeaderPerson;
                         };
-                        // TODO debugging
                         //commit
                     }],
                 controllerAs: "salesPersonCtrl"

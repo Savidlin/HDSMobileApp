@@ -57,7 +57,7 @@ var ErrorUtil = (function () {
      */
     ErrorUtil.getServiceTransactionErrorMessage = function (error, msg) {
         if (error.isHandshakeError) {
-            return "Check connection to server"; // TODO better error message
+            return "Check connection to server";
         }
         else {
             return ErrorUtil.getServiceErrorMessage(error.error);

@@ -64,7 +64,6 @@ var Services = (function () {
                 paramAry.push(encodeURIComponent(parameterNames[paramI]) + "=" + encodeURIComponent(parameterValues[paramI]));
             }
         }
-        // TODO workaround
         $http.defaults.headers.get["Content-Type"] = "application/json";
         var requestDefaults = {
             url: Services.baseUrl() + relativeUrl + (paramAry.length > 0 ? "?" + paramAry.join("&") : ""),
