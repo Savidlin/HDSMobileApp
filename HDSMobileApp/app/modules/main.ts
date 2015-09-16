@@ -39,7 +39,7 @@ class Ps {
     private static uiUtil: UiUtil;
 
 
-    static resetAppNewPage(psInst/*TODO : psInstance*/, svcs/*TODO : Services*/, wnd: Window, pageDocument: Document = wnd.document, url: string = pageDocument.location.href) {
+    static resetAppNewPage(psInst, svcs, wnd: Window, pageDocument: Document = wnd.document, url: string = pageDocument.location.href) {
         Ps.resetAppState(psInst);
         if (window["$"]) {
             Ps.setJQuery(window["$"]);
@@ -52,7 +52,7 @@ class Ps {
     /**
      * @param psInst the current app's {@link psInstance} to reset
      */
-    static resetAppState(psInst/*TODO : psInstance*/) {
+    static resetAppState(psInst) {
         if (psInst) {
             psInst.currentBid.reset();
         }
@@ -63,7 +63,7 @@ class Ps {
      * @param svcs the {@link Services} instance to apply this change to
      * @param url optional new page URL being navigated to
      */
-    static urlLoaded(svcs/*TODO : Services*/, url: string) {
+    static urlLoaded(svcs, url: string) {
         if (svcs) {
             svcs.navigated(url);
         }

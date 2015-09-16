@@ -102,7 +102,7 @@ var DateConverter;
             if (incrementAtMidnight === void 0) { incrementAtMidnight = false; }
             var msPerDay = (1000 * 60 * 60) * 24;
             var daysDiff = ((dtLeft.getTime() - dtRight.getTime()) / msPerDay);
-            var dateDiff = (incrementAtMidnight ? Math.floor(daysDiff) : Math.round(daysDiff)); // TODO this does not handle leap years or other non-gregorian calendar days in a year
+            var dateDiff = (incrementAtMidnight ? Math.floor(daysDiff) : Math.round(daysDiff));
             return dateDiff;
         };
         return Dates;

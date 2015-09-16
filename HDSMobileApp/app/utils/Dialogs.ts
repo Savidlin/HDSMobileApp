@@ -16,7 +16,7 @@ interface DialogOptions {
  * for managing, showing, and closing UI dialog boxes
  * @since 2015-1-9
  */
-// TODO needs refactoring for unified dialog handling
+
 class Dialogs {
 
     static showDbSaveDialog(message?: string): JQuery {
@@ -30,7 +30,6 @@ class Dialogs {
     }
 
 
-    // TODO partially replaces openDialog() and openDialogWithTitle()
     static openDialogOk(title: string, message: string, callback?: () => void): JQuery {
         var dlg = Dialogs.openDialog(message, callback);
         dlg.dialog("option", "title", title || "");
@@ -235,7 +234,6 @@ class Dialogs {
 
 
     /** close the default dialog box
-     * TODO remove/refactor, left 2015-2-9 for backward compatibility
      */
     static closeDialogNoCloseNoOK() {
         Ps.getJQueryContext().find("#dialog").dialog("close");
