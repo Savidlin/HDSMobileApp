@@ -65,7 +65,6 @@ class SalesPersonController implements WidgetView<any>{
                     };
 
                   
-                    // TODO debugging
                     //commit
                 }],
                 controllerAs: "salesPersonCtrl"               

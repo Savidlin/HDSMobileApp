@@ -4,8 +4,6 @@ import Services = require("../../../services/Services");
 class GlobalDirectivesController implements WidgetView<any> {
 
     public initView(appTools: Main, ngApp: ng.IModule) {
-        
-        // TODO create scenario controllers/directives/angular stuff here...
 
         this.setupGlobalDirectives(ngApp);
     }

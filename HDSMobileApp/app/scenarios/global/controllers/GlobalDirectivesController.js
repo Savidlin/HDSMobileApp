@@ -3,7 +3,6 @@ var GlobalDirectivesController = (function () {
     function GlobalDirectivesController() {
     }
     GlobalDirectivesController.prototype.initView = function (appTools, ngApp) {
-        // TODO create scenario controllers/directives/angular stuff here...
         this.setupGlobalDirectives(ngApp);
     };
     GlobalDirectivesController.prototype.setupGlobalDirectives = function (ngApp) {

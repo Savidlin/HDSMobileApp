@@ -79,7 +79,6 @@ class Services {
             }
         }
 
-        // TODO workaround
         $http.defaults.headers.get["Content-Type"] = "application/json";
 
         var requestDefaults: angular.IRequestConfig = {

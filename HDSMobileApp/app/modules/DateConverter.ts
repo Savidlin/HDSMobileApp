@@ -117,7 +117,7 @@ module DateConverter {
         static dayDiff(dtLeft: Date, dtRight: Date, incrementAtMidnight: boolean = false): number {
             var msPerDay = (1000 * 60 * 60) * 24;
             var daysDiff = ((dtLeft.getTime() - dtRight.getTime()) / msPerDay);
-            var dateDiff = (incrementAtMidnight ? Math.floor(daysDiff) : Math.round(daysDiff)); // TODO this does not handle leap years or other non-gregorian calendar days in a year
+            var dateDiff = (incrementAtMidnight ? Math.floor(daysDiff) : Math.round(daysDiff));
             return dateDiff;
         }
 

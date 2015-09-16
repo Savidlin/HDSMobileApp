@@ -243,8 +243,6 @@
     <TypeScriptCompile Include="app\modules\DataCache.ts" />
     <TypeScriptCompile Include="app\modules\DateConverter.ts" />
     <TypeScriptCompile Include="app\modules\Defer.ts" />
-    <TypeScriptCompile Include="app\modules\Filter.ts" />
-    <TypeScriptCompile Include="app\modules\Join.ts" />
     <TypeScriptCompile Include="app\modules\LocalStore.ts" />
     <TypeScriptCompile Include="app\modules\LocalStoreByDate.ts" />
     <TypeScriptCompile Include="app\modules\main.ts" />
