@@ -11,18 +11,6 @@ var Data;
         return DataCache.customerData;
     }
     Data.getCustomers = getCustomers;
-    function getCustomersByCustomerId(customerId) {
-        //return ArrayUtil.findPropValue(getSalesPersons(), "territoryId", territoryId);
-        var saleHeader = DataCache.salesOrderHeaderData;
-        var retMe = [];
-        for (var i = 0; i < saleHeader.length; i++) {
-            if (saleHeader[i].customerId == customerId) {
-                retMe.push(saleHeader[i]);
-            }
-        }
-        return retMe;
-    }
-    Data.getCustomersByCustomerId = getCustomersByCustomerId;
     function getEmployeeById(businessEntityId) {
         return ArrayUtil.findPropValue(getEmployees(), "businessEntityId", businessEntityId);
     }
@@ -67,10 +55,6 @@ var Data;
         return DataCache.salesOrderDetailData;
     }
     Data.getSalesOrderDetails = getSalesOrderDetails;
-    function getSalesOrderHeaderBySalesPersonId(salesPersonId) {
-        return ArrayUtil.findAllPropValue(Data.getSalesOrderHeaders(), "salesPersonId", salesPersonId);
-    }
-    Data.getSalesOrderHeaderBySalesPersonId = getSalesOrderHeaderBySalesPersonId;
     function getSalesOrderHeaderById(salesOrderId) {
         return ArrayUtil.findPropValue(getSalesOrderHeaders(), "salesOrderId", salesOrderId);
     }
@@ -79,6 +63,15 @@ var Data;
         return DataCache.salesOrderHeaderData;
     }
     Data.getSalesOrderHeaders = getSalesOrderHeaders;
+    /** Create a sales order object containing order information and line items for a give sales order
+     */
+    function joinSalesOrderHeaderToDetails(salesOrderId) {
+        return {
+            salesOrderHeader: Data.getSalesOrderHeaderById(salesOrderId),
+            salesOrderDetails: Data.getSalesOrderDetailBySalesOrderId(salesOrderId)
+        };
+    }
+    Data.joinSalesOrderHeaderToDetails = joinSalesOrderHeaderToDetails;
     function getSalesPersonById(businessEntityId) {
         return ArrayUtil.findPropValue(getSalesPersons(), "businessEntityId", businessEntityId);
     }
@@ -95,8 +88,8 @@ var Data;
         return retMe;
     }
     Data.getSalesPeopleByTerritoryId = getSalesPeopleByTerritoryId;
-    //couldn't use newley created model Models.SalesPeopleEmployee[] as return type
-    //another jquery extend issue
+    /** Join Sales person info (yearly sales, region, etc.) with employee info (name, DOB, vacation hours) to get all information about a sales person
+     */
     function joinEmployeeSalesPeople(territoryId) {
         var salesPeople = Data.getSalesPeopleByTerritoryId(territoryId);
         var employees = DataCache.employeeData;
