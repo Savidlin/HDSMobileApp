@@ -5,8 +5,8 @@
     </div>
 
     <div class="col-md-4 col-md-offset-2 col-xs-12">
-        <!-- the model of searchTerm will be used to filter the product table and is an example of two way data binding -->
-        <input type="text" class="form-control  salesSearch" placeholder="search" ng-model="searchTerm" />
+        <!-- TODO: make whatever the user inputs into this searchbox be a angular model of "searchTerm" -->
+        <input type="text" class="form-control  salesSearch" placeholder="search" />
         <!-- if ng-show evaluates to true the 'x' icon will show up so if the length of the model searchTerm is > 0 it will be true -->
         <!-- meaning if there is text in the search box the input clear button will appear -->
         <!-- when clicked it calls the inputClear function in ProductLookupController which contains javascript and jquery that clears search box -->
@@ -46,13 +46,17 @@
                     <span class="fa fa-sort-desc pull-right" ng-show="predicate == 'vacationHours' && reverse"></span>
                     <span class="fa fa-sort-asc pull-right" ng-show="predicate == 'vacationHours' && !reverse"></span>
                 </th>
+                <!-- TODO: make the table header Sick Leave Hours a link that calls the order function in the controller -->
+                <!-- Remember to pass the correct string as an parameter  -->
                 <th>
-                    <a href="" ng-click="order('sickLeaveHours')">Sick Leave Hours</a>
+                    <a href="">Sick Leave Hours</a>
                     <span class="fa fa-sort-desc pull-right" ng-show="predicate == 'sickLeaveHours' && reverse"></span>
                     <span class="fa fa-sort-asc pull-right" ng-show="predicate == 'sickLeaveHours' && !reverse"></span>
                 </th>
+                <!-- TODO: make the table header Level a link that calls the order function in the controller -->
+                <!-- Remember to pass the correct string as an parameter  -->
                 <th>
-                    <a href="" ng-click="order('organizationLevel')">Level</a>
+                    <a href="">Level</a>
                     <span class="fa fa-sort-desc pull-right" ng-show="predicate == 'organizationLevel' && reverse"></span>
                     <span class="fa fa-sort-asc pull-right" ng-show="predicate == 'organizationLevel' && !reverse"></span>
                 </th>
@@ -62,15 +66,15 @@
         <!-- orderBy the predicate which is a string and the argumetn for the filter is reverse which can be true or false -->
         <!-- if reverse is false ascending if true is decending  -->
         <tbody>
-            <tr ng-repeat="emp in VacCtrl.employees | filter: searchTerm | orderBy: predicate:reverse" ng-click="showProduct(emp)" data-toggle="modal" data-target="#myModal">
-                <!-- we are repeating a table row for every employee in our controller instance variable employees -->
-                <td>{{emp.businessEntityId}}</td>
-                <td>{{emp.firstName}}</td>
-                <td>{{emp.lastName}}</td>
-                <td>{{emp.jobTitle}}</td>
-                <td>{{emp.vacationHours}}</td>
-                <td>{{emp.sickLeaveHours}}</td>
-                <td>{{emp.organizationLevel}}</td> 
+            <!-- TODO: make it so that when the user clicks on a table row the function showEmployee is called and passed the correct object as a paramater -->
+            <!-- Remeber that the function needs to know which employee needs to be displayed -->
+
+            <!-- TODO: Make it so that this row repeats for all employees in the VacCtrl's employees variable -->
+            <!-- Remeber to append "| filter: searchTerm | orderBy: predicate:reverse" to the end of your code -->
+
+            <tr data-toggle="modal" data-target="#myModal">
+                <!-- TODO: create table data elements for each attribute of the employee object -->
+                <!-- Remeber we are displaying 7 attributes of the object and they should match the table headers -->
             </tr>
         </tbody>
     </table>
