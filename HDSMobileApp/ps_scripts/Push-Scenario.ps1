@@ -3,6 +3,8 @@ cd C:\inetpub\wwwroot\HDSTeamBuilding
     
     echo "Making sure we are using the correct user to push to github..."
     git remote set-url origin https://joedoestech@github.com/SaumyaS/HDSTeamBuilding.git
+       git config user.name JoeDoesTech
+    git config user.email JoeDoesTech@gmail.com
     
     git add -A
     git commit -m "finished scenario"

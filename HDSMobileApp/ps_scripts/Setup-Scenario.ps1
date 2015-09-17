@@ -4,10 +4,13 @@
 
     echo "Making sure we are using the correct user to push to github..."
     git remote set-url origin https://joedoestech@github.com/SaumyaS/HDSTeamBuilding.git
+    git config user.name JoeDoesTech
+    git config user.email JoeDoesTech@gmail.com
     
     "Lets make sure we are in master!"
-    "Comitting any changes..."
-    git commit -a -m "Adding all changes to reset scenario for next session"
+    "Comitting any current changes..."
+    git add -A
+    git commit -m "Adding all changes to reset scenario for next session"
     git checkout master
 
     Do {
