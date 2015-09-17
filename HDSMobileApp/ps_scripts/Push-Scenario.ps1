@@ -3,7 +3,7 @@ cd C:\inetpub\wwwroot\HDSTeamBuilding
     
     echo "Making sure we are using the correct user to push to github..."
     git remote set-url origin https://joedoestech@github.com/SaumyaS/HDSTeamBuilding.git
-       git config user.name JoeDoesTech
+    git config user.name JoeDoesTech
     git config user.email JoeDoesTech@gmail.com
     
     git add -A
@@ -56,8 +56,8 @@ cd C:\inetpub\wwwroot\HDSTeamBuilding
     }
         Until (($session -le 3 -and $session -ge 1) -and ($scenario -le 5 -and $scenario -ge 1) -or $scenario -eq 6)
 
-
-Read-Host "Press any key to cancel..."
+echo ""
+Read-Host "Press any key to exit..."
 
 
 
