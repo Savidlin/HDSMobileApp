@@ -30,6 +30,10 @@ class Dialogs {
     }
 
 
+<<<<<<< HEAD
+=======
+    
+>>>>>>> 7327ba2f17bd0ba8249fe662956814e1b53f2235
     static openDialogOk(title: string, message: string, callback?: () => void): JQuery {
         var dlg = Dialogs.openDialog(message, callback);
         dlg.dialog("option", "title", title || "");

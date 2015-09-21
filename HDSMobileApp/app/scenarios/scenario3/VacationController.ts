@@ -15,17 +15,15 @@ class VacationController implements WidgetView<any> {
         // define a directive and now we can use products in the html
         ngApp.directive("vacationTable", function () {
             return {
-                // E is for element we are defining our own element
-                // A is for attribute if you were to use directive as an attribute
-                restrict: "E",
-                //point to html file
-                templateUrl: "/app/scenarios/scenario3/vacation-table.html",
+                //TODO: ensure that the productTable directive is an element
+
+                //TODO: define a template HTML file for this directive
+
                 //add in a controller
                 controller: ["$scope", "$http", function ($scope, $http) {
 
-                    //get all the employees and set them as an instance variable for the controller
-                    this.employees = Data.getEmployees();
-                    console.log(this.employees);
+                     //TODO: assign the this.employees variable by using a services call instead of a null value
+                    this.employees = null;
 
                     $scope.vacationChange = false;
                     // set an initial value to sort by
@@ -49,9 +47,10 @@ class VacationController implements WidgetView<any> {
 
                     //this function is called when a user clicks on a table row
                     //the product the user clicked on is passed in as product
-                    $scope.showProduct = function (emp) {
-                        //set the scope variables 
-                        $scope.employee = emp;
+                    $scope.showEmployee = function (emp) {
+                        //TODO assign the $scope.semployee variable to the employee clicked on by the user
+                        //Remeber what was passed to this function from the html
+                        $scope.employee = null;
                     };
 
                     $scope.submit = function (emp, vacHoursTaken) {

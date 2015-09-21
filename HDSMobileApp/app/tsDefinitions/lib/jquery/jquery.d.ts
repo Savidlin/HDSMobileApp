@@ -949,7 +949,6 @@ interface JQueryStatic {
 
     expr: any;
     fn: any;  
-
     isReady: boolean;
 
     // Properties
