@@ -1,3 +1,4 @@
+. "C:\inetpub\wwwroot\HDSTeamBuilding\HDSMobileApp\ps_scripts\Include.ps1"
 "Navigating to our site directory.."
 cd C:\inetpub\wwwroot\HDSTeamBuilding
     
