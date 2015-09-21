@@ -33,7 +33,7 @@
                 }
             4 {
                 $areyousure = read-host "Are you sure you want to reset your scenario to default? (y/n)"
-                if($areyousure -like "y") {& "C:\inetpub\wwwroot\HDSTeamBuilding\HDSMobileApp\ps_scripts\Setup-Reset-Scenario.ps1"}
+                if($areyousure -like "y") {& "C:\inetpub\wwwroot\HDSTeamBuilding\HDSMobileApp\ps_scripts\Setup-Scenario.ps1"}
                 Elseif($areyousure -like "n") {cls; write-host -ForegroundColor red "Back to main menu..."; mainmenu}
                 Else {write-host -ForegroundColor red "Invalid Selection"; mainmenu}
                 }
@@ -51,15 +51,9 @@
                 }
             7 {
                 $areyousure = read-host "Are you sure you want to exit? (y/n)"
-                if($areyousure -like "y"){
-                "Exiting..."; Start-Sleep -s 2; Exit;
-            }
-            Elseif($areyousure -like "n") {
-                cls
-                write-host -ForegroundColor red "Back to main menu..."
-                mainmenu
-            }
-            Else {write-host -ForegroundColor red "Invalid Selection"; mainmenu}
+                if($areyousure -like "y"){"Exiting..."; Start-Sleep -s 2; Exit;}
+                Elseif($areyousure -like "n") {cls; write-host -ForegroundColor red "Back to main menu..."; mainmenu }
+                Else {write-host -ForegroundColor red "Invalid Selection"; mainmenu}
             }
         }
 }
