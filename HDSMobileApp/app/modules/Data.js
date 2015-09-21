@@ -29,7 +29,7 @@ var Data;
         return retMe;
     }
     Data.getSalesOrderHeadersByCustomerId = getSalesOrderHeadersByCustomerId;
-    function joinSalesData(salesPersons) {
+    function joinSalesPersonWithEmpAndPerson(salesPersons) {
         // loop through all sales people
         for (var i = 0; i < salesPersons.length; i++) {
             // loop through all employees to find a record that matches for the current sales person in loop
@@ -41,7 +41,7 @@ var Data;
         }
         return salesPersons;
     }
-    Data.joinSalesData = joinSalesData;
+    Data.joinSalesPersonWithEmpAndPerson = joinSalesPersonWithEmpAndPerson;
     /** Get a single employee matching the specified primary key
      */
     function getEmployeeById(businessEntityId) {
