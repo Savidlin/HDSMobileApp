@@ -32,8 +32,7 @@ class PageLoader {
     public loadPage(pageLoadInfo: { ngAppName: string; controllerNames: string[]; appLoaderName?: string; }) {
         var that = this;
         Ps.resetAppNewPage(null, null, window);
-
-
+   
         console.log("init loading data...");
 
         DataCache.loadData(undefined, false).done(function () {
@@ -64,6 +63,7 @@ class PageLoader {
             }
             // call the custom bootstrapper class matching 'appLoaderName' to create the angular.module()
             else {
+
                 console.log("loading app: ", pageLoadInfo.ngAppName, "using custom bootstrapper: ", pageLoadInfo.appLoaderName);
 
                 var appObj = that.getAppBootstrappers()[pageLoadInfo.appLoaderName].initNgApp(Ps, pageLoadInfo.ngAppName);

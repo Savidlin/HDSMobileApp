@@ -67,6 +67,9 @@ class SalesPersonController implements WidgetView<any>{
                         $scope.person = salesPerson;
                         $scope.salesHeaders = salesHeaderPerson; 
                     };
+
+                    //commit
+
                 }],
                 controllerAs: "salesPersonCtrl"               
             };
