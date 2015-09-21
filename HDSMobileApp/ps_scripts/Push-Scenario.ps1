@@ -1,8 +1,10 @@
 "Navigating to our site directory.."
 cd C:\inetpub\wwwroot\HDSTeamBuilding
     
-    echo "Making sure we are using the correct user to push to github..."
+    Write-Host -Foregroundcolor white "Making sure we are using the correct user to push to github..."
     git remote set-url origin https://joedoestech@github.com/SaumyaS/HDSTeamBuilding.git
+    git config user.name JoeDoesTech
+    git config user.email JoeDoesTech@gmail.com
     
     git add -A
     git commit -m "finished scenario"
@@ -14,7 +16,6 @@ cd C:\inetpub\wwwroot\HDSTeamBuilding
 
 
             If ($session -eq 1) {
-                echo $scenario
                 switch ($scenario) {
                         1 {git checkout session1scenario1; git pull origin session1; git push origin session1scenario1:session1;}
                         2 {git checkout session1scenario2; git pull origin session1; git push origin session1scenario2:session1;}
@@ -26,7 +27,6 @@ cd C:\inetpub\wwwroot\HDSTeamBuilding
             }
 
             elseif ($session -eq 2) {
-                echo $scenario
                 switch ($scenario) {
                         1 {git checkout session2scenario1; git pull origin session2; git push origin session2scenario1:session2;}
                         2 {git checkout session2scenario2; git pull origin session2; git push origin session2scenario2:session2;}
@@ -39,7 +39,6 @@ cd C:\inetpub\wwwroot\HDSTeamBuilding
             }
 
             elseif ($session -eq 3) {
-                echo $scenario
                 switch ($scenario) {
                         1 {git checkout session3scenario1; git pull origin session3; git push origin session3scenario1:session3;}
                         2 {git checkout session3scenario2; git pull origin session3; git push origin session3scenario2:session3;}
@@ -54,8 +53,8 @@ cd C:\inetpub\wwwroot\HDSTeamBuilding
     }
         Until (($session -le 3 -and $session -ge 1) -and ($scenario -le 5 -and $scenario -ge 1) -or $scenario -eq 6)
 
-
-Read-Host "Press any key to cancel..."
+echo ""
+Read-Host "Press return to exit..."
 
 
 
