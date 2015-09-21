@@ -15,17 +15,15 @@ class SalesTerritoryController implements WidgetView<any> {
         // define a directive
         ngApp.directive("territoryTable", function () {
             return {
-                // E is for element we are defining our own element
-                // A is for attribute if you were to use directive as an attribute
-                restrict: "E",
-                //point to html file
-                templateUrl: "/app/scenarios/scenario4/territory-table.html",
+                //TODO: ensure that the productTable directive is an element
+                
+                //TODO: define a template HTML file for this directive
+
                 //add in a controller
                 controller: ["$scope", "$http", function ($scope, $http) {
                     
-                    //get all the territories and set them as an instance variable for the controller
-                    this.territories = Data.getSalesTerritorys();
-                    console.log(this.territories);
+                    //TODO: assign the this.territories variable by using a services call instead of a null value
+                    this.territories = null;
 
                     // set an initial value to sort by
                     $scope.predicate = 'territoryId';
@@ -50,12 +48,15 @@ class SalesTerritoryController implements WidgetView<any> {
                     //the product the user clicked on is passed in as territory
                     $scope.showTerritory = function (territory) {
 
-                        //getSalesPeopleByTerritoryId is a custom function in Data by James that returns an array of sales people
-                        //that match a given territory ID
-                        var salesPeople = Data.getSalesPeopleByTerritoryId(territory.territoryId);
+                        //TODO: assign the salesPeople variable to all the sales people that have a shared territory ID
+                        //Remeber that a territory object has been based into this function that contains all territory attributes
+                        //Remeber we only want to show sales people that are in the same territory that the user clicked on
+                        //Remeber Data has methods for getting data and joining data
+                        var salesPeople = null;
 
-                        //joinEmployeeSalesPeople is a custom function by james in Data that will  join salespeople and employees based on territory ID
-                        var employeeSalesPeople = Data.joinEmployeeSalesPeople(territory.territoryId);
+                        //TODO: assign the employeeSalesPeople variable to the joined data of salespeople and employee based on their shared territoryId
+                        //Remeber Data has methods for getting data and joining data
+                        var employeeSalesPeople = null;
 
                         //set scope variables
                         $scope.terrSalesPeople = employeeSalesPeople;
