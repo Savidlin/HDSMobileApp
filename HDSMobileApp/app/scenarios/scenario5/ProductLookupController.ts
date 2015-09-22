@@ -16,9 +16,9 @@ class ProductLookupController implements WidgetView<any> {
         ngApp.directive("productTable", function () {
             return {
                 //TODO: ensure that the productTable directive is an element
-                 
+                restrict: "E",
                 //TODO: define a template HTML file for this directive
-
+                templateUrl: "/app/scenarios/scenario5/product-table.html",
                 //add in a controller
                 controller: ["$scope", "$http", function ($scope, $http) {
 

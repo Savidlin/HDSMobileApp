@@ -6,6 +6,14 @@ hr {
     margin-top: 10px;
     margin-bottom: 10px;
 }
+
+.bannerDiv {
+    margin-bottom: 20px;
+}
+
+.logoDiv {
+    margin-bottom: 20px;
+}
 /*.modal {
 /*solve large modal scrolling issue
     position: absolute;
