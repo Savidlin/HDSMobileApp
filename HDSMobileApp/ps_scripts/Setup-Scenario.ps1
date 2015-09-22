@@ -23,7 +23,6 @@
         $scenario = Read-Host "Which scenario are you working on?"
 
             If ($session -eq 1) {
-                echo $scenario
                 switch ($scenario) {
 
                         1 {git branch -D session1scenario1; git checkout -b session1scenario1; git pull origin skeleton}
@@ -37,7 +36,6 @@
             }
 
             elseif ($session -eq 2) {
-                echo $scenario
                 switch ($scenario) {
 
                         1 {git branch -D session2scenario1; git checkout -b session2scenario1; git pull origin skeleton}
@@ -51,7 +49,6 @@
             }
 
             elseif ($session -eq 3) {
-                echo $scenario
                 switch ($scenario) {
 
                         1 {git branch -D session3scenario1; git checkout -b session3scenario1; git pull origin skeleton}
