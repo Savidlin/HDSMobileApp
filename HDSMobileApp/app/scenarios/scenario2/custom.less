@@ -1,18 +1,75 @@
-﻿/* Navbar Variables */
-    @navbar-background:black;
-    @navbar-background-hover:red;
-    @navbar-text:white;
-    @navbar-text-hover:black;
+﻿/* Global Variables */
+    @background-color:#fff;
 
+/* Navbar Variables */
+    @navbar-background:#333;
+    @navbar-background-hover:#000;
+    @navbar-text:#fff;
+    @navbar-text-hover:#fff;
+
+/* Header Variables */
+    @header-background:#e5e5e5;
+    @header-title-color:#000;
+    @header-paragraph-color:#000;
+
+/* Table Variables */
+    @table-header-color:#fff;
+    @table-text-color:#fff;
+    @table-row-background-hover:#000;
+    @table-text-color-hover:#fff;
+
+/* Footer Variables */
+    @footer-background:#333;
+    @footer-text-color:#fff;
+
+
+/* Global Classes */
+    body {
+        background-color:@background-color;
+    }
+   
 /* Navbar Classes */
     .navbar-default {
         background-color:@navbar-background;
-        
         .navbar-nav {
             li>a {color:@navbar-text;}
             li>a:hover, li>a:focus{background-color:@navbar-background-hover;color:@navbar-text-hover;}
-            .open>a, .open>a:hover, .open>a:focus{background-color:@navbar-background-hover;color:@navbar-text-hover;}
+            .open>a, .open>a:hover, .open>a:focus{background-color:@navbar-background-hover;color:@navbar-text-
+hover;}
             .dropdown-menu>li>a, .dropdown-menu>li>a:focus{background-color:@navbar-background;}
             .dropdown-menu>li>a:hover {background-color:@navbar-background-hover;color:@navbar-text-hover;}
         }
+    }
+
+/* Header classes */
+
+    .jumbotron {
+        background-color:@header-background;
+        h2{color:@header-title-color;}
+        p{color:@header-paragraph-color;}
+    }
+
+/* Table Classes */
+    .table {
+        th {
+            a{color:@table-header-color;}   
+        }
+        td {color:@table-text-color;}
+    }
+
+    .table-hover > tbody>tr:hover {
+        cursor:pointer;
+        background-color:@table-row-background-hover;
+        color:@table-text-color-hover;
+    }
+
+    #tableHeader {
+        h3{color:@table-header-color;}
+    }
+
+/* Footer Classes */
+
+    .footer {
+        background-color:@footer-background;
+        p {color:@footer-text-color;}
     }
