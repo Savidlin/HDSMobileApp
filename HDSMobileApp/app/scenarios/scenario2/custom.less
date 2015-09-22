@@ -1,7 +1,18 @@
-﻿@test: black;
-@test2: white;
+﻿/* Navbar Variables */
+    @navbar-background:black;
+    @navbar-background-hover:red;
+    @navbar-text:white;
+    @navbar-text-hover:black;
 
-    .jumbotron {
-        background-color:@test;
-        color:@test2;
+/* Navbar Classes */
+    .navbar-default {
+        background-color:@navbar-background;
+        
+        .navbar-nav {
+            li>a {color:@navbar-text;}
+            li>a:hover, li>a:focus{background-color:@navbar-background-hover;color:@navbar-text-hover;}
+            .open>a, .open>a:hover, .open>a:focus{background-color:@navbar-background-hover;color:@navbar-text-hover;}
+            .dropdown-menu>li>a, .dropdown-menu>li>a:focus{background-color:@navbar-background;}
+            .dropdown-menu>li>a:hover {background-color:@navbar-background-hover;color:@navbar-text-hover;}
+        }
     }
