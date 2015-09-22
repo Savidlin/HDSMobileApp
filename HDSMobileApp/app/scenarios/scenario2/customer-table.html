@@ -5,7 +5,7 @@
     </div>
 
     <div class="col-md-4 col-md-offset-2 col-xs-12">
-        <!-- the model of searchTerm will be used to filter the product table and is an example of two way data binding -->
+        <!-- TODO: make whatever the user inputs into this searchbox be a angular model of "searchTerm" -->
         <input type="text" class="form-control  salesSearch" placeholder="search" ng-model="searchTerm" />
         <!-- if ng-show evaluates to true the 'x' icon will show up so if the length of the model searchTerm is > 0 it will be true -->
         <!-- meaning if there is text in the search box the input clear button will appear -->
@@ -26,13 +26,17 @@
                     <!-- up arrow will show only if the predicate matches the header and the reverse is false meaning ascending -->
                     <span class="fa fa-sort-asc" ng-show="predicate == 'accountNumber' && !reverse"></span>
                 </th>
+                <!-- TODO: make the table header ID a link that calls the order function in the controller -->
+                <!-- Remember to pass the correct string as an parameter  -->
                 <th>
-                    <a href="" ng-click="order('customerId')">ID</a>
+                    <a href="">ID</a>
                     <span class="fa fa-sort-desc" ng-show="predicate == 'customerId' && reverse"></span>
                     <span class="fa fa-sort-asc" ng-show="predicate == 'customerId' && !reverse"></span>
                 </th>
+                <!-- TODO: make the table header Territory ID a link that calls the order function in the controller -->
+                <!-- Remember to pass the correct string as an parameter  -->
                 <th>
-                    <a href="" ng-click="order('territoryId')">Territory ID</a>
+                    <a href="">Territory ID</a>
                     <span class="fa fa-sort-desc" ng-show="predicate == 'territoryId' && reverse"></span>
                     <span class="fa fa-sort-asc" ng-show="predicate == 'territoryId' && !reverse"></span>
                 </th>
@@ -42,11 +46,15 @@
         <!-- orderBy the predicate which is a string and the argumetn for the filter is reverse which can be true or false -->
         <!-- if reverse is false ascending if true is decending  -->
         <tbody>
-            <tr ng-repeat="customer in CustomerCtrl.customers | filter: searchTerm | orderBy: predicate:reverse" ng-click="showCustomerSales(customer)" data-toggle="modal" data-target="#myModal">
-                <!-- we are repeating a table row for every product in our controller instance variable products -->
-                <td>{{customer.accountNumber}}</td>
-                <td>{{customer.customerId}}</td>
-                <td>{{customer.territoryId}}</td>
+
+            <!-- TODO: make it so that when the user clicks on a table row the function showCustomerSales is called and passed the correct object as a paramater -->
+            <!-- Remeber that the function needs to know which customer needs to be displayed -->
+
+            <!-- TODO: Make it so that this row repeats for all customers in the CustomerCtrl's customers variable -->
+            <!-- Remeber to append "| filter: searchTerm | orderBy: predicate:reverse" to the end of your code -->
+            <tr data-toggle="modal" data-target="#myModal">
+                <!-- TODO: create table data elements for each attribute of the customer object -->
+                <!-- Remeber we are displaying 3 attributes of the object and they should match the table headers -->
             </tr>
         </tbody>
     </table>

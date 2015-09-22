@@ -5,8 +5,8 @@
     </div>
 
     <div class="col-md-4 col-md-offset-2 col-xs-12">
-        <input type="text" class="form-control  salesSearch" placeholder="Enter Name" ng-model="searchTerm"/>
-
+        <!-- TODO: make whatever the user inputs into this searchbox be a angular model of "searchTerm" -->
+        <input type="text" class="form-control  salesSearch" placeholder="Enter Name" />
         <span id="searchClear" class="glyphicon glyphicon-remove-circle" ng-click="inputClear()" ng-show="searchTerm.length > 0"></span>
     </div>
 
@@ -32,6 +32,8 @@
                     <!-- up arrow will show only if the predicate matches the header and the reverse is false meaning ascending -->
                     <span class="glyphicon glyphicon-triangle-top" ng-show="predicate == 'firstName' && !reverse"></span>
                 </th>
+                <!-- TODO: make the table header Last Name a link that calls the order function in the controller -->
+                <!-- Remember to pass the correct string as an parameter  -->
                 <th>
                     <a href="" ng-click="order('lastName')">Last Name</a>
                     <!-- down arrow will show only if the predicate matches the header and reverse is true meaning descending -->
@@ -39,6 +41,8 @@
                     <!-- up arrow will show only if the predicate matches the header and the reverse is false meaning ascending -->
                     <span class="glyphicon glyphicon-triangle-top" ng-show="predicate == 'lastName' && !reverse"></span>
                 </th>
+                <!-- TODO: make the table header Job Title a link that calls the order function in the controller -->
+                <!-- Remember to pass the correct string as an parameter  -->
                 <th>
                     <a href="" ng-click="order('jobTitle')">Job Title</a>
                     <!-- down arrow will show only if the predicate matches the header and reverse is true meaning descending -->
@@ -49,11 +53,14 @@
             </tr>
         </thead>
         <tbody>
-            <tr ng-repeat="salesPerson in salesPersonCtrl.salesPersonFull | filter: searchTerm | orderBy: predicate:reverse" ng-click="display(salesPerson)" data-toggle="modal" data-target="#myModal">
-                <td>{{salesPerson.businessEntityId}}</td>
-                <td>{{salesPerson.firstName}}</td>
-                <td>{{salesPerson.lastName}}</td>
-                <td>{{salesPerson.jobTitle}}</td>
+            <!-- TODO: make it so that when the user clicks on a table row the function display is called and passed the correct object as a paramater -->
+            <!-- Remeber that the function needs to know which sales person needs to be displayed -->
+
+            <!-- TODO: Make it so that this row repeats for all sales people in the salesPersonCtrl's salesPersonFull variable -->
+            <!-- Remeber to append "| filter: searchTerm | orderBy: predicate:reverse" to the end of your code -->
+            <tr data-toggle="modal" data-target="#myModal">
+                <!-- TODO: create table data elements for each attribute of the sales person object -->
+                <!-- Remeber we are displaying 3 attributes of the object and they should match the table headers -->
             </tr>
         </tbody>
     </table>

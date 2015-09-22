@@ -1,5 +1,4 @@
 "use strict";
-var Data = require("../../modules/Data");
 var CustomerPurchaseController = (function () {
     function CustomerPurchaseController() {
     }
@@ -11,17 +10,13 @@ var CustomerPurchaseController = (function () {
         // define a directive and now we can use products in the html
         ngApp.directive("customerTable", function () {
             return {
-                // E is for element we are defining our own element
-                // A is for attribute if you were to use directive as an attribute
-                restrict: "E",
-                //point to html file
-                templateUrl: "/app/scenarios/scenario2/customer-table.html",
+                //TODO: ensure that the productTable directive is an element
+                //TODO: define a template HTML file for this directive
                 //add in a controller
                 controller: ["$scope", "$http", function ($scope, $http) {
-                        //get all the territories and set them as an instance variable for the controller
-                        this.customers = Data.getCustomers().slice(1000, 1050);
-                        console.log(this.customers);
-                        // console.log(this.customers);
+                        //TODO: assign the this.customers variable by using a services call instead of a null value
+                        //then append the following to it (don't worry about what it does) ".slice(1000,1050)"
+                        this.customers = null;
                         // set an initial value to sort by
                         $scope.predicate = 'customerId';
                         // set an initial reverse value
@@ -41,10 +36,11 @@ var CustomerPurchaseController = (function () {
                         //this function is called when a user clicks on a table row
                         //the product the user clicked on is passed in as product
                         $scope.showCustomerSales = function (customersales) {
-                            //return sales order headres for specific customer
-                            var customer = Data.getSalesOrderHeadersByCustomerId(customersales.customerId);
+                            //TODO: assign the customer varaible to all the sales order headers by customerId instead of null
+                            //Rember to pass the right id into the service data call
+                            //Remeber that a customer object has been pased into this function that contains all customer attributes
+                            var customer = null;
                             $scope.custSales = customer;
-                            console.log($scope.custSales);
                         };
                     }],
                 // add an alias for a controller

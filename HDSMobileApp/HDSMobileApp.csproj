@@ -108,22 +108,17 @@
     <Content Include="app\lib\jquery-ui-1.10.3.custom.js" />
     <Content Include="app\scenarios\global\partials\footer.html" />
     <Content Include="app\scenarios\global\partials\navbar.html" />
-    <Content Include="app\scenarios\scenario1\custom.css" />
     <Content Include="app\scenarios\scenario1\instructions.txt" />
     <Content Include="app\scenarios\scenario1\salesperson-table.html" />
     <Content Include="app\scenarios\scenario2\customer-table.html" />
     <Content Include="app\scenarios\scenario2\instructions.txt" />
-    <Content Include="app\scenarios\scenario3\custom.css" />
     <Content Include="app\scenarios\scenario3\instructions.txt" />
     <Content Include="app\scenarios\scenario3\vacation-table.html" />
-    <Content Include="app\scenarios\scenario2\custom.css" />
     <Content Include="app\scenarios\scenario2\scenario2.html" />
     <Content Include="app\scenarios\scenario3\scenario3.html" />
-    <Content Include="app\scenarios\scenario4\custom.css" />
     <Content Include="app\scenarios\scenario4\instructions.txt" />
     <Content Include="app\scenarios\scenario4\scenario4.html" />
     <Content Include="app\scenarios\scenario4\territory-table.html" />
-    <Content Include="app\scenarios\scenario5\custom.css" />
     <Content Include="app\scenarios\scenario5\instructions.txt" />
     <Content Include="app\scenarios\scenario5\product-table.html" />
     <Content Include="app\scenarios\demo\sales-table.html" />
@@ -223,6 +218,11 @@
     <Content Include="database\adventure_works.sqlite">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="app\scenarios\scenario1\custom.less" />
+    <Content Include="app\scenarios\scenario2\custom.less" />
+    <Content Include="app\scenarios\scenario3\custom.less" />
+    <Content Include="app\scenarios\scenario4\custom.less" />
+    <Content Include="app\scenarios\scenario5\custom.less" />
     <None Include="Properties\PublishProfiles\local.pubxml" />
     <None Include="Properties\PublishProfiles\portlet.pubxml" />
     <None Include="Properties\PublishProfiles\PowerScope.pubxml" />
