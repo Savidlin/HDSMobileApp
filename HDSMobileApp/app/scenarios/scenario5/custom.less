@@ -14,8 +14,8 @@
     @header-paragraph-color:#000;
 
 /* Table Variables */
-    @table-header-color:#fff;
-    @table-text-color:#fff;
+    @table-header-color:#000;
+    @table-text-color:#000;
     @table-row-background-hover:#000;
     @table-text-color-hover:#fff;
 
@@ -51,16 +51,14 @@
 
 /* Table Classes */
     .table {
-        th {
-            a{color:@table-header-color;}   
-        }
+        th {a{color:@table-header-color;}   }
         td {color:@table-text-color;}
     }
 
     .table-hover > tbody>tr:hover {
         cursor:pointer;
         background-color:@table-row-background-hover;
-        color:@table-text-color-hover;
+        td{color:@table-text-color-hover;}
     }
 
     #tableHeader {

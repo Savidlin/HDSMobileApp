@@ -6,7 +6,6 @@
     <title>HDS - Mobile App</title>
     <link rel="stylesheet" type="text/css" href="/app/css/bootstrap.min.css" />
     <link rel="stylesheet" type="text/css" href="/app/css/screen.css" />
-    <link rel="stylesheet" type="text/css" href="custom.css" />
     <link rel="stylesheet/less" type="text/css" href="custom.less" />
     <script type="text/javascript" src="/app/lib/less.min.js"></script>
     <script type="text/javascript" src="/app/dist/loading.js"></script>
@@ -23,39 +22,30 @@
         <div class="container-fluid">
             <div class="jumbotron">
                 <div class="row">
-                    <h2>Product Lookup</h2>
-                    <p>Products are sortable and searchable by all attributes</p>
-                </div>
+                    <div class="col-md-2 col-md-offset-1">
+                        <!-- TODO: update the paintLogo file to your team's custom logo-->
+                        <!-- simply open the file in paint edit it and then save it -->
+                        <img src="paintLogo.jpg" class="img-responsive" />
+                    </div>
+                    <div class="col-md-9">
+                        <h2>Company Name</h2>
+                        <p>Company Slogan</p>
+                    </div>
             </div>
         </div>
         <div class="container">
-
             <div class="row">
                 <div class="col-md-12">
                     <!-- TODO: update the paintBanner file to your team's custom banner -->
                     <!-- simply open the file in paint edit it and then save it -->
-                    <img src="paintBanner.png" class="img-responsive" />
+                    <img src="paintBanner.jpg" class="img-responsive" />
                 </div>
             </div>
-
-            <div class="row">
-
-                <div class="col-md-3">
-                    <!-- TODO: update the paintLogo file to your team's custom logo-->
-                    <!-- simply open the file in paint edit it and then save it -->
-                    <img src="paintLogo.png" class="img-responsive" />
-                </div>
-
-                <div class="col-md-9 text-center">
-                    <h3>Company Name</h3>
-                    <h4>Company Slogan goes here</h4>
-                </div>
-
-            </div>
-            
+           
             <!-- TODO: add ProductLookupController's custom directive -->
+            <product-table></product-table>
         </div>
-        <!-- test commit-->
+
         <footer></footer>
     </div>
 
