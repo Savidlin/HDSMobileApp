@@ -713,10 +713,6 @@ declare module angular {
 
     ///////////////////////////////////////////////////////////////////////////
     // BrowserService
-<<<<<<< HEAD
-    // 
-=======
->>>>>>> 7327ba2f17bd0ba8249fe662956814e1b53f2235
     ///////////////////////////////////////////////////////////////////////////
     interface IBrowserService {
         defer: angular.ITimeoutService;
@@ -1644,10 +1640,6 @@ declare module angular {
     }
 
     interface IAugmentedJQuery extends JQuery {
-<<<<<<< HEAD
-        
-=======
->>>>>>> 7327ba2f17bd0ba8249fe662956814e1b53f2235
         //$destroy
 
         find(selector: string): IAugmentedJQuery;
